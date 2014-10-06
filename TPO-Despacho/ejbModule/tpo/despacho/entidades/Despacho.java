@@ -22,7 +22,7 @@ public class Despacho {
 		this.nombre = nombre;
 	}
 
-	@Embedded
+	@OneToOne
 	public Coordenadas getCoordenadas() {
 		return coordenadas;
 	}
