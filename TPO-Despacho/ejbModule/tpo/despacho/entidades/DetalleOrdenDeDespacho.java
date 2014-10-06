@@ -17,6 +17,7 @@ public class DetalleOrdenDeDespacho {
 
 	@Id
 	@GeneratedValue
+	@Column (name = "ID")
 	public int getIdDetalle() {
 		return idDetalle;
 	}

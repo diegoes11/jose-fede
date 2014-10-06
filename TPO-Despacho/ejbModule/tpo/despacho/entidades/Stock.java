@@ -5,12 +5,25 @@ import javax.persistence.*;
 @Entity
 @Table(name="Stock")
 public class Stock {
+	
+	private int idStock;
 	private Articulo articulo;
 	private int cantidad;
 	private Deposito deposito;
 	
 	public Stock(){
 		
+	}
+	
+	@Id
+	@GeneratedValue
+	@Column (name = "ID")
+	public int getIdStock() {
+		return idStock;
+	}
+
+	public void setIdStock(int idStock) {
+		this.idStock = idStock;
 	}
 
 	@OneToOne
@@ -31,7 +44,7 @@ public class Stock {
 		this.cantidad = cantidad;
 	}
 
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name="NombreDeposito", referencedColumnName="Nombre")
 	public Deposito getDeposito() {
 		return deposito;
