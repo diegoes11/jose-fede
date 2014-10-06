@@ -5,12 +5,24 @@ import javax.persistence.*;
 @Entity
 @Table(name="DetallesOrdenDeDespacho")
 public class DetalleOrdenDeDespacho {
+	
+	private int idDetalle;
 	private Articulo articulo;
 	private int cantidad;
 	private String estado;
 	private SolicitudDeArticulo solicitudDeArticulo;
 	
 	public DetalleOrdenDeDespacho() {
+	}
+
+	@Id
+	@GeneratedValue
+	public int getIdDetalle() {
+		return idDetalle;
+	}
+
+	public void setIdDetalle(int idDetalle) {
+		this.idDetalle = idDetalle;
 	}
 
 	@Column(name="Articulo")
