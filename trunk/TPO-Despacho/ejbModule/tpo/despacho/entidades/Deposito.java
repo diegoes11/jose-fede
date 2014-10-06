@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="Depositos")
 public class Deposito {
+	
 	private String nombre;
 	private Coordenadas coordenadas;
 	private List<Stock> stock;

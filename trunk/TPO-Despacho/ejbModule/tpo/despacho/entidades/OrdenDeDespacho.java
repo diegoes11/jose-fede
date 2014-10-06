@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="OrdenesDeDespacho")
 public class OrdenDeDespacho {
+	
 	private int idOrdenDeDespacho;
+	private PortalWeb portalWeb;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
 	
@@ -43,6 +45,16 @@ public class OrdenDeDespacho {
 	public void setDetallesOrdenDeDespacho(
 			List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho) {
 		this.detallesOrdenDeDespacho = detallesOrdenDeDespacho;
+	}
+
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn (name = "Nombre")
+	public PortalWeb getPortalWeb() {
+		return portalWeb;
+	}
+
+	public void setPortalWeb(PortalWeb portalWeb) {
+		this.portalWeb = portalWeb;
 	}
 	
 	
