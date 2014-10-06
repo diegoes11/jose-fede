@@ -2,8 +2,7 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="Coordenadas")
+@Embeddable
 public class Coordenadas {
 	private IdCoordenadas id;
 
