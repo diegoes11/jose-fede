@@ -26,7 +26,7 @@ public class Deposito {
 		this.nombre = nombre;
 	}
 
-	@Embedded
+	@OneToOne
 	public Coordenadas getCoordenadas() {
 		return coordenadas;
 	}

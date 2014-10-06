@@ -22,7 +22,7 @@ public class LogisticaYMonitoreo {
 		this.nombre = nombre;
 	}
 
-	@Embedded
+	@OneToOne
 	public Coordenadas getCoordenadas() {
 		return coordenadas;
 	}
