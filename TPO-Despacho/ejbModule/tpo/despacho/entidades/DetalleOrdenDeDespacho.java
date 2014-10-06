@@ -26,7 +26,8 @@ public class DetalleOrdenDeDespacho {
 		this.idDetalle = idDetalle;
 	}
 
-	@Column(name="Articulo")
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn (name = "Codigo")
 	public Articulo getArticulo() {
 		return articulo;
 	}
