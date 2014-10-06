@@ -35,6 +35,7 @@ public class OrdenDeDespacho {
 	}
 
 	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn (name = "idDetalle")
 	public List<DetalleOrdenDeDespacho> getDetallesOrdenDeDespacho() {
 		return detallesOrdenDeDespacho;
 	}
