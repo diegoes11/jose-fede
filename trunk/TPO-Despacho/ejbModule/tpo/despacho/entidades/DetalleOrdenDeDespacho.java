@@ -8,13 +8,23 @@ public class DetalleOrdenDeDespacho {
 	
 	private int idDetalle;
 	private Articulo articulo;
+	private OrdenDeDespacho ordenDeDespacho;
 	private int cantidad;
 	private String estado;
 	private SolicitudDeArticulo solicitudDeArticulo;
 	
 	public DetalleOrdenDeDespacho() {
 	}
-
+	
+	// Metodos
+	public void completarDetalle(){
+		// Actualizo el estado del detalle
+		setEstado("Completo");
+		// NOTIFICAR A PORTAL WEB
+		ordenDeDespacho.verificarOrdenCompleta();
+	}
+	
+	// Getters y Setters
 	@Id
 	@GeneratedValue
 	@Column (name = "ID")
@@ -34,6 +44,16 @@ public class DetalleOrdenDeDespacho {
 
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
+	}
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="ID")
+	public OrdenDeDespacho getOrdenDeDespacho() {
+		return ordenDeDespacho;
+	}
+
+	public void setOrdenDeDespacho(OrdenDeDespacho ordenDeDespacho) {
+		this.ordenDeDespacho = ordenDeDespacho;
 	}
 
 	@Column(name="Cantidad")

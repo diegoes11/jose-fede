@@ -16,7 +16,21 @@ public class OrdenDeDespacho {
 	public OrdenDeDespacho(){
 		
 	}
+	
+	// Métodos
+	public void verificarOrdenCompleta(){
+		boolean ordenCompleta = true;
+		for(DetalleOrdenDeDespacho detalle : detallesOrdenDeDespacho){
+			if(detalle.getEstado().equals("Incompleto"))
+				ordenCompleta = false;
+		}
+		if(ordenCompleta == true){
+			setEstado("Entregada");
+			// ENVIARLE NOTIFICACION A LOGISTICA Y MONITOREO Y AL PORTAL WEB
+		}
+	}
 
+	// Getters y Setters
 	@Id
 	@Column(name="ID")
 	public int getIdOrdenDeDespacho() {
