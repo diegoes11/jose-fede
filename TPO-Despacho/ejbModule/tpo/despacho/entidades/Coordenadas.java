@@ -2,20 +2,29 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "Coordenadas")
+@Embeddable
 public class Coordenadas {
-	private IdCoordenadas id;
+	private float x;
+	private float y;
 
 	public Coordenadas() {
 	}
-
-	@EmbeddedId
-	public IdCoordenadas getId() {
-		return id;
+	
+	@Column(name="X")
+	public float getX() {
+		return x;
 	}
 
-	public void setId(IdCoordenadas id) {
-		this.id = id;
+	@Column(name="Y")
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
 	}
 }

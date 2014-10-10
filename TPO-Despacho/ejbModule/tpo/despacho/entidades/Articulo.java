@@ -10,11 +10,12 @@ public class Articulo {
 	// Atributos
 	private int codigo;
 	private String nombre;
-	private String categoria;
+	private String tipo;
 	private String descripcion;
 	private String marca;
 	private float precio;
-	private String foto;
+	private byte[] foto;
+	private String nombreFoto;
 	private String origen;
 	private List<ItemFicha> fichaTecnica;
 	
@@ -43,13 +44,13 @@ public class Articulo {
 		this.nombre = nombre;
 	}
 
-	@Column(name="Categoria")
-	public String getCategoria() {
-		return categoria;
+	@Column(name="Tipo")
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	@Column(name="Descripcion")
@@ -80,12 +81,21 @@ public class Articulo {
 	}
 
 	@Column(name="Foto")
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+	
+	@Column(name="NombreFoto")
+	String getNombreFoto() {
+		return nombreFoto;
+	}
+
+	public void setNombreFoto(String nombreFoto) {
+		this.nombreFoto = nombreFoto;
 	}
 
 	@Column(name="Origen")
