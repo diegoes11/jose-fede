@@ -7,7 +7,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
-import tpo.despacho.vos.ArticuloNuevoVO;
+import tpo.despacho.vos.ArticuloVO;
 
 @MessageDriven(
 		activationConfig = { @ActivationConfigProperty(
@@ -23,7 +23,7 @@ public class ArticulosBean implements MessageListener {
     	try 
     	{
     		ObjectMessage objectMessage = (ObjectMessage)message;
-    		ArticuloNuevoVO articuloNuevoVO = (ArticuloNuevoVO)objectMessage.getObject();
+    		ArticuloVO articuloVO = (ArticuloVO)objectMessage.getObject();
     		// DAR DE ALTA EL ARTICULO EN NUESTRO SISTEMA
     	}
     	catch (JMSException jmse)

@@ -1,41 +1,98 @@
 package tpo.despacho.vos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ArticuloVO implements Serializable {
-	private static final long serialVersionUID = 4129130312589973623L;
+public class ArticuloVO implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int codigo;
 	private String nombre;
-	private String tipo;
 	private String descripcion;
 	private String marca;
+	private String tipo;
+	private String origen;
+	private int stock;
 	private float precio;
 	private byte[] foto;
 	private String nombreFoto;
-	private String origen;
-	private float stock;
-	private List<ItemFichaVO> fichaTecnica;
+	private String estado;
+	private List<FichaTecnicaVO> fichasTecnicas;
+	private String deposito;
 	
-	public ArticuloVO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public ArticuloVO (){
+		
 	}
+
+
+		
+	public ArticuloVO(int codigo, String nombre, String descripcion,
+			String marca, String pais_origen, int stock, float precio,String tipo,List<FichaTecnicaVO> fichas, String estado, String nombreFoto, byte[] foto) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.marca = marca;
+		this.origen = pais_origen;
+		this.stock = stock;
+		this.precio = precio;
+		this.tipo=tipo;
+		this.fichasTecnicas=fichas;
+		this.estado=estado;
+		this.nombreFoto=nombreFoto;
+		this.foto=foto;
+	}
+	
+	public ArticuloVO(int codigo, String nombre, String descripcion,
+			String marca, String pais_origen, int stock, float precio,String tipo) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.marca = marca;
+		this.origen = pais_origen;
+		this.stock = stock;
+		this.precio = precio;
+		this.tipo=tipo;
+		this.fichasTecnicas=new ArrayList<FichaTecnicaVO>();
+	}
+
+
+
 
 	public int getCodigo() {
 		return codigo;
 	}
-
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getMarca() {
+		return marca;
+	}
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public float getPrecio() {
+		return precio;
+	}
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 	public String getTipo() {
@@ -46,46 +103,6 @@ public class ArticuloVO implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public float getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	}
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
-	public String getNombreFoto() {
-		return nombreFoto;
-	}
-
-	public void setNombreFoto(String nombreFoto) {
-		this.nombreFoto = nombreFoto;
-	}
-
 	public String getOrigen() {
 		return origen;
 	}
@@ -94,21 +111,62 @@ public class ArticuloVO implements Serializable {
 		this.origen = origen;
 	}
 
-	public float getStock() {
-		return stock;
+	public List<FichaTecnicaVO> getFichasTecnicas() {
+		return fichasTecnicas;
 	}
 
-	public void setStock(float stock) {
-		this.stock = stock;
+	public void setFichasTecnicas(List<FichaTecnicaVO> fichasTecnicas) {
+		this.fichasTecnicas = fichasTecnicas;
 	}
 
-	public List<ItemFichaVO> getFichaTecnica() {
-		return fichaTecnica;
+
+
+	public byte[] getFoto() {
+		return foto;
 	}
 
-	public void setFichaTecnica(List<ItemFichaVO> fichaTecnica) {
-		this.fichaTecnica = fichaTecnica;
+
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
-	
-	
+
+
+
+	public String getNombreFoto() {
+		return nombreFoto;
+	}
+
+
+
+	public void setNombreFoto(String nombreFoto) {
+		this.nombreFoto = nombreFoto;
+	}
+
+
+
+	public String getDeposito() {
+		return deposito;
+	}
+
+
+
+	public void setDeposito(String deposito) {
+		this.deposito = deposito;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 }
+
+
