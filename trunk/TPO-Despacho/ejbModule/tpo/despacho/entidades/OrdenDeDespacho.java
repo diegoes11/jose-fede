@@ -1,5 +1,6 @@
 package tpo.despacho.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,12 +13,12 @@ public class OrdenDeDespacho {
 	private PortalWeb portalWeb;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
+	// AGREGAR FECHA
 	
 	public OrdenDeDespacho(){
-		
 	}
 	
-	// Métodos
+	// Métodos	
 	public void verificarOrdenCompleta(){
 		boolean ordenCompleta = true;
 		for(DetalleOrdenDeDespacho detalle : detallesOrdenDeDespacho){
@@ -51,7 +52,7 @@ public class OrdenDeDespacho {
 	}
 
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn (name = "idDetalle")
+	@JoinColumn (name = "IDOrdenDeDespacho")
 	public List<DetalleOrdenDeDespacho> getDetallesOrdenDeDespacho() {
 		return detallesOrdenDeDespacho;
 	}
@@ -62,7 +63,7 @@ public class OrdenDeDespacho {
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL)
-	@JoinColumn (name = "Nombre")
+	@JoinColumn (name = "NombrePortalWeb")
 	public PortalWeb getPortalWeb() {
 		return portalWeb;
 	}

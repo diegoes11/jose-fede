@@ -1,7 +1,5 @@
 package tpo.despacho.entidades;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +8,6 @@ public class Deposito {
 	
 	private String nombre;
 	private Coordenadas coordenadas;
-	private List<Stock> stock;
 	
 	public Deposito(){
 		
@@ -35,14 +32,4 @@ public class Deposito {
 		this.coordenadas = coordenadas;
 	}
 
-	@OneToMany (cascade = CascadeType.ALL)
-	public List<Stock> getStock() {
-		return stock;
-	}
-
-	public void setStock(List<Stock> stock) {
-		this.stock = stock;
-	}
-	
-	
 }

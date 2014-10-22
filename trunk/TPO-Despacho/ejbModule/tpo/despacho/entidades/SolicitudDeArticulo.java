@@ -36,7 +36,8 @@ public class SolicitudDeArticulo {
 		this.idSolicitudDeArticulo = idSolicitudDeArticulo;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="NombreDeposito")
 	public Deposito getDeposito() {
 		return deposito;
 	}
@@ -45,7 +46,8 @@ public class SolicitudDeArticulo {
 		this.deposito = deposito;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="IDOrdenDeDespacho")
 	public DetalleOrdenDeDespacho getDetalleOrdenDeDespacho() {
 		return detalleOrdenDeDespacho;
 	}
