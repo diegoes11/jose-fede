@@ -2,6 +2,8 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
+import tpo.despacho.vos.DetalleOrdenDeDespachoVO;
+
 @Entity
 @Table(name="DetallesOrdenDeDespacho")
 public class DetalleOrdenDeDespacho {
@@ -16,7 +18,7 @@ public class DetalleOrdenDeDespacho {
 	public DetalleOrdenDeDespacho() {
 	}
 	
-	// Metodos
+	// Metodos	
 	public void completarDetalle(){
 		// Actualizo el estado del detalle
 		setEstado("Completo");
@@ -37,7 +39,7 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL)
-	@JoinColumn (name = "Codigo")
+	@JoinColumn (name = "CodigoArticulo")
 	public Articulo getArticulo() {
 		return articulo;
 	}
@@ -47,7 +49,7 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="ID")
+	@JoinColumn(name="IDOrdenDeDespacho")
 	public OrdenDeDespacho getOrdenDeDespacho() {
 		return ordenDeDespacho;
 	}

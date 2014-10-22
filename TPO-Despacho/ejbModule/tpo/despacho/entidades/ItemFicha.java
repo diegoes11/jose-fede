@@ -2,19 +2,31 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
+import tpo.despacho.vos.FichaTecnicaVO;
+
 @Entity
 @Table(name="ItemsFicha")
 public class ItemFicha {
+	
 	// Atributos
 	private int idItemFicha;
 	private String atributo;
 	private String detalle;
 	
+	// Constructor
 	public ItemFicha()
 	{
 		
 	}
+	
+	// Metodos
+	public void setFichaTecnicaVO(FichaTecnicaVO fichaTecnicaVO){
+		//idItemFicha = fichaTecnicaVO.getId();
+		atributo = fichaTecnicaVO.getAtributo();
+		detalle = fichaTecnicaVO.getDetalle();
+	}
 
+	// Getters y setters
 	@Id
 	@Column(name="ID")
 	@GeneratedValue (strategy = GenerationType.AUTO)

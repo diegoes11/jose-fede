@@ -1,8 +1,12 @@
 package tpo.despacho.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import tpo.despacho.vos.ArticuloVO;
+import tpo.despacho.vos.FichaTecnicaVO;
 
 @Entity
 @Table(name="Articulos")
@@ -18,11 +22,33 @@ public class Articulo {
 	private String nombreFoto;
 	private String origen;
 	private List<ItemFicha> fichaTecnica;
+	private Deposito deposito;
 	
 	// Constructor
 	public Articulo(){
-		
+		fichaTecnica = new ArrayList<ItemFicha>();
 	}
+	
+	// Metodos
+	public void setArticuloVO(ArticuloVO articuloVO){
+		codigo = articuloVO.getCodigo();
+		nombre = articuloVO.getNombre();
+		tipo = articuloVO.getTipo();
+		descripcion = articuloVO.getDescripcion();
+		marca = articuloVO.getMarca();
+		precio = articuloVO.getPrecio();
+		foto = articuloVO.getFoto();
+		nombreFoto = articuloVO.getNombreFoto();
+		origen = articuloVO.getOrigen();
+		List<FichaTecnicaVO> fichasTecnicasVO = articuloVO.getFichasTecnicas();
+		for(FichaTecnicaVO fichaTecnicaVO : fichasTecnicasVO)
+		{
+			ItemFicha itemFicha = new ItemFicha();
+			itemFicha.setFichaTecnicaVO(fichaTecnicaVO);
+			fichaTecnica.add(itemFicha);
+		}
+	}
+	
 
 	// Getters y setters
 	@Id
@@ -108,6 +134,7 @@ public class Articulo {
 	}
 
 	@OneToMany (cascade = CascadeType.ALL)
+	@JoinColumn(name="IDArticulo")
 	public List<ItemFicha> getFichaTecnica() {
 		return fichaTecnica;
 	}
@@ -115,5 +142,16 @@ public class Articulo {
 	public void setFichaTecnica(List<ItemFicha> fichaTecnica) {
 		this.fichaTecnica = fichaTecnica;
 	}
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="NombreDeposito")
+	public Deposito getDeposito() {
+		return deposito;
+	}
+
+	public void setDeposito(Deposito deposito) {
+		this.deposito = deposito;
+	}
+	
 	
 }
