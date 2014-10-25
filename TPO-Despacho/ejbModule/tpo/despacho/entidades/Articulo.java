@@ -30,6 +30,29 @@ public class Articulo {
 	}
 	
 	// Metodos
+	@Transient
+	public ArticuloVO getArticuloVO(){
+		ArticuloVO articuloVO = new ArticuloVO();
+		articuloVO.setCodigo(codigo);
+		articuloVO.setNombre(nombre);
+		articuloVO.setTipo(tipo);
+		articuloVO.setDescripcion(descripcion);
+		articuloVO.setMarca(marca);
+		articuloVO.setPrecio(precio);
+		articuloVO.setFoto(foto);
+		articuloVO.setNombreFoto(nombreFoto);
+		articuloVO.setOrigen(origen);
+		articuloVO.setDeposito(deposito.getNombre());
+		List<FichaTecnicaVO> fichasTecnicas = new ArrayList<FichaTecnicaVO>();
+		for(ItemFicha itemFicha : fichaTecnica)
+		{
+			FichaTecnicaVO ft = itemFicha.getFichaTecnicaVO();
+			fichasTecnicas.add(ft);
+		}
+		articuloVO.setFichasTecnicas(fichasTecnicas);
+		return articuloVO;
+	}
+	
 	public void setArticuloVO(ArticuloVO articuloVO){
 		codigo = articuloVO.getCodigo();
 		nombre = articuloVO.getNombre();
@@ -48,7 +71,6 @@ public class Articulo {
 			fichaTecnica.add(itemFicha);
 		}
 	}
-	
 
 	// Getters y setters
 	@Id

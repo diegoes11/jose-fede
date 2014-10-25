@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import tpo.despacho.vos.UsuarioVO;
 
@@ -27,6 +28,11 @@ public class Usuario {
 	}
 	
 	// Getters y Setters
+	@Transient
+	public UsuarioVO getUsuarioVO(){
+		return new UsuarioVO(dni, nombre, apellido, activo);
+	}
+	
 	@Id	
 	@Column(name="DNI")
 	public long getDni() {
@@ -58,7 +64,4 @@ public class Usuario {
 	}
 	
 	// Métodos
-	public UsuarioVO obtenerUsuarioVO(){
-		return new UsuarioVO(dni, nombre, apellido, activo);
-	}
 }

@@ -1,10 +1,15 @@
 package tpo.despacho.sessions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.SolicitudDeArticulo;
+import tpo.despacho.vos.ArticuloVO;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {
@@ -30,5 +35,17 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		if(solicitudDeArticulo != null){
 			solicitudDeArticulo.actualizarCantidad(cantidad);
 		}
+	}
+
+	public List<ArticuloVO> obtenerArticulos() {
+    	String query = "SELECT a FROM Articulo a";
+    	List<Articulo> articulos = (List<Articulo>)manager.createQuery(query, Articulo.class).getResultList();
+    	List<ArticuloVO> articulosVO = new ArrayList<ArticuloVO>(articulos.size());
+    	// Convierto la lista de Usuario a UsuarioVO
+    	for(Articulo a : articulos){
+    		ArticuloVO articuloVO = a.getArticuloVO();
+    		articulosVO.add(articuloVO);
+    	}
+    	return articulosVO;
 	}
 }
