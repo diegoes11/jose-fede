@@ -13,6 +13,7 @@ import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
+import tpo.despacho.entidades.SolicitudDeArticulo;
 import tpo.despacho.vos.DetalleOrdenDeDespachoVO;
 import tpo.despacho.vos.OrdenDeDespachoVO;
 
@@ -31,10 +32,12 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     	PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
     	if(portalWeb != null)
     	{
+    		// Creo la orden de despacho
     		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
     		ordenDeDespacho.setIdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho());
     		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
     		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
+    		// Creo los detalles de la orden de despacho
     		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
     		{
     			Articulo articulo = manager.find(Articulo.class, doddvo.getCodigoArticulo());
@@ -48,12 +51,18 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     			}
     		}
     		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
+    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
+    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
+    		{
+    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
+    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getDeposito());
+    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
+    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
+    			
+    			// ENVIAR ASINCRONICAMENTE LA SOLICITUD DEL ARTICULO AL DEPOSITO CORRESPONDIENTE.
+    		}
     		
-    		//-	Por cada artículo, se debe obtener el Deposito que lo administra y solicitarlo asincrónicamente
-    		//-	Se debe registrar la solicitud de articulo por Deposito
-
-    		
-    		
+    		manager.persist(ordenDeDespacho);
     	}
     	
     	return false;
