@@ -45,7 +45,7 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
     	List<UsuarioVO> usuariosVO = new ArrayList<UsuarioVO>(usuarios.size());
     	// Convierto la lista de Usuario a UsuarioVO
     	for(Usuario u : usuarios){
-    		UsuarioVO usuarioVO = u.obtenerUsuarioVO();
+    		UsuarioVO usuarioVO = u.getUsuarioVO();
     		usuariosVO.add(usuarioVO);
     	}
     	return usuariosVO;

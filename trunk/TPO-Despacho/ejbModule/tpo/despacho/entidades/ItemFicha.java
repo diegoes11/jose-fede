@@ -20,6 +20,15 @@ public class ItemFicha {
 	}
 	
 	// Metodos
+	@Transient
+	public FichaTecnicaVO getFichaTecnicaVO(){
+		FichaTecnicaVO fichaTecnicaVO = new FichaTecnicaVO();
+		fichaTecnicaVO.setId(idItemFicha);
+		fichaTecnicaVO.setAtributo(atributo);
+		fichaTecnicaVO.setDetalle(detalle);
+		return fichaTecnicaVO;
+	}
+	
 	public void setFichaTecnicaVO(FichaTecnicaVO fichaTecnicaVO){
 		idItemFicha = fichaTecnicaVO.getId();
 		atributo = fichaTecnicaVO.getAtributo();
