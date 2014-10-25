@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="tpo.despacho.vos.ArticuloVO" %>
+<%@ page import="tpo.despacho.vos.FichaTecnicaVO" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -40,15 +41,38 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td><a href="">Ver</a></td>
+<%
+	for(ArticuloVO e : electrodomesticos)
+	{
+%>
+			<td><%= e.getCodigo() %></td>
+			<td><%= e.getNombre() %></td>
+			<td><%= e.getDescripcion() %></td>
+			<td><%= e.getMarca() %></td>
+			<td>$<%= e.getPrecio() %></td>
+			<td><img src="<%= e.getFoto() %>" alt="<%= e.getNombreFoto() %>" /></td>
+			<td><%= e.getOrigen() %></td>
+			<td>
+				<table>
+					<tbody>
+						<%
+							for(FichaTecnicaVO ft : e.getFichasTecnicas())
+							{
+						%>
+							<tr>
+								<td><i><%= ft.getAtributo() %>:</i></td>
+								<td><%= ft.getDetalle() %></td>
+							<tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+			</td>
 		</tr>
+<%
+	}
+%>
 	</tbody>
 	</table>
 </div>
