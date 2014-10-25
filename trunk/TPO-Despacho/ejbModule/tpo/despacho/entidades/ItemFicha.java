@@ -21,7 +21,7 @@ public class ItemFicha {
 	
 	// Metodos
 	public void setFichaTecnicaVO(FichaTecnicaVO fichaTecnicaVO){
-		//idItemFicha = fichaTecnicaVO.getId();
+		idItemFicha = fichaTecnicaVO.getId();
 		atributo = fichaTecnicaVO.getAtributo();
 		detalle = fichaTecnicaVO.getDetalle();
 	}
@@ -29,7 +29,7 @@ public class ItemFicha {
 	// Getters y setters
 	@Id
 	@Column(name="ID")
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	//@GeneratedValue (strategy = GenerationType.AUTO)
 	public int getIdItemFicha() {
 		return idItemFicha;
 	}

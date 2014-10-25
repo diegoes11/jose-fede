@@ -38,12 +38,12 @@ public class ArticulosMDB implements MessageListener {
     			articulo = new Articulo();
     			articulo.setArticuloVO(articuloVO);
     			articulo.setDeposito(deposito);
-    			//manager.persist(articulo);
+    			manager.persist(articulo);
     		}
     	}
-    	catch (JMSException jmse)
+    	catch (Exception e)
     	{
-    		System.out.println(jmse.getStackTrace());
+    		System.out.println(e.getStackTrace());
     	}
     }
     
