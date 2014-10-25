@@ -1,3 +1,6 @@
+<%@ page import="java.util.List" %>
+<%@ page import="tpo.despacho.vos.ArticuloVO" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,6 +12,12 @@
 <link rel="stylesheet" href="css/despacho.css">
 </head>
 <body>
+<%
+	List<ArticuloVO> electrodomesticos = (List<ArticuloVO>)request.getAttribute("electrodomesticos");
+	List<ArticuloVO> moda = (List<ArticuloVO>)request.getAttribute("moda");
+	List<ArticuloVO> muebles = (List<ArticuloVO>)request.getAttribute("muebles");
+	List<ArticuloVO> ninos = (List<ArticuloVO>)request.getAttribute("ninos");
+%>
 <h1>Despacho - Listado de Art&iacute;los</h1>
 
 <!-- Agregar filtro por: Deposito o Codigo -->
@@ -61,17 +70,24 @@
 		</tr>
 	</thead>
 	<tbody>
+<%
+	for(ArticuloVO m : moda)
+	{
+%>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td><%= m.getCodigo() %></td>
+			<td><%= m.getNombre() %></td>
+			<td><%= m.getDescripcion() %></td>
+			<td><%= m.getMarca() %></td>
+			<td>$<%= m.getPrecio() %></td>
+			<td><img src="<%= m.getFoto() %>" alt="<%= m.getNombreFoto() %>" /></td>
+			<td><%= m.getOrigen() %></td>
+			<td><%= m.getDetalleFichaTecnicaPorAtributo("Color") %></td>
+			<td><%= m.getDetalleFichaTecnicaPorAtributo("Talle") %></td>
 		</tr>
+<%
+	}
+%>
 	</tbody>
 	</table>
 </div>

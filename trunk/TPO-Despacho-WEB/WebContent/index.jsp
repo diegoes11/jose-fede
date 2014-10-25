@@ -22,7 +22,7 @@
 		<a href="ListarUsuarios">Listado de Usuarios</a>
 	</div>
 	<div id="tabs-2">
-		<a href="listarArticulos.jsp">Listado de Art&iacute;culos</a>
+		<a href="ListarArticulos">Listado de Art&iacute;culos</a>
 	</div>
 	<div id="tabs-3">
 		<a href="listarArticulos.jsp">Listado de &Oacute;rdenes de Despacho</a>
