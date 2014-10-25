@@ -2,6 +2,8 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
+import tpo.despacho.vos.SolicitudDeArticuloVO;
+
 @Entity
 @Table(name="SolicitudesDeArticulo")
 public class SolicitudDeArticulo {
@@ -14,6 +16,16 @@ public class SolicitudDeArticulo {
 	}
 	
 	// Metodos
+	@Transient
+	public SolicitudDeArticuloVO getSolicitudDeArticuloVO(){
+		SolicitudDeArticuloVO solicitudDeArticuloVO = new SolicitudDeArticuloVO();
+		solicitudDeArticuloVO.setIdSolicitudDeArticulo(idSolicitudDeArticulo);
+		solicitudDeArticuloVO.setNombreDespacho("");
+		solicitudDeArticuloVO.setCodigoArticulo(detalleOrdenDeDespacho.getArticulo().getCodigo());
+		solicitudDeArticuloVO.setCantidad(detalleOrdenDeDespacho.getCantidad());
+		return solicitudDeArticuloVO;
+	}
+	
 	public void actualizarCantidad(int cantidad){
 		if(cantidadRestante - cantidad > 0){
 			cantidadRestante = cantidadRestante - cantidad;
