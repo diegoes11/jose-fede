@@ -132,16 +132,23 @@
 		</tr>
 	</thead>
 	<tbody>
+<%
+	for(ArticuloVO mu : muebles)
+	{
+%>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
+			<td><%= mu.getCodigo() %></td>
+			<td><%= mu.getNombre() %></td>
+			<td><%= mu.getDescripcion() %></td>
+			<td><%= mu.getMarca() %></td>
+			<td>$<%= mu.getPrecio() %></td>
+			<td><img src="<%= mu.getFoto() %>" alt="<%= mu.getNombreFoto() %>" /></td>
+			<td><%= mu.getOrigen() %></td>
+			<td><%= mu.getFichasTecnicas().get(0).getDetalle() %></td>
 		</tr>
+<%
+	}
+%>
 	</tbody>
 	</table>
 </div>
@@ -162,16 +169,23 @@
 		</tr>
 	</thead>
 	<tbody>
+<%
+	for(ArticuloVO n : ninos)
+	{
+%>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
+			<td><%= n.getCodigo() %></td>
+			<td><%= n.getNombre() %></td>
+			<td><%= n.getDescripcion() %></td>
+			<td><%= n.getMarca() %></td>
+			<td>$<%= n.getPrecio() %></td>
+			<td><img src="<%= n.getFoto() %>" alt="<%= n.getNombreFoto() %>" /></td>
+			<td><%= n.getOrigen() %></td>
+			<td><%= n.getFichasTecnicas().get(0).getDetalle() %></td>
 		</tr>
+<%
+	}
+%>
 	</tbody>
 	</table>
 </div>
