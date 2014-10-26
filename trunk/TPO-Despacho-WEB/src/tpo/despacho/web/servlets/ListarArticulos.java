@@ -27,7 +27,7 @@ public class ListarArticulos extends HttpServlet {
 		List<ArticuloVO> electrodomesticos = obtenerArticulosPorTipo(articulos, "Electrodomesticos");
 		List<ArticuloVO> moda = obtenerArticulosPorTipo(articulos, "Moda");
 		List<ArticuloVO> muebles = obtenerArticulosPorTipo(articulos, "Muebles");
-		List<ArticuloVO> ninos = obtenerArticulosPorTipo(articulos, "Ninos");
+		List<ArticuloVO> ninos = obtenerArticulosPorTipo(articulos, "Niños");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarArticulos.jsp");
 		request.setAttribute("electrodomesticos", electrodomesticos);
