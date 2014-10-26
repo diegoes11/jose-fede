@@ -111,66 +111,174 @@ public class Deposito {
 		/***************/
 		
 		 // CREO EL ARTICULO nº3 y lo envio
-		 FichaTecnicaVO ft5 = new FichaTecnicaVO();
-		 ft5.setId(5);
-		 ft5.setAtributo("Color");
-		 ft5.setDetalle("Celeste");
-		 FichaTecnicaVO ft6 = new FichaTecnicaVO();
-		 ft6.setId(6);
-		 ft6.setAtributo("Talle");
-		 ft6.setDetalle("M");
-		 List<FichaTecnicaVO> fichas3 = new ArrayList<FichaTecnicaVO>();
-		 fichas3.add(ft5);
-		 fichas3.add(ft6);
-		 ArticuloVO art3 = new ArticuloVO();
-		 art3.setCodigo(3122);
-		 art3.setDeposito("DEPOSITO1");
-		 art3.setTipo("Moda");
-		 art3.setDescripcion("Musculosa Basement con Breteles");
-		 art3.setEstado("Estado");
-		 art3.setFichasTecnicas(fichas3);
-		 art3.setMarca("Basement");
-		 art3.setNombre("Musculosa Pale");
-		 art3.setNombreFoto("RemeraFoto");
-		 art3.setOrigen("Brasil");
-		 art3.setPrecio(79f);
-		 art3.setStock(9);
+//		 FichaTecnicaVO ft5 = new FichaTecnicaVO();
+//		 ft5.setId(5);
+//		 ft5.setAtributo("Color");
+//		 ft5.setDetalle("Celeste");
+//		 FichaTecnicaVO ft6 = new FichaTecnicaVO();
+//		 ft6.setId(6);
+//		 ft6.setAtributo("Talle");
+//		 ft6.setDetalle("M");
+//		 List<FichaTecnicaVO> fichas3 = new ArrayList<FichaTecnicaVO>();
+//		 fichas3.add(ft5);
+//		 fichas3.add(ft6);
+//		 ArticuloVO art3 = new ArticuloVO();
+//		 art3.setCodigo(3122);
+//		 art3.setDeposito("DEPOSITO1");
+//		 art3.setTipo("Moda");
+//		 art3.setDescripcion("Musculosa Basement con Breteles");
+//		 art3.setEstado("Estado");
+//		 art3.setFichasTecnicas(fichas3);
+//		 art3.setMarca("Basement");
+//		 art3.setNombre("Musculosa Pale");
+//		 art3.setNombreFoto("RemeraFoto");
+//		 art3.setOrigen("Brasil");
+//		 art3.setPrecio(79f);
+//		 art3.setStock(9);
+//		 
+//		ObjectMessage message3 = session.createObjectMessage();
+//		message3.setObject(art3);
+//		
+//		producer.send(message3);
+//		
+//		 // CREO EL ARTICULO nº4 y lo envio
+//		 FichaTecnicaVO ft7 = new FichaTecnicaVO();
+//		 ft7.setId(7);
+//		 ft7.setAtributo("Color");
+//		 ft7.setDetalle("Negro");
+//		 FichaTecnicaVO ft8 = new FichaTecnicaVO();
+//		 ft8.setId(8);
+//		 ft8.setAtributo("Talle");
+//		 ft8.setDetalle("Largo del reloj: 2");
+//		 List<FichaTecnicaVO> fichas4 = new ArrayList<FichaTecnicaVO>();
+//		 fichas4.add(ft7);
+//		 fichas4.add(ft8);
+//		 ArticuloVO art4 = new ArticuloVO();
+//		 art4.setCodigo(1741046);
+//		 art4.setDeposito("DEPOSITO1");
+//		 art4.setTipo("Moda");
+//		 art4.setDescripcion("Modelo: MZ-24");
+//		 art4.setEstado("Estado");
+//		 art4.setFichasTecnicas(fichas4);
+//		 art4.setMarca("Montreal");
+//		 art4.setNombre("Reloj Negro Hombre");
+//		 art4.setNombreFoto("RemeraFoto");
+//		 art4.setOrigen("Argentina");
+//		 art4.setPrecio(345f);
+//		 art4.setStock(9);
+//		 
+//		ObjectMessage message4 = session.createObjectMessage();
+//		message4.setObject(art4);
+//		
+//		producer.send(message4);
+		
+		/***************/
+		
+//		 // CREO EL ARTICULO nº5 y lo envio
+//		 FichaTecnicaVO ft9 = new FichaTecnicaVO();
+//		 ft9.setId(9);
+//		 ft9.setAtributo("Material");
+//		 ft9.setDetalle("MDF");
+//		 List<FichaTecnicaVO> fichas5 = new ArrayList<FichaTecnicaVO>();
+//		 fichas5.add(ft9);
+//		 ArticuloVO art5 = new ArticuloVO();
+//		 art5.setCodigo(1857363);
+//		 art5.setDeposito("DEPOSITO1");
+//		 art5.setTipo("Muebles");
+//		 art5.setDescripcion("Mesa para Tv");
+//		 art5.setEstado("Estado");
+//		 art5.setFichasTecnicas(fichas5);
+//		 art5.setMarca("Mica");
+//		 art5.setNombre("Mesa para TV 21' wengue");
+//		 art5.setNombreFoto("MesaFoto");
+//		 art5.setOrigen("Argentina");
+//		 art5.setPrecio(409f);
+//		 art5.setStock(2);
+//		 
+//		ObjectMessage message5 = session.createObjectMessage();
+//		message5.setObject(art5);
+//		
+//		producer.send(message5);
+//		
+//		 // CREO EL ARTICULO nº6 y lo envio
+//		 FichaTecnicaVO ft10 = new FichaTecnicaVO();
+//		 ft10.setId(10);
+//		 ft10.setAtributo("Material");
+//		 ft10.setDetalle("Rattan de Pvc");
+//		 List<FichaTecnicaVO> fichas6 = new ArrayList<FichaTecnicaVO>();
+//		 fichas6.add(ft10);
+//		 ArticuloVO art6 = new ArticuloVO();
+//		 art6.setCodigo(1607594);
+//		 art6.setDeposito("DEPOSITO1");
+//		 art6.setTipo("Muebles");
+//		 art6.setDescripcion("2 Sofa 1 Cuerpo");
+//		 art6.setEstado("Estado");
+//		 art6.setFichasTecnicas(fichas6);
+//		 art6.setMarca("Mica");
+//		 art6.setNombre("Juego de Jardín Humbert Chocolate");
+//		 art6.setNombreFoto("JuegoJardinFoto");
+//		 art6.setOrigen("Argentina");
+//		 art6.setPrecio(3.29f);
+//		 art6.setStock(9);
+//		 
+//		ObjectMessage message6 = session.createObjectMessage();
+//		message6.setObject(art6);
+//		
+//		producer.send(message6);
+		
+		/************************/
+		
+		 // CREO EL ARTICULO nº7 y lo envio
+		 FichaTecnicaVO ft11 = new FichaTecnicaVO();
+		 ft11.setId(11);
+		 ft11.setAtributo("Edad recomendada");
+		 ft11.setDetalle("8 a 14 años");
+		 List<FichaTecnicaVO> fichas7 = new ArrayList<FichaTecnicaVO>();
+		 fichas7.add(ft11);
+		 ArticuloVO art7 = new ArticuloVO();
+		 art7.setCodigo(1750150);
+		 art7.setDeposito("DEPOSITO1");
+		 art7.setTipo("Niños");
+		 art7.setDescripcion("Madera con lija");
+		 art7.setEstado("Estado");
+		 art7.setFichasTecnicas(fichas7);
+		 art7.setMarca("Falabella");
+		 art7.setNombre("Skateboard PRO");
+		 art7.setNombreFoto("SkateFoto");
+		 art7.setOrigen("Argentina");
+		 art7.setPrecio(399f);
+		 art7.setStock(6);
 		 
-		ObjectMessage message3 = session.createObjectMessage();
-		message3.setObject(art3);
+		ObjectMessage message7 = session.createObjectMessage();
+		message7.setObject(art7);
 		
-		producer.send(message3);
+		producer.send(message7);
 		
-		 // CREO EL ARTICULO nº4 y lo envio
-		 FichaTecnicaVO ft7 = new FichaTecnicaVO();
-		 ft7.setId(7);
-		 ft7.setAtributo("Color");
-		 ft7.setDetalle("Negro");
-		 FichaTecnicaVO ft8 = new FichaTecnicaVO();
-		 ft8.setId(8);
-		 ft8.setAtributo("Talle");
-		 ft8.setDetalle("Largo del reloj: 2");
-		 List<FichaTecnicaVO> fichas4 = new ArrayList<FichaTecnicaVO>();
-		 fichas4.add(ft7);
-		 fichas4.add(ft8);
-		 ArticuloVO art4 = new ArticuloVO();
-		 art4.setCodigo(1741046);
-		 art4.setDeposito("DEPOSITO1");
-		 art4.setTipo("Moda");
-		 art4.setDescripcion("Modelo: MZ-24");
-		 art4.setEstado("Estado");
-		 art4.setFichasTecnicas(fichas4);
-		 art4.setMarca("Montreal");
-		 art4.setNombre("Reloj Negro Hombre");
-		 art4.setNombreFoto("RemeraFoto");
-		 art4.setOrigen("Argentina");
-		 art4.setPrecio(345f);
-		 art4.setStock(9);
+		 // CREO EL ARTICULO nº8 y lo envio
+		 FichaTecnicaVO ft12 = new FichaTecnicaVO();
+		 ft12.setId(12);
+		 ft12.setAtributo("Edad recomendada");
+		 ft12.setDetalle("9 meses a 3 años");
+		 List<FichaTecnicaVO> fichas8 = new ArrayList<FichaTecnicaVO>();
+		 fichas8.add(ft12);
+		 ArticuloVO art8 = new ArticuloVO();
+		 art8.setCodigo(1858018);
+		 art8.setDeposito("DEPOSITO1");
+		 art8.setTipo("Niños");
+		 art8.setDescripcion("Coche Paraguas");
+		 art8.setEstado("Estado");
+		 art8.setFichasTecnicas(fichas8);
+		 art8.setMarca("Love");
+		 art8.setNombre("Coche Paraguas Gris");
+		 art8.setNombreFoto("CarritoFoto");
+		 art8.setOrigen("China");
+		 art8.setPrecio(529f);
+		 art8.setStock(5);
 		 
-		ObjectMessage message4 = session.createObjectMessage();
-		message4.setObject(art4);
+		ObjectMessage message8 = session.createObjectMessage();
+		message8.setObject(art8);
 		
-		producer.send(message4);
+		producer.send(message8);
 		
 		
 		// TODO: recordar cerrar la session y la connection en un bloque “finally”
