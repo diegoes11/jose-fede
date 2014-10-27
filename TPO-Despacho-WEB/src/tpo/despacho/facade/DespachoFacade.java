@@ -13,4 +13,5 @@ public interface DespachoFacade {
 	public List<UsuarioVO> obtenerUsuarios();
 	public boolean setEstadoActivoUsuario(UsuarioVO usuarioVO);
 	public List<ArticuloVO> obtenerArticulos();
+	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad);
 }
