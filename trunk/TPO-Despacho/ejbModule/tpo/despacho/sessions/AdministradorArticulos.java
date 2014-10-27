@@ -8,6 +8,6 @@ import tpo.despacho.vos.ArticuloVO;
 
 @Local
 public interface AdministradorArticulos {
-	public void actualizarCantidadSolicitudDeArticulo(int idSolicitudDeArticulo, int cantidad);
+	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad);
 	public List<ArticuloVO> obtenerArticulos();
 }

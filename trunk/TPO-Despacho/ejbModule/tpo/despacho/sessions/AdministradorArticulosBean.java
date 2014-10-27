@@ -30,11 +30,13 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
     	return null;
     }
 
-	public void actualizarCantidadSolicitudDeArticulo(int idSolicitudDeArticulo, int cantidad) {
+	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad) {
 		SolicitudDeArticulo solicitudDeArticulo = buscarSolicitudDeArticulo(idSolicitudDeArticulo);
 		if(solicitudDeArticulo != null){
 			solicitudDeArticulo.actualizarCantidad(cantidad);
+			return true;
 		}
+		return false;
 	}
 
 	public List<ArticuloVO> obtenerArticulos() {

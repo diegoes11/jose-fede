@@ -38,4 +38,8 @@ public class DespachoFacadeBean implements DespachoFacade {
 	public List<ArticuloVO> obtenerArticulos() {
 		return administradorArticulos.obtenerArticulos();
 	}
+	
+	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad){
+		return administradorArticulos.recepcionDeArticulos(idSolicitudDeArticulo, cantidad);
+	}
 }
