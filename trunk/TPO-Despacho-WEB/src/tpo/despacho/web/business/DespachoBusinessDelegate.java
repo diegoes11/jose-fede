@@ -58,4 +58,8 @@ public class DespachoBusinessDelegate {
 	public List<ArticuloVO> obtenerArticulos(){
 		return despachoFacade.obtenerArticulos();
 	}
+	
+	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad){
+		return despachoFacade.recepcionDeArticulos(idSolicitudDeArticulo, cantidad);
+	}
 }
