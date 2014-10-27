@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
+import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
@@ -45,40 +46,46 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     	PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
     	if(portalWeb != null)
     	{
-    		// Creo la orden de despacho
-    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
-    		ordenDeDespacho.setIdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho());
-    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
-    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
-    		// Creo los detalles de la orden de despacho
-    		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
+    		LogisticaYMonitoreo logisticaYMonitoreo = manager.find(LogisticaYMonitoreo.class, ordenDeDespachoVO.getNombreLogisticaYMonitoreo());
+    		if(logisticaYMonitoreo != null)
     		{
-    			Articulo articulo = manager.find(Articulo.class, doddvo.getCodigoArticulo());
-    			if(articulo != null)
-    			{
-        			DetalleOrdenDeDespacho dodd = new DetalleOrdenDeDespacho();
-    				dodd.setArticulo(articulo);
-    				dodd.setCantidad(doddvo.getCantidad());
-    				dodd.setEstado("incompleto");
-    				detallesOrdenDeDespacho.add(dodd);
-    			}
+	    		// Creo la orden de despacho
+	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
+	    		ordenDeDespacho.setIdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho());
+	    		ordenDeDespacho.setPortalWeb(portalWeb);
+	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
+	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
+	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
+	    		// Creo los detalles de la orden de despacho
+	    		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
+	    		{
+	    			Articulo articulo = manager.find(Articulo.class, doddvo.getCodigoArticulo());
+	    			if(articulo != null)
+	    			{
+	        			DetalleOrdenDeDespacho dodd = new DetalleOrdenDeDespacho();
+	    				dodd.setArticulo(articulo);
+	    				dodd.setCantidad(doddvo.getCantidad());
+	    				dodd.setEstado("incompleto");
+	    				detallesOrdenDeDespacho.add(dodd);
+	    			}
+	    		}
+	    		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
+	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
+	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
+	    		{
+	    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
+	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getDeposito());
+	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
+	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
+	    			
+	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
+	    		}
+	    		
+				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
+	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+	    		
+	    		manager.persist(ordenDeDespacho);
     		}
-    		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
-    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
-    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
-    		{
-    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
-    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getDeposito());
-    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
-    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
-    			
-    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
-    		}
-    		
-			// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
-    		
-    		manager.persist(ordenDeDespacho);
     	}
     	
     	return false;
@@ -126,6 +133,5 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 			System.out.println("Error al efectuar pedido: " + e);
 			e.printStackTrace();
 		}
-
 	}
 }

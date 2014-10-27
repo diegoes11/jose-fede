@@ -11,6 +11,7 @@ public class OrdenDeDespacho {
 	
 	private int idOrdenDeDespacho;
 	private PortalWeb portalWeb;
+	private LogisticaYMonitoreo logisticaYMonitoreo;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
 	// AGREGAR FECHA
@@ -70,6 +71,16 @@ public class OrdenDeDespacho {
 
 	public void setPortalWeb(PortalWeb portalWeb) {
 		this.portalWeb = portalWeb;
+	}
+
+	@ManyToOne (cascade = CascadeType.ALL)
+	@JoinColumn (name = "NombreLogisticaYMonitoreo")
+	public LogisticaYMonitoreo getLogisticaYMonitoreo() {
+		return logisticaYMonitoreo;
+	}
+
+	public void setLogisticaYMonitoreo(LogisticaYMonitoreo logisticaYMonitoreo) {
+		this.logisticaYMonitoreo = logisticaYMonitoreo;
 	}
 	
 	
