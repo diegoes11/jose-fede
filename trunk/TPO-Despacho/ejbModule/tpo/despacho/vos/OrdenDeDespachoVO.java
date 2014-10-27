@@ -8,6 +8,7 @@ public class OrdenDeDespachoVO implements Serializable {
 	private static final long serialVersionUID = 4722769366909883343L;
 	private int idOrdenDeDespacho;
 	private String nombrePortalWeb;
+	private String nombreLogisticaYMonitoreo;
 	private List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO;
 		
 	public OrdenDeDespachoVO() {
@@ -31,6 +32,13 @@ public class OrdenDeDespachoVO implements Serializable {
 	public void setDetallesOrdenDeDespachoVO(
 			List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO) {
 		this.detallesOrdenDeDespachoVO = detallesOrdenDeDespachoVO;
+	}
+	public String getNombreLogisticaYMonitoreo() {
+		return nombreLogisticaYMonitoreo;
+	}
+
+	public void setNombreLogisticaYMonitoreo(String nombreLogisticaYMonitoreo) {
+		this.nombreLogisticaYMonitoreo = nombreLogisticaYMonitoreo;
 	}
 	
 	
