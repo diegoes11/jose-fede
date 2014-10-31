@@ -14,22 +14,19 @@
 </head>
 <body>
 <%
-	List<ArticuloVO> electrodomesticos = (List<ArticuloVO>)request.getAttribute("electrodomesticos");
-	List<ArticuloVO> moda = (List<ArticuloVO>)request.getAttribute("moda");
-	List<ArticuloVO> muebles = (List<ArticuloVO>)request.getAttribute("muebles");
-	List<ArticuloVO> ninos = (List<ArticuloVO>)request.getAttribute("ninos");
+	List<ArticuloVO> articulos = (List<ArticuloVO>)request.getAttribute("articulos");
 %>
-<h1>Despacho - Listado de Art&iacute;culos</h1>
+<h1>Despacho - Listado de Art&iacute;los</h1>
 
-<!-- Agregar filtro por: Deposito o Codigo -->
-<h1>Agregar filtro por: Deposito o Codigo</h1>
-
-<div id="electrodomesticos">
-	<h1>Electrodomesticos</h1>
-	<table border="1">
+<div id="articulos">
+	<h1>Articulos</h1>
+	<input id="filtro" type="text">
+	<br />
+	<table id="tablaArticulos" border="1">
 	<thead>
 		<tr>
 			<th>C&oacute;odigo</th>
+			<th>Tipo</th>
 			<th>Nombre</th>
 			<th>Descripci&oacute;n</th>
 			<th>Marca</th>
@@ -37,26 +34,28 @@
 			<th>Foto</th>
 			<th>Origen</th>
 			<th>Ficha T&eacute;cnica</th>
+			<th>Dep&oacute;sito</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 <%
-	for(ArticuloVO e : electrodomesticos)
+	for(ArticuloVO a : articulos)
 	{
 %>
-			<td><%= e.getCodigo() %></td>
-			<td><%= e.getNombre() %></td>
-			<td><%= e.getDescripcion() %></td>
-			<td><%= e.getMarca() %></td>
-			<td>$<%= e.getPrecio() %></td>
-			<td><img src="<%= e.getFoto() %>" alt="<%= e.getNombreFoto() %>" /></td>
-			<td><%= e.getOrigen() %></td>
+			<td><%= a.getCodigo() %></td>
+			<td><%= a.getTipo() %></td>
+			<td><%= a.getNombre() %></td>
+			<td><%= a.getDescripcion() %></td>
+			<td><%= a.getMarca() %></td>
+			<td>$<%= a.getPrecio() %></td>
+			<td><img src="<%= a.getFoto() %>" alt="<%= a.getNombreFoto() %>" /></td>
+			<td><%= a.getOrigen() %></td>
 			<td>
 				<table>
 					<tbody>
 						<%
-							for(FichaTecnicaVO ft : e.getFichasTecnicas())
+							for(FichaTecnicaVO ft : a.getFichasTecnicas())
 							{
 						%>
 							<tr>
@@ -69,119 +68,7 @@
 					</tbody>
 				</table>
 			</td>
-		</tr>
-<%
-	}
-%>
-	</tbody>
-	</table>
-</div>
-
-<div id="moda">
-	<h1>Moda</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Color</th>
-			<th>Talle</th>
-		</tr>
-	</thead>
-	<tbody>
-<%
-	for(ArticuloVO m : moda)
-	{
-%>
-		<tr>
-			<td><%= m.getCodigo() %></td>
-			<td><%= m.getNombre() %></td>
-			<td><%= m.getDescripcion() %></td>
-			<td><%= m.getMarca() %></td>
-			<td>$<%= m.getPrecio() %></td>
-			<td><img src="<%= m.getFoto() %>" alt="<%= m.getNombreFoto() %>" /></td>
-			<td><%= m.getOrigen() %></td>
-			<td><%= m.getDetalleFichaTecnicaPorAtributo("Color") %></td>
-			<td><%= m.getDetalleFichaTecnicaPorAtributo("Talle") %></td>
-		</tr>
-<%
-	}
-%>
-	</tbody>
-	</table>
-</div>
-
-<div id="muebles">
-	<h1>Muebles</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Material</th>
-		</tr>
-	</thead>
-	<tbody>
-<%
-	for(ArticuloVO mu : muebles)
-	{
-%>
-		<tr>
-			<td><%= mu.getCodigo() %></td>
-			<td><%= mu.getNombre() %></td>
-			<td><%= mu.getDescripcion() %></td>
-			<td><%= mu.getMarca() %></td>
-			<td>$<%= mu.getPrecio() %></td>
-			<td><img src="<%= mu.getFoto() %>" alt="<%= mu.getNombreFoto() %>" /></td>
-			<td><%= mu.getOrigen() %></td>
-			<td><%= mu.getFichasTecnicas().get(0).getDetalle() %></td>
-		</tr>
-<%
-	}
-%>
-	</tbody>
-	</table>
-</div>
-
-<div id="niños">
-	<h1>Niños</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Edad recomendada</th>
-		</tr>
-	</thead>
-	<tbody>
-<%
-	for(ArticuloVO n : ninos)
-	{
-%>
-		<tr>
-			<td><%= n.getCodigo() %></td>
-			<td><%= n.getNombre() %></td>
-			<td><%= n.getDescripcion() %></td>
-			<td><%= n.getMarca() %></td>
-			<td>$<%= n.getPrecio() %></td>
-			<td><img src="<%= n.getFoto() %>" alt="<%= n.getNombreFoto() %>" /></td>
-			<td><%= n.getOrigen() %></td>
-			<td><%= n.getFichasTecnicas().get(0).getDetalle() %></td>
+			<td><%= a.getDeposito() %></td>
 		</tr>
 <%
 	}

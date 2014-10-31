@@ -24,31 +24,13 @@ public class ListarArticulos extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<ArticuloVO> articulos = DespachoBusinessDelegate.getInstancia().obtenerArticulos();
-		List<ArticuloVO> electrodomesticos = obtenerArticulosPorTipo(articulos, "Electrodomesticos");
-		List<ArticuloVO> moda = obtenerArticulosPorTipo(articulos, "Moda");
-		List<ArticuloVO> muebles = obtenerArticulosPorTipo(articulos, "Muebles");
-		List<ArticuloVO> ninos = obtenerArticulosPorTipo(articulos, "Niños");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarArticulos.jsp");
-		request.setAttribute("electrodomesticos", electrodomesticos);
-		request.setAttribute("moda", moda);
-		request.setAttribute("muebles", muebles);
-		request.setAttribute("ninos", ninos);
+		request.setAttribute("articulos", articulos);
 	    dispatcher.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	private List<ArticuloVO> obtenerArticulosPorTipo(List<ArticuloVO> articulos, String tipo){
-		List<ArticuloVO> arts = new ArrayList<ArticuloVO>();
-		for(ArticuloVO a : articulos){
-			if(a.getTipo().equals(tipo))
-			{
-				arts.add(a);
-			}
-		}
-		return arts;
 	}
 }
