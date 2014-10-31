@@ -2,8 +2,6 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.DetalleOrdenDeDespachoVO;
-
 @Entity
 @Table(name="DetallesOrdenDeDespacho")
 public class DetalleOrdenDeDespacho {
