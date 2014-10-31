@@ -50,7 +50,10 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="IDOrdenDeDespacho")
+	@JoinColumns({
+        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="ID"),
+        @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")
+    })
 	public OrdenDeDespacho getOrdenDeDespacho() {
 		return ordenDeDespacho;
 	}
