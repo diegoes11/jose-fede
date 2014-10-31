@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class OrdenDeDespacho {
 	
 	private int idOrdenDeDespacho;
+	private int idOrdenDeDespachoInterno;
 	private PortalWeb portalWeb;
 	private LogisticaYMonitoreo logisticaYMonitoreo;
 	private String estado;
@@ -33,7 +34,6 @@ public class OrdenDeDespacho {
 	}
 
 	// Getters y Setters
-	@Id
 	@Column(name="ID")
 	public int getIdOrdenDeDespacho() {
 		return idOrdenDeDespacho;
@@ -41,6 +41,17 @@ public class OrdenDeDespacho {
 
 	public void setIdOrdenDeDespacho(int idOrdenDeDespacho) {
 		this.idOrdenDeDespacho = idOrdenDeDespacho;
+	}
+
+	@Id
+	@Column (name="IDInterno")
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	public int getIdOrdenDeDespachoInterno() {
+		return idOrdenDeDespachoInterno;
+	}
+
+	public void setIdOrdenDeDespachoInterno(int idOrdenDeDespachoInterno) {
+		this.idOrdenDeDespachoInterno = idOrdenDeDespachoInterno;
 	}
 
 	@Column(name="Estado")
