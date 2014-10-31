@@ -39,7 +39,10 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL)
-	@JoinColumn (name = "CodigoArticulo")
+	@JoinColumns({
+        @JoinColumn(name="CodigoArticulo", referencedColumnName="Codigo"),
+        @JoinColumn(name="NombreDeposito", referencedColumnName="NombreDeposito")
+    })
 	public Articulo getArticulo() {
 		return articulo;
 	}
