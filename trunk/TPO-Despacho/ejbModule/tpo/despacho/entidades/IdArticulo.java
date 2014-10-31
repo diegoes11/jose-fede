@@ -1,10 +1,14 @@
 package tpo.despacho.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Embeddable
-public class IdArticulo {
-
+public class IdArticulo implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int codigo;
 	private Deposito deposito;
 
