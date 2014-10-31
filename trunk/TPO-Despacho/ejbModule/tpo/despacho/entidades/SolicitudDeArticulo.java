@@ -45,7 +45,7 @@ public class SolicitudDeArticulo {
 	
 	// Getters y Setters
 	@Id
-	@Column(name="ID")
+	@Column(name="IdSolicitudDeArticulo")
 	public int getIdSolicitudDeArticulo() {
 		return idSolicitudDeArticulo;
 	}

@@ -26,7 +26,7 @@ public class IdOrdenDeDespacho implements Serializable {
 	public IdOrdenDeDespacho() {
 	}
 
-	@Column(name="ID")
+	@Column(name="IdOrdenDeDespacho")
 	public int getIdOrdenDeDespacho() {
 		return idOrdenDeDespacho;
 	}
