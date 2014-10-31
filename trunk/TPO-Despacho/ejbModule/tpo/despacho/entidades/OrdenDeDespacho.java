@@ -57,7 +57,7 @@ public class OrdenDeDespacho {
 
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumns({
-        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="ID"),
+        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="IdOrdenDeDespacho"),
         @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")
     })
 	public List<DetalleOrdenDeDespacho> getDetallesOrdenDeDespacho() {
