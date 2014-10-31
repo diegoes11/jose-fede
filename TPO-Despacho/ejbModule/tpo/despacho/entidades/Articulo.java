@@ -13,6 +13,7 @@ import tpo.despacho.vos.FichaTecnicaVO;
 public class Articulo {
 	// Atributos
 	private int codigo;
+	private int codigoInterno;
 	private String nombre;
 	private String tipo;
 	private String descripcion;
@@ -73,7 +74,6 @@ public class Articulo {
 	}
 
 	// Getters y setters
-	@Id
 	@Column(name="Codigo")
 	public int getCodigo() {
 		return codigo;
@@ -81,6 +81,17 @@ public class Articulo {
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
+	}
+	
+	@Id
+	@Column(name="CodigoInterno")
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	public int getCodigoInterno() {
+		return codigoInterno;
+	}
+
+	public void setCodigoInterno(int codigoInterno) {
+		this.codigoInterno = codigoInterno;
 	}
 
 	@Column(name="Nombre")
