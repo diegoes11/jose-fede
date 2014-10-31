@@ -15,17 +15,18 @@ public class OrdenDeDespacho {
 	// AGREGAR FECHA
 	
 	public OrdenDeDespacho(){
+	
 	}
 	
 	// Métodos	
 	public void verificarOrdenCompleta(){
 		boolean ordenCompleta = true;
 		for(DetalleOrdenDeDespacho detalle : detallesOrdenDeDespacho){
-			if(detalle.getEstado().equals("Incompleto"))
+			if(detalle.getEstado().equals("incompleto"))
 				ordenCompleta = false;
 		}
 		if(ordenCompleta == true){
-			setEstado("Entregada");
+			setEstado("despachada");
 			// ENVIARLE NOTIFICACION A LOGISTICA Y MONITOREO Y AL PORTAL WEB
 		}
 	}
