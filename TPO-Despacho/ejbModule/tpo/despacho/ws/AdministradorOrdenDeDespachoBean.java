@@ -1,6 +1,7 @@
 package tpo.despacho.ws;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -55,6 +56,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
 	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
 	    		ordenDeDespacho.setEstado("pendiente de entrega");
+	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
 	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
 	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
 	    		// Creo los detalles de la orden de despacho
@@ -78,6 +80,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
 	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
 	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
+	    			solicitudDeArticulo.setFechaPedido(Calendar.getInstance().getTime());
 	    			
 	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
 	    		}

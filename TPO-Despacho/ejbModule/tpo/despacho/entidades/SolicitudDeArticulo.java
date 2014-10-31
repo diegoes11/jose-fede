@@ -1,5 +1,8 @@
 package tpo.despacho.entidades;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import tpo.despacho.vos.SolicitudDeArticuloVO;
@@ -11,6 +14,8 @@ public class SolicitudDeArticulo {
 	private Deposito deposito;
 	private DetalleOrdenDeDespacho detalleOrdenDeDespacho;
 	private int cantidadRestante;
+	private Date fechaPedido;
+	private Date fechaCompletitud;
 	
 	public SolicitudDeArticulo() {
 	}
@@ -32,6 +37,7 @@ public class SolicitudDeArticulo {
 		}
 		// Si completé la solicitud de articulo
 		if(cantidadRestante == 0){
+			this.setFechaCompletitud(Calendar.getInstance().getTime());
 			detalleOrdenDeDespacho.completarDetalle();
 		}
 	}
@@ -76,6 +82,24 @@ public class SolicitudDeArticulo {
 
 	public void setCantidadRestante(int cantidadRestante) {
 		this.cantidadRestante = cantidadRestante;
+	}
+
+	@Column (name="FechaPedido")
+	public Date getFechaPedido() {
+		return fechaPedido;
+	}
+
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
+
+	@Column (name="FechaCompletitud")
+	public Date getFechaCompletitud() {
+		return fechaCompletitud;
+	}
+
+	public void setFechaCompletitud(Date fechaCompletitud) {
+		this.fechaCompletitud = fechaCompletitud;
 	}
 	
 }
