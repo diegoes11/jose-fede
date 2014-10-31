@@ -1,6 +1,8 @@
+/* LISTAR ARTICULOS */
+
+
+/* JQUERY-UI */
 $( "#accordion" ).accordion();
-
-
 
 var availableTags = [
 	"ActionScript",
