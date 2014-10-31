@@ -26,7 +26,7 @@ public class DetalleOrdenDeDespacho {
 	// Getters y Setters
 	@Id
 	@GeneratedValue
-	@Column (name = "IdDetalle")
+	@Column (name = "IdDetalleOrdenDeDespacho")
 	public int getIdDetalle() {
 		return idDetalle;
 	}
@@ -50,7 +50,7 @@ public class DetalleOrdenDeDespacho {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumns({
-        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="ID"),
+        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="IdOrdenDeDespacho"),
         @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")
     })
 	public OrdenDeDespacho getOrdenDeDespacho() {
@@ -80,7 +80,7 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="IDSolicitudDeArticulo", referencedColumnName="ID")
+	@JoinColumn(name="IdSolicitudDeArticulo", referencedColumnName="IdSolicitudDeArticulo")
 	public SolicitudDeArticulo getSolicitudDeArticulo() {
 		return solicitudDeArticulo;
 	}
