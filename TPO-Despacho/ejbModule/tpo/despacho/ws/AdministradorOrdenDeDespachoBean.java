@@ -54,6 +54,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
 	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
 	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
+	    		ordenDeDespacho.setEstado("pendiente de entrega");
 	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
 	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
 	    		// Creo los detalles de la orden de despacho
@@ -82,9 +83,8 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 	    		}
 	    		
 				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
-	    		
 	    		manager.persist(ordenDeDespacho);
+	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     		}
     	}
     	
@@ -105,10 +105,10 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 		String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
 		ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
 		// buscar la Cola en JNDI
-		String destinationString = System.getProperty("destination", "jms/queue/Articulos");
+		String destinationString = System.getProperty("destination", "jms/queue/SolicitudArticulos");
 		Destination  destination = (Destination) context.lookup(destinationString);
 		// crear la connection y la session a partir de la connection
-		Connection connection = connectionFactory.createConnection(System.getProperty("username", "test2"), System.getProperty("password", "test1234."));
+		Connection connection = connectionFactory.createConnection(System.getProperty("username", "colasolicitud."), System.getProperty("password", "colasolicitud1."));
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		connection.start();
 		// crear un producer para enviar mensajes usando la session

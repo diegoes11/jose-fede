@@ -19,8 +19,7 @@ public class DetalleOrdenDeDespacho {
 	// Metodos	
 	public void completarDetalle(){
 		// Actualizo el estado del detalle
-		setEstado("Completo");
-		// NOTIFICAR A PORTAL WEB
+		setEstado("completo");
 		ordenDeDespacho.verificarOrdenCompleta();
 	}
 	
