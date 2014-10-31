@@ -11,6 +11,9 @@ public class IdArticulo implements Serializable {
 	
 	private int codigo;
 	private Deposito deposito;
+	
+	public IdArticulo() {
+	}
 
 	public IdArticulo(int codigo, Deposito deposito) {
 		super();
