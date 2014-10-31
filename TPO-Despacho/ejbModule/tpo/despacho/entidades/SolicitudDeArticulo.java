@@ -64,8 +64,8 @@ public class SolicitudDeArticulo {
 		this.deposito = deposito;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="IdOrdenDeDespacho")
+	@OneToOne
+	@JoinColumn(name="IdDetalleOrdenDeDespacho")
 	public DetalleOrdenDeDespacho getDetalleOrdenDeDespacho() {
 		return detalleOrdenDeDespacho;
 	}

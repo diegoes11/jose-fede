@@ -80,7 +80,7 @@ public class DetalleOrdenDeDespacho {
 	}
 
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="IdSolicitudDeArticulo", referencedColumnName="IdSolicitudDeArticulo")
+	@JoinColumn(name="IdSolicitudDeArticulo")
 	public SolicitudDeArticulo getSolicitudDeArticulo() {
 		return solicitudDeArticulo;
 	}
