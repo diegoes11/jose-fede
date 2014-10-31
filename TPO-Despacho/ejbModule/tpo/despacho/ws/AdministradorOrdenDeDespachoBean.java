@@ -74,7 +74,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
 	    		{
 	    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
-	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getDeposito());
+	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
 	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
 	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
 	    			
