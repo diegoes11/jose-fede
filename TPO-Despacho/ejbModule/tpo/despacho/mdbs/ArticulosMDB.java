@@ -1,5 +1,7 @@
 package tpo.despacho.mdbs;
 
+import java.util.List;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -47,9 +49,13 @@ public class ArticulosMDB implements MessageListener {
     	}
     }
     
-    private Articulo buscarArticulo(int codigo){
-    	Articulo articulo = manager.find(Articulo.class, codigo);
-    	return articulo;
+    @SuppressWarnings("unchecked")
+	private Articulo buscarArticulo(int codigo){
+    	List<Articulo> articulos = (List<Articulo>)manager.createQuery("SELECT a FROM Articulo a WHERE a.codigo =:c").setParameter("c", codigo).getResultList();
+    	if(articulos.size() == 0) {
+    		return null;
+    	}
+    	return articulos.get(0);
     }
     
     private Deposito buscarDeposito(String nombre){
