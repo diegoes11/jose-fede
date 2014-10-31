@@ -42,7 +42,7 @@ public class Deposito {
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		connection.start();
 		// crear un producer para enviar mensajes usando la session
-		 MessageProducer producer = session.createProducer(destination);
+		MessageProducer producer = session.createProducer(destination);
 		 
 		 // CREO EL ARTICULO nº1 y lo envio
 		 FichaTecnicaVO ft1 = new FichaTecnicaVO();
