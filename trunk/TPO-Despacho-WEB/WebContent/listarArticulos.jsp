@@ -19,7 +19,7 @@
 	List<ArticuloVO> muebles = (List<ArticuloVO>)request.getAttribute("muebles");
 	List<ArticuloVO> ninos = (List<ArticuloVO>)request.getAttribute("ninos");
 %>
-<h1>Despacho - Listado de Art&iacute;los</h1>
+<h1>Despacho - Listado de Art&iacute;culos</h1>
 
 <!-- Agregar filtro por: Deposito o Codigo -->
 <h1>Agregar filtro por: Deposito o Codigo</h1>
