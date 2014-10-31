@@ -154,7 +154,10 @@ public class Articulo {
 	}
 
 	@OneToMany (cascade = CascadeType.ALL)
-	@JoinColumn(name="IDArticulo")
+	@JoinColumns({
+        @JoinColumn(name="CodigoArticulo", referencedColumnName="Codigo"),
+        @JoinColumn(name="NombreDeposito", referencedColumnName="NombreDeposito")
+    })
 	public List<ItemFicha> getFichaTecnica() {
 		return fichaTecnica;
 	}
