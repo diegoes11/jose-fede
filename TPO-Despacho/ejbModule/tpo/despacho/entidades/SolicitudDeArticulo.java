@@ -84,7 +84,7 @@ public class SolicitudDeArticulo {
 		this.cantidadRestante = cantidadRestante;
 	}
 
-	@Column (name="FechaPedido")
+	@Column (name="FechaPedido", columnDefinition = "datetime", nullable = true)
 	public Date getFechaPedido() {
 		return fechaPedido;
 	}
@@ -93,7 +93,7 @@ public class SolicitudDeArticulo {
 		this.fechaPedido = fechaPedido;
 	}
 
-	@Column (name="FechaCompletitud")
+	@Column (name="FechaCompletitud", columnDefinition = "datetime", nullable = true)
 	public Date getFechaCompletitud() {
 		return fechaCompletitud;
 	}
