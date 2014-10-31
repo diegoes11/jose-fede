@@ -79,7 +79,7 @@ public class OrdenDeDespacho {
 		this.logisticaYMonitoreo = logisticaYMonitoreo;
 	}
 
-	@Column (name="FechaRecepcion")
+	@Column (name = "FechaRecepcion", columnDefinition = "datetime", nullable = true)
 	public Date getFechaRecepcion() {
 		return fechaRecepcion;
 	}
@@ -88,7 +88,7 @@ public class OrdenDeDespacho {
 		this.fechaRecepcion = fechaRecepcion;
 	}
 
-	@Column (name="FechaEntrega")
+	@Column (name = "FechaEntrega", columnDefinition = "datetime", nullable = true)
 	public Date getFechaEntrega() {
 		return fechaEntrega;
 	}
