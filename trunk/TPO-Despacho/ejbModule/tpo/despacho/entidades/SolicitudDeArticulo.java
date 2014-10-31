@@ -21,7 +21,7 @@ public class SolicitudDeArticulo {
 		SolicitudDeArticuloVO solicitudDeArticuloVO = new SolicitudDeArticuloVO();
 		solicitudDeArticuloVO.setIdSolicitudDeArticulo(idSolicitudDeArticulo);
 		solicitudDeArticuloVO.setNombreDespacho("");
-		solicitudDeArticuloVO.setCodigoArticulo(detalleOrdenDeDespacho.getArticulo().getCodigo());
+		solicitudDeArticuloVO.setCodigoArticulo(detalleOrdenDeDespacho.getArticulo().getId().getCodigo());
 		solicitudDeArticuloVO.setCantidad(detalleOrdenDeDespacho.getCantidad());
 		return solicitudDeArticuloVO;
 	}

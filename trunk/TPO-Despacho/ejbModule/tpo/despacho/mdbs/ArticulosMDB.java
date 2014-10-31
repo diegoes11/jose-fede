@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
+import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.vos.ArticuloVO;
 
 @MessageDriven(
@@ -39,7 +40,7 @@ public class ArticulosMDB implements MessageListener {
     		if(articulo == null && deposito != null){
     			articulo = new Articulo();
     			articulo.setArticuloVO(articuloVO);
-    			articulo.setDeposito(deposito);
+    			articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
     			manager.persist(articulo);
     		}
     	}
@@ -51,7 +52,7 @@ public class ArticulosMDB implements MessageListener {
     
     @SuppressWarnings("unchecked")
 	private Articulo buscarArticulo(int codigo){
-    	List<Articulo> articulos = (List<Articulo>)manager.createQuery("SELECT a FROM Articulo a WHERE a.codigo =:c").setParameter("c", codigo).getResultList();
+    	List<Articulo> articulos = manager.createQuery("SELECT a FROM Articulo a WHERE a.codigo =:c").setParameter("c", codigo).getResultList();
     	if(articulos.size() == 0) {
     		return null;
     	}

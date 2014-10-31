@@ -12,8 +12,7 @@ import tpo.despacho.vos.FichaTecnicaVO;
 @Table(name="Articulos")
 public class Articulo {
 	// Atributos
-	private int codigo;
-	private int codigoInterno;
+	private IdArticulo id;
 	private String nombre;
 	private String tipo;
 	private String descripcion;
@@ -23,7 +22,6 @@ public class Articulo {
 	private String nombreFoto;
 	private String origen;
 	private List<ItemFicha> fichaTecnica;
-	private Deposito deposito;
 	
 	// Constructor
 	public Articulo(){
@@ -34,7 +32,7 @@ public class Articulo {
 	@Transient
 	public ArticuloVO getArticuloVO(){
 		ArticuloVO articuloVO = new ArticuloVO();
-		articuloVO.setCodigo(codigo);
+		articuloVO.setCodigo(id.getCodigo());
 		articuloVO.setNombre(nombre);
 		articuloVO.setTipo(tipo);
 		articuloVO.setDescripcion(descripcion);
@@ -43,7 +41,7 @@ public class Articulo {
 		articuloVO.setFoto(foto);
 		articuloVO.setNombreFoto(nombreFoto);
 		articuloVO.setOrigen(origen);
-		articuloVO.setDeposito(deposito.getNombre());
+		articuloVO.setDeposito(id.getDeposito().getNombre());
 		List<FichaTecnicaVO> fichasTecnicas = new ArrayList<FichaTecnicaVO>();
 		for(ItemFicha itemFicha : fichaTecnica)
 		{
@@ -55,7 +53,6 @@ public class Articulo {
 	}
 	
 	public void setArticuloVO(ArticuloVO articuloVO){
-		codigo = articuloVO.getCodigo();
 		nombre = articuloVO.getNombre();
 		tipo = articuloVO.getTipo();
 		descripcion = articuloVO.getDescripcion();
@@ -74,26 +71,16 @@ public class Articulo {
 	}
 
 	// Getters y setters
-	@Column(name="Codigo")
-	public int getCodigo() {
-		return codigo;
+	
+	@EmbeddedId
+	public IdArticulo getId() {
+		return id;
 	}
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(IdArticulo id) {
+		this.id = id;
 	}
 	
-	@Id
-	@Column(name="CodigoInterno")
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	public int getCodigoInterno() {
-		return codigoInterno;
-	}
-
-	public void setCodigoInterno(int codigoInterno) {
-		this.codigoInterno = codigoInterno;
-	}
-
 	@Column(name="Nombre")
 	public String getNombre() {
 		return nombre;
@@ -175,16 +162,5 @@ public class Articulo {
 	public void setFichaTecnica(List<ItemFicha> fichaTecnica) {
 		this.fichaTecnica = fichaTecnica;
 	}
-
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="NombreDeposito")
-	public Deposito getDeposito() {
-		return deposito;
-	}
-
-	public void setDeposito(Deposito deposito) {
-		this.deposito = deposito;
-	}
-	
 	
 }
