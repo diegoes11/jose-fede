@@ -1,5 +1,7 @@
 package tpo.despacho.entidades;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,7 +14,8 @@ public class OrdenDeDespacho {
 	private LogisticaYMonitoreo logisticaYMonitoreo;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
-	// AGREGAR FECHA
+	private Date fechaRecepcion;
+	private Date fechaEntrega;
 	
 	public OrdenDeDespacho(){
 	
@@ -26,6 +29,7 @@ public class OrdenDeDespacho {
 				ordenCompleta = false;
 		}
 		if(ordenCompleta == true){
+			this.setFechaEntrega(Calendar.getInstance().getTime());
 			setEstado("despachada");
 			// ENVIARLE NOTIFICACION A LOGISTICA Y MONITOREO Y AL PORTAL WEB
 		}
@@ -74,6 +78,22 @@ public class OrdenDeDespacho {
 	public void setLogisticaYMonitoreo(LogisticaYMonitoreo logisticaYMonitoreo) {
 		this.logisticaYMonitoreo = logisticaYMonitoreo;
 	}
-	
-	
+
+	@Column (name="FechaRecepcion")
+	public Date getFechaRecepcion() {
+		return fechaRecepcion;
+	}
+
+	public void setFechaRecepcion(Date fechaRecepcion) {
+		this.fechaRecepcion = fechaRecepcion;
+	}
+
+	@Column (name="FechaEntrega")
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
 }
