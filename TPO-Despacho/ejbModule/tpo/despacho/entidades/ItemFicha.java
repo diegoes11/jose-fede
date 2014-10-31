@@ -37,7 +37,7 @@ public class ItemFicha {
 
 	// Getters y setters
 	@Id
-	@Column(name="ID")
+	@Column(name="IdItemFicha")
 	public int getIdItemFicha() {
 		return idItemFicha;
 	}

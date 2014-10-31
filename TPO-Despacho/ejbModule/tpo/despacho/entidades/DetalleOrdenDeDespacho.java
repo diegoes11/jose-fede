@@ -26,7 +26,7 @@ public class DetalleOrdenDeDespacho {
 	// Getters y Setters
 	@Id
 	@GeneratedValue
-	@Column (name = "ID")
+	@Column (name = "IdDetalle")
 	public int getIdDetalle() {
 		return idDetalle;
 	}
