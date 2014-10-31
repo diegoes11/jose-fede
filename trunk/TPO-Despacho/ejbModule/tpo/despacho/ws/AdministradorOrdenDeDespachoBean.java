@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
+import tpo.despacho.entidades.IdOrdenDeDespacho;
 import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
@@ -51,8 +52,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     		{
 	    		// Creo la orden de despacho
 	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
-	    		ordenDeDespacho.setIdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho());
-	    		ordenDeDespacho.setPortalWeb(portalWeb);
+	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
 	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
 	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
 	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();

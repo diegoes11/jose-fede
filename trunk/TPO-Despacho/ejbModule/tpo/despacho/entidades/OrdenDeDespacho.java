@@ -8,8 +8,7 @@ import javax.persistence.*;
 @Table(name="OrdenesDeDespacho")
 public class OrdenDeDespacho {
 	
-	private int idOrdenDeDespacho;
-	private PortalWeb portalWeb;
+	private IdOrdenDeDespacho id;
 	private LogisticaYMonitoreo logisticaYMonitoreo;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
@@ -32,16 +31,7 @@ public class OrdenDeDespacho {
 	}
 
 	// Getters y Setters
-	@Id
-	@Column(name="ID")
-	public int getIdOrdenDeDespacho() {
-		return idOrdenDeDespacho;
-	}
-
-	public void setIdOrdenDeDespacho(int idOrdenDeDespacho) {
-		this.idOrdenDeDespacho = idOrdenDeDespacho;
-	}
-
+	
 	@Column(name="Estado")
 	public String getEstado() {
 		return estado;
@@ -50,9 +40,21 @@ public class OrdenDeDespacho {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	@EmbeddedId
+	public IdOrdenDeDespacho getId() {
+		return id;
+	}
+
+	public void setId(IdOrdenDeDespacho id) {
+		this.id = id;
+	}
 
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn (name = "IDOrdenDeDespacho")
+	@JoinColumns({
+        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="ID"),
+        @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")
+    })
 	public List<DetalleOrdenDeDespacho> getDetallesOrdenDeDespacho() {
 		return detallesOrdenDeDespacho;
 	}
@@ -60,16 +62,6 @@ public class OrdenDeDespacho {
 	public void setDetallesOrdenDeDespacho(
 			List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho) {
 		this.detallesOrdenDeDespacho = detallesOrdenDeDespacho;
-	}
-
-	@ManyToOne (cascade = CascadeType.ALL)
-	@JoinColumn (name = "NombrePortalWeb")
-	public PortalWeb getPortalWeb() {
-		return portalWeb;
-	}
-
-	public void setPortalWeb(PortalWeb portalWeb) {
-		this.portalWeb = portalWeb;
 	}
 
 	@ManyToOne (cascade = CascadeType.ALL)
