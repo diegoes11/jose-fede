@@ -10,7 +10,6 @@ public class ItemFicha {
 	
 	// Atributos
 	private int idItemFicha;
-	private int idItemFichaInterno;
 	private String atributo;
 	private String detalle;
 	
@@ -37,8 +36,8 @@ public class ItemFicha {
 	}
 
 	// Getters y setters
+	@Id
 	@Column(name="ID")
-	//@GeneratedValue (strategy = GenerationType.AUTO)
 	public int getIdItemFicha() {
 		return idItemFicha;
 	}
@@ -47,16 +46,6 @@ public class ItemFicha {
 		this.idItemFicha = idItemFicha;
 	}
 
-	@Id
-	@Column(name="IDInterno")
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	public int getIdItemFichaInterno() {
-		return idItemFichaInterno;
-	}
-
-	public void setIdItemFichaInterno(int idItemFichaInterno) {
-		this.idItemFichaInterno = idItemFichaInterno;
-	}
 
 	@Column(name="Atributo")
 	public String getAtributo() {
