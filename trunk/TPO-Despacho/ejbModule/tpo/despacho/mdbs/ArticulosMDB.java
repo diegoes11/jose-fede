@@ -52,7 +52,7 @@ public class ArticulosMDB implements MessageListener {
     
     @SuppressWarnings("unchecked")
 	private Articulo buscarArticulo(int codigo){
-    	List<Articulo> articulos = manager.createQuery("SELECT a FROM Articulo a WHERE a.codigo =:c").setParameter("c", codigo).getResultList();
+    	List<Articulo> articulos = manager.createQuery("SELECT a FROM Articulo a WHERE a.id.codigo =:c").setParameter("c", codigo).getResultList();
     	if(articulos.size() == 0) {
     		return null;
     	}
