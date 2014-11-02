@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import tpo.despacho.entidades.IdOrdenDeDespacho;
 import tpo.despacho.entidades.OrdenDeDespacho;
+import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
 
 @Stateless
@@ -39,4 +41,21 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 		}
 	}
 
+    public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+    	try{
+    		PortalWeb portalWeb = manager.find(PortalWeb.class, nombrePortalWeb);
+    		if (portalWeb != null){
+            	IdOrdenDeDespacho idOrden = new IdOrdenDeDespacho(id, portalWeb);
+        		OrdenDeDespacho ordenDeDespacho = manager.find(OrdenDeDespacho.class, idOrden);
+        		if(ordenDeDespacho != null){
+        			return ordenDeDespacho.getOrdenDeDespachoVO();
+        		}
+    		}
+    		return null;
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    		return null;
+    	}
+	}
 }

@@ -52,6 +52,7 @@ public class OrdenDeDespacho {
 		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho){
 			detallesOrdenDeDespachoVO.add(dodd.getDetalleOrdenDeDespachoVO());
 		}
+		oddvo.setDetallesOrdenDeDespachoVO(detallesOrdenDeDespachoVO);
 		return oddvo;
 	}
 
