@@ -1,5 +1,7 @@
 package tpo.despacho.entidades;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,9 @@ public class Despacho {
 	
 	private String nombre;
 	private Coordenadas coordenadas;
+	private List<OrdenDeDespacho> ordenesDeDespacho;
+	private List<Articulo> articulos;
+	private List<Usuario> usuarios;
 	
 	public Despacho() {
 	}
@@ -30,5 +35,28 @@ public class Despacho {
 	public void setCoordenadas(Coordenadas coordenadas) {
 		this.coordenadas = coordenadas;
 	}
-	
+
+	public List<OrdenDeDespacho> getOrdenesDeDespacho() {
+		return ordenesDeDespacho;
+	}
+
+	public void setOrdenesDeDespacho(List<OrdenDeDespacho> ordenesDeDespacho) {
+		this.ordenesDeDespacho = ordenesDeDespacho;
+	}
+
+	public List<Articulo> getArticulos() {
+		return articulos;
+	}
+
+	public void setArticulos(List<Articulo> articulos) {
+		this.articulos = articulos;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 }
