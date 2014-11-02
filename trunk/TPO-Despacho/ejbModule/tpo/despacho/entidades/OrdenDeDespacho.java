@@ -1,10 +1,14 @@
 package tpo.despacho.entidades;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
+import tpo.despacho.vos.DetalleOrdenDeDespachoCompletaVO;
+import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
 
 @Entity
 @Table(name="OrdenesDeDespacho")
@@ -33,6 +37,22 @@ public class OrdenDeDespacho {
 			setEstado("despachada");
 			// ENVIARLE NOTIFICACION A LOGISTICA Y MONITOREO Y AL PORTAL WEB
 		}
+	}
+	
+	@Transient
+	public OrdenDeDespachoCompletaVO getOrdenDeDespachoVO(){
+		OrdenDeDespachoCompletaVO oddvo = new OrdenDeDespachoCompletaVO();
+		oddvo.setIdOrdenDeDespacho(id.getIdOrdenDeDespacho());
+		oddvo.setNombreLogisticaYMonitoreo(logisticaYMonitoreo.getNombre());
+		oddvo.setNombrePortalWeb(id.getPortalWeb().getNombre());
+		oddvo.setEstado(estado);
+		oddvo.setFechaRecepcion(fechaRecepcion);
+		oddvo.setFechaEntrega(fechaEntrega);
+		List<DetalleOrdenDeDespachoCompletaVO> detallesOrdenDeDespachoVO = new ArrayList<DetalleOrdenDeDespachoCompletaVO>();
+		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho){
+			detallesOrdenDeDespachoVO.add(dodd.getDetalleOrdenDeDespachoVO());
+		}
+		return oddvo;
 	}
 
 	// Getters y Setters
