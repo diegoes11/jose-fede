@@ -1,143 +1,74 @@
+<%@ page import="java.util.List" %>
+<%@ page import="tpo.despacho.vos.OrdenDeDespachoCompletaVO" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>IA TPO - Despacho - Listado de Artículos - Bustamante, Lerner</title>
+<title>IA TPO - Despacho - Listado de Órdenes de Despacho - Bustamante, Lerner</title>
 <link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery.dataTables.css">
+<link rel="stylesheet" href="css/jquery.dataTables_themeroller.css">
 <link rel="stylesheet" href="css/despacho.css">
 </head>
 <body>
-<h1>Despacho - Listado de Art&iacute;los</h1>
+<%
+	List<OrdenDeDespachoCompletaVO> ordenesDeDespacho = (List<OrdenDeDespachoCompletaVO>)request.getAttribute("ordenesDeDespacho");
+%>
+<h1>Despacho - Listado de &Oacute;rdenes de Despacho</h1>
 
-<!-- Agregar filtro por: Deposito o Codigo -->
-<h1>Agregar filtro por: Deposito o Codigo</h1>
-
-<div id="electrodomesticos">
-	<h1>Electrodomesticos</h1>
-	<table border="1">
+<div id="ordenesDeDespacho">
+	<h1>&Oacute;rdenes de Despacho</h1>
+	<br />
+	<table id="tabla" class="display cell-border compact" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Ficha T&eacute;cnica</th>
+			<th>ID</th>
+			<th>Estado</th>
+			<th>Fecha de recepci&oacute;n</th>
+			<th>Fecha de entrega</th>
+			<th>Portal Web</th>
+			<th>Log&iacute;stica y Monitoreo</th>
+			<th>Detalle</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th>ID</th>
+			<th>Estado</th>
+			<th>Fecha de recepci&oacute;n</th>
+			<th>Fecha de entrega</th>
+			<th>Portal Web</th>
+			<th>Log&iacute;stica y Monitoreo</th>
+			<th>Detalle</th>
+		</tr>
+	</tfoot>
 	<tbody>
+<%
+	for(OrdenDeDespachoCompletaVO odd : ordenesDeDespacho)
+	{
+%>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td><a href="">Ver</a></td>
+			<td><%= odd.getIdOrdenDeDespacho() %></td>
+			<td><%= odd.getEstado() %></td>
+			<td><%= odd.getFechaRecepcion() %></td>
+			<td><%= ((odd.getFechaEntrega() == null) ? "-" : odd.getFechaEntrega()) %></td>
+			<td><%= odd.getNombrePortalWeb() %></td>
+			<td><%= odd.getNombreLogisticaYMonitoreo() %></td>
+			<td><a href="DetalleOrdenDeDespacho?id=<%= odd.getIdOrdenDeDespacho() %>&portalWeb=<%= odd.getNombrePortalWeb() %>">Ver</a></td>
 		</tr>
-	</tbody>
-	</table>
-</div>
-
-<div id="moda">
-	<h1>Moda</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Color</th>
-			<th>Talle</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</tbody>
-	</table>
-</div>
-
-<div id="muebles">
-	<h1>Muebles</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Material</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</tbody>
-	</table>
-</div>
-
-<div id="niños">
-	<h1>Niños</h1>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>C&oacute;odigo</th>
-			<th>Nombre</th>
-			<th>Descripci&oacute;n</th>
-			<th>Marca</th>
-			<th>Precio</th>
-			<th>Foto</th>
-			<th>Origen</th>
-			<th>Edad recomendada</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>$</td>
-			<td><img src="" /></td>
-			<td></td>
-			<td></td>
-		</tr>
+<%
+	}
+%>
 	</tbody>
 	</table>
 </div>
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
+<script src="js/jquery.dataTables.js"></script>
 <script src="js/despacho.js"></script>
 </body>
 </html>

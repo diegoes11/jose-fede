@@ -67,4 +67,8 @@ public class DespachoBusinessDelegate {
 	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
 		return despachoFacade.obtenerOrdenesDeDespacho();
 	}
+	
+	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+		return despachoFacade.obtenerOrdenDeDespacho(id, nombrePortalWeb);
+	}
 }

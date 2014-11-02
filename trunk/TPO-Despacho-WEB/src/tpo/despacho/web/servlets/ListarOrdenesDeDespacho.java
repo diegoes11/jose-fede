@@ -24,9 +24,9 @@ public class ListarOrdenesDeDespacho extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<OrdenDeDespachoCompletaVO> ordenesDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenesDeDespacho();
 		
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("/listarOrdenesDeDespacho.jsp");
-		//request.setAttribute("ordenesDeDespacho", ordenesDeDespacho);
-	    //dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarOrdenesDeDespacho.jsp");
+		request.setAttribute("ordenesDeDespacho", ordenesDeDespacho);
+	    dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

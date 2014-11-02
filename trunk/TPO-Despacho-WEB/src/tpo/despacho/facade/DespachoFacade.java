@@ -16,4 +16,5 @@ public interface DespachoFacade {
 	public List<ArticuloVO> obtenerArticulos();
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad);
 	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho();
+	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb);
 }
