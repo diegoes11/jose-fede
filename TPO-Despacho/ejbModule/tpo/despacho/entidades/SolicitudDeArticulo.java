@@ -32,7 +32,7 @@ public class SolicitudDeArticulo {
 	}
 	
 	public void actualizarCantidad(int cantidad){
-		if(cantidadRestante - cantidad > 0){
+		if(cantidadRestante - cantidad >= 0){
 			cantidadRestante = cantidadRestante - cantidad;
 		}
 		// Si completé la solicitud de articulo

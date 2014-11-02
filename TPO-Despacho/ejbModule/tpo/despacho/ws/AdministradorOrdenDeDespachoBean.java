@@ -68,6 +68,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     	    				dodd.setArticulo(articulo);
     	    				dodd.setCantidad(doddvo.getCantidad());
     	    				dodd.setEstado("incompleto");
+    	    				dodd.setOrdenDeDespacho(ordenDeDespacho);
     	    				detallesOrdenDeDespacho.add(dodd);
     	    			}
     	    		}
@@ -108,7 +109,8 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     	return articulos.get(0);
     }
     
-    private static void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
+    @SuppressWarnings("unused")
+	private static void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
 
 		final Properties env = new Properties();
 		  env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
