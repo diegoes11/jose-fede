@@ -2,6 +2,8 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
+import tpo.despacho.vos.DetalleOrdenDeDespachoCompletaVO;
+
 @Entity
 @Table(name="DetallesOrdenDeDespacho")
 public class DetalleOrdenDeDespacho {
@@ -21,6 +23,22 @@ public class DetalleOrdenDeDespacho {
 		// Actualizo el estado del detalle
 		setEstado("completo");
 		ordenDeDespacho.verificarOrdenCompleta();
+	}
+	
+	@Transient
+	public DetalleOrdenDeDespachoCompletaVO getDetalleOrdenDeDespachoVO(){
+		DetalleOrdenDeDespachoCompletaVO doddvo = new DetalleOrdenDeDespachoCompletaVO();
+		doddvo.setIdDetalleOrdenDeDespacho(idDetalle);
+		doddvo.setIdSolicitudDeArticulo(solicitudDeArticulo.getIdSolicitudDeArticulo());
+		doddvo.setNombreDeposito(solicitudDeArticulo.getDeposito().getNombre());
+		doddvo.setEstado(getEstado());
+		doddvo.setFechaPedido(solicitudDeArticulo.getFechaPedido());
+		doddvo.setFechaCompletitud(solicitudDeArticulo.getFechaCompletitud());
+		doddvo.setCodigoArticulo(articulo.getId().getCodigo());
+		doddvo.setNombreArticulo(articulo.getNombre());
+		doddvo.setCantidadSolicitada(cantidad);
+		doddvo.setCantidadRecibida(cantidad-solicitudDeArticulo.getCantidadRestante());
+		return doddvo;
 	}
 	
 	// Getters y Setters

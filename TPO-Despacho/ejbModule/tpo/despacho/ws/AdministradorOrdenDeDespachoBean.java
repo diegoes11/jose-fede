@@ -26,9 +26,7 @@ import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.despacho.vos.ArticuloVO;
 import tpo.despacho.vos.DetalleOrdenDeDespachoVO;
-import tpo.despacho.vos.FichaTecnicaVO;
 import tpo.despacho.vos.OrdenDeDespachoVO;
 
 // URL WSDL: http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl
@@ -45,54 +43,70 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
 
     @WebMethod
 	public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO) {
-    	PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
-    	if(portalWeb != null)
-    	{
-    		LogisticaYMonitoreo logisticaYMonitoreo = manager.find(LogisticaYMonitoreo.class, ordenDeDespachoVO.getNombreLogisticaYMonitoreo());
-    		if(logisticaYMonitoreo != null)
-    		{
-	    		// Creo la orden de despacho
-	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
-	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
-	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
-	    		ordenDeDespacho.setEstado("pendiente de entrega");
-	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
-	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
-	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
-	    		// Creo los detalles de la orden de despacho
-	    		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
-	    		{
-	    			Articulo articulo = manager.find(Articulo.class, doddvo.getCodigoArticulo());
-	    			if(articulo != null)
-	    			{
-	        			DetalleOrdenDeDespacho dodd = new DetalleOrdenDeDespacho();
-	    				dodd.setArticulo(articulo);
-	    				dodd.setCantidad(doddvo.getCantidad());
-	    				dodd.setEstado("incompleto");
-	    				detallesOrdenDeDespacho.add(dodd);
-	    			}
-	    		}
-	    		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
-	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
-	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
-	    		{
-	    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
-	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
-	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
-	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
-	    			solicitudDeArticulo.setFechaPedido(Calendar.getInstance().getTime());
-	    			
-	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
-	    		}
-	    		
-				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-	    		manager.persist(ordenDeDespacho);
-	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
-    		}
+    	try{
+    		PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
+        	if(portalWeb != null)
+        	{
+        		LogisticaYMonitoreo logisticaYMonitoreo = manager.find(LogisticaYMonitoreo.class, ordenDeDespachoVO.getNombreLogisticaYMonitoreo());
+        		if(logisticaYMonitoreo != null)
+        		{
+    	    		// Creo la orden de despacho
+    	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
+    	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
+    	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
+    	    		ordenDeDespacho.setEstado("pendiente de entrega");
+    	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
+    	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
+    	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
+    	    		// Creo los detalles de la orden de despacho
+    	    		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
+    	    		{
+    	    			Articulo articulo = buscarArticulo(doddvo.getCodigoArticulo());
+    	    			if(articulo != null)
+    	    			{
+    	        			DetalleOrdenDeDespacho dodd = new DetalleOrdenDeDespacho();
+    	    				dodd.setArticulo(articulo);
+    	    				dodd.setCantidad(doddvo.getCantidad());
+    	    				dodd.setEstado("incompleto");
+    	    				detallesOrdenDeDespacho.add(dodd);
+    	    			}
+    	    		}
+    	    		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
+    	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
+    	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
+    	    		{
+    	    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
+    	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
+    	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
+    	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
+    	    			solicitudDeArticulo.setFechaPedido(Calendar.getInstance().getTime());
+    	    			
+    	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
+    	    		}
+
+    	    		manager.persist(ordenDeDespacho);
+    	    		
+    				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
+    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		return true;
+        		}
+        	}
+        	return false;
     	}
-    	
-    	return false;
+    	catch (Exception e){
+    		e.printStackTrace();
+    		return false;
+    	}
 	}
+    
+    @SuppressWarnings("unchecked")
+	private Articulo buscarArticulo(int codigo){
+    	List<Articulo> articulos = manager.createQuery("SELECT a FROM Articulo a WHERE a.id.codigo =:c").setParameter("c", codigo).getResultList();
+    	if(articulos.size() == 0) {
+    		return null;
+    	}
+    	return articulos.get(0);
+    }
     
     private static void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
 

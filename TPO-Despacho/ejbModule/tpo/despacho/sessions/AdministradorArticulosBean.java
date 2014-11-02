@@ -43,7 +43,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
     	String query = "SELECT a FROM Articulo a";
     	List<Articulo> articulos = (List<Articulo>)manager.createQuery(query, Articulo.class).getResultList();
     	List<ArticuloVO> articulosVO = new ArrayList<ArticuloVO>(articulos.size());
-    	// Convierto la lista de Usuario a UsuarioVO
+    	// Convierto la lista de Articulo a ArticuloVO
     	for(Articulo a : articulos){
     		ArticuloVO articuloVO = a.getArticuloVO();
     		articulosVO.add(articuloVO);
