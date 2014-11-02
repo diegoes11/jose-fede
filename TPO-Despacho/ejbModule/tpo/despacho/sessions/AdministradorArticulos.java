@@ -10,4 +10,5 @@ import tpo.despacho.vos.ArticuloVO;
 public interface AdministradorArticulos {
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad);
 	public List<ArticuloVO> obtenerArticulos();
+	public boolean altaArticulo(ArticuloVO articuloVO);
 }

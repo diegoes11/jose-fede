@@ -10,6 +10,7 @@ import tpo.despacho.sessions.AdministradorOrdenesDeDespacho;
 import tpo.despacho.sessions.AdministradorUsuarios;
 import tpo.despacho.vos.ArticuloVO;
 import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
+import tpo.despacho.vos.OrdenDeDespachoVO;
 import tpo.despacho.vos.UsuarioVO;
 
 @Stateless
@@ -53,5 +54,13 @@ public class DespachoFacadeBean implements DespachoFacade {
 	
 	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
 		return administradorOrdenesDeDespacho.obtenerOrdenDeDespacho(id, nombrePortalWeb);
+	}
+	
+	public boolean altaArticulo(ArticuloVO articuloVO){
+		return administradorArticulos.altaArticulo(articuloVO);
+	}
+	
+	public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO){
+		return administradorOrdenesDeDespacho.recepcionOrdenDeDespacho(ordenDeDespachoVO);
 	}
 }
