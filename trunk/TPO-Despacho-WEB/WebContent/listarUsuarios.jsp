@@ -9,6 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IA TPO - Despacho - Listado de Usuarios - Bustamante, Lerner</title>
 <link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery.dataTables.css">
+<link rel="stylesheet" href="css/jquery.dataTables_themeroller.css">
 <link rel="stylesheet" href="css/despacho.css">
 </head>
 <body>
@@ -18,7 +20,7 @@ A HACER: UPDATE DEL ESTADO POR AJAX!
 %>
 <h1>Despacho - Listado de Usuarios</h1>
 
-<table border="1">
+<table  id="tabla" class="display cell-border compact" cellspacing="0" width="100%">
 <thead>
 	<tr>
 		<th>DNI</th>
@@ -27,6 +29,14 @@ A HACER: UPDATE DEL ESTADO POR AJAX!
 		<th>Estado</th>
 	</tr>
 </thead>
+<tfoot>
+	<tr>
+		<th>DNI</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Estado</th>
+	</tr>
+</tfoot>
 <tbody>
 <%
 	for(UsuarioVO u : usuarios)
@@ -50,6 +60,7 @@ A HACER: UPDATE DEL ESTADO POR AJAX!
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
+<script src="js/jquery.dataTables.js"></script>
 <script src="js/despacho.js"></script>
 </body>
 </html>

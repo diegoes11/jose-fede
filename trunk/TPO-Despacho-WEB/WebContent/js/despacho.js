@@ -1,5 +1,31 @@
-/* LISTAR ARTICULOS */
-
+/* DATA TABLES */
+$(document).ready(function() {
+    $('#tabla').DataTable({
+        language: {
+        	"emptyTable":     "No hay información disponible en la tabla",
+            "info":           "Mostrando los registros _START_ al _END_ de _TOTAL_",
+            "infoEmpty":      "Mostrando los registros 0 al 0 de 0",
+            "infoFiltered":   "(filtrado de _MAX_ registros totales)",
+            "infoPostFix":    "",
+            "thousands":      ".",
+            "lengthMenu":     "Mostrar _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Buscar:",
+            "zeroRecords":    "No hay registros que coincidan con la búsqueda ingresada",
+            "paginate": {
+                "first":      "Primero",
+                "last":       "Último",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "aria": {
+                "sortAscending":  ": activar para ordenar la comunma en orden ascendiente",
+                "sortDescending": ": activar para ordenar la comunma en orden descendiente"
+            }
+        }
+    });
+} );
 
 /* JQUERY-UI */
 $( "#accordion" ).accordion();
