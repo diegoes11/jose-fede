@@ -97,8 +97,7 @@ public class DetalleOrdenDeDespacho {
 		this.estado = estado;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="IdSolicitudDeArticulo")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="detalleOrdenDeDespacho")
 	public SolicitudDeArticulo getSolicitudDeArticulo() {
 		return solicitudDeArticulo;
 	}
