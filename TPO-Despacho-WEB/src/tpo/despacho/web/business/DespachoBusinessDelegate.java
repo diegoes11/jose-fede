@@ -7,6 +7,7 @@ import javax.naming.InitialContext;
 
 import tpo.despacho.facade.DespachoFacade;
 import tpo.despacho.vos.ArticuloVO;
+import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
 import tpo.despacho.vos.UsuarioVO;
 
 public class DespachoBusinessDelegate {
@@ -61,5 +62,9 @@ public class DespachoBusinessDelegate {
 	
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad){
 		return despachoFacade.recepcionDeArticulos(idSolicitudDeArticulo, cantidad);
+	}
+	
+	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
+		return despachoFacade.obtenerOrdenesDeDespacho();
 	}
 }

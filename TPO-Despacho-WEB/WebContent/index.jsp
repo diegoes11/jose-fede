@@ -25,7 +25,7 @@
 		<a href="ListarArticulos">Listado de Art&iacute;culos</a>
 	</div>
 	<div id="tabs-3">
-		<a href="listarArticulos.jsp">Listado de &Oacute;rdenes de Despacho</a>
+		<a href="ListarOrdenesDeDespacho">Listado de &Oacute;rdenes de Despacho</a>
 	</div>
 </div>
 

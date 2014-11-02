@@ -10,26 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tpo.despacho.vos.ArticuloVO;
+import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
 import tpo.despacho.web.business.DespachoBusinessDelegate;
 
-@WebServlet("/ListarArticulos")
-public class ListarArticulos extends HttpServlet {
+@WebServlet("/ListarOrdenesDeDespacho")
+public class ListarOrdenesDeDespacho extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public ListarArticulos() {
+       
+    public ListarOrdenesDeDespacho() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ArticuloVO> articulos = DespachoBusinessDelegate.getInstancia().obtenerArticulos();
+		List<OrdenDeDespachoCompletaVO> ordenesDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenesDeDespacho();
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarArticulos.jsp");
-		request.setAttribute("articulos", articulos);
-	    dispatcher.forward(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/listarOrdenesDeDespacho.jsp");
+		//request.setAttribute("ordenesDeDespacho", ordenesDeDespacho);
+	    //dispatcher.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
