@@ -10,19 +10,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>IA TPO - Despacho - Listado de Artículos - Bustamante, Lerner</title>
 <link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/jquery.dataTables.css">
+<link rel="stylesheet" href="css/jquery.dataTables_themeroller.css">
 <link rel="stylesheet" href="css/despacho.css">
 </head>
 <body>
 <%
 	List<ArticuloVO> articulos = (List<ArticuloVO>)request.getAttribute("articulos");
 %>
-<h1>Despacho - Listado de Art&iacute;los</h1>
+<h1>Despacho - Listado de Art&iacute;culos</h1>
 
 <div id="articulos">
 	<h1>Articulos</h1>
-	<input id="filtro" type="text">
 	<br />
-	<table id="tablaArticulos" border="1">
+	<table id="tabla" class="display cell-border compact" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th>C&oacute;odigo</th>
@@ -37,6 +38,20 @@
 			<th>Dep&oacute;sito</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th>C&oacute;odigo</th>
+			<th>Tipo</th>
+			<th>Nombre</th>
+			<th>Descripci&oacute;n</th>
+			<th>Marca</th>
+			<th>Precio</th>
+			<th>Foto</th>
+			<th>Origen</th>
+			<th>Ficha T&eacute;cnica</th>
+			<th>Dep&oacute;sito</th>
+		</tr>
+	</tfoot>
 	<tbody>
 		<tr>
 <%
@@ -79,6 +94,7 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
+<script src="js/jquery.dataTables.js"></script>
 <script src="js/despacho.js"></script>
 </body>
 </html>
