@@ -50,4 +50,8 @@ public class DespachoFacadeBean implements DespachoFacade {
 	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
 		return administradorOrdenesDeDespacho.obtenerOrdenesDeDespacho();
 	}
+	
+	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+		return administradorOrdenesDeDespacho.obtenerOrdenDeDespacho(id, nombrePortalWeb);
+	}
 }
