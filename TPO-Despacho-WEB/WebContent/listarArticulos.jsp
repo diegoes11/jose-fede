@@ -53,11 +53,11 @@
 		</tr>
 	</tfoot>
 	<tbody>
-		<tr>
 <%
 	for(ArticuloVO a : articulos)
 	{
 %>
+		<tr>
 			<td><%= a.getCodigo() %></td>
 			<td><%= a.getTipo() %></td>
 			<td><%= a.getNombre() %></td>
