@@ -16,18 +16,18 @@ public class LogisticaYMonitoreo {
 	        
 	        // CREO UNA ORDEN DE DESPACHO
 	        OrdenDeDespachoVO odd = new OrdenDeDespachoVO();
-	        odd.setIdOrdenDeDespacho(1);
+	        odd.setIdOrdenDeDespacho(4);
 	        odd.setNombrePortalWeb("PORTALWEB1");
 	        odd.setNombreLogisticaYMonitoreo("LOGISTICA1");
 	        
 	        List<DetalleOrdenDeDespachoVO> detalles = odd.getDetallesOrdenDeDespachoVO();
 	        DetalleOrdenDeDespachoVO dodd1 = new DetalleOrdenDeDespachoVO();
 	        dodd1.setCodigoArticulo(1351953);
-	        dodd1.setCantidad(2);
+	        dodd1.setCantidad(48);
 	        detalles.add(dodd1);
 	        DetalleOrdenDeDespachoVO dodd2 = new DetalleOrdenDeDespachoVO();
 	        dodd2.setCodigoArticulo(1607594);
-	        dodd2.setCantidad(1);
+	        dodd2.setCantidad(29);
 	        detalles.add(dodd2);
 	        
 	        System.out.println("Server said: " + port1.recepcionOrdenDeDespacho(odd));
