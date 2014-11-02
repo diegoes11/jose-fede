@@ -19,7 +19,7 @@ import tpo.despacho.vos.FichaTecnicaVO;
 public class Deposito {
 	public static void main(String[] args) {
 		altaArticulo();
-	} 
+	}
 
 	private static void altaArticulo() {
 
