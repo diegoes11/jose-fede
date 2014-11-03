@@ -6,7 +6,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.despacho.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.OrdenDeDespachoVO;
 
 // URL WSDL: http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl
 
