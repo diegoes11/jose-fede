@@ -13,8 +13,8 @@ import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import tpo.despacho.vos.ArticuloVO;
-import tpo.despacho.vos.FichaTecnicaVO;
+import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.FichaTecnicaVO;
 
 public class Deposito {
 	public static void main(String[] args) {
@@ -25,7 +25,8 @@ public class Deposito {
 
 		final Properties env = new Properties();
 		  env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-		  env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://localhost:4447"));
+		  //env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://localhost:4447"));
+		  env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://172.16.164.34:4447"));
 
 		  try {
 		
@@ -38,7 +39,7 @@ public class Deposito {
 		String destinationString = System.getProperty("destination", "jms/queue/Articulos");
 		Destination  destination = (Destination) context.lookup(destinationString);
 		// crear la connection y la session a partir de la connection
-		Connection connection = connectionFactory.createConnection(System.getProperty("username", "test2"), System.getProperty("password", "test1234."));
+		Connection connection = connectionFactory.createConnection(System.getProperty("username", "despacho"), System.getProperty("password", "despacho1."));
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		connection.start();
 		// crear un producer para enviar mensajes usando la session
