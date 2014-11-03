@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tpo.despacho.vos.UsuarioVO;
 import tpo.despacho.web.business.DespachoBusinessDelegate;
+import tpo.ia.vos.UsuarioVO;
 
 @WebServlet("/AltaUsuario")
 public class AltaUsuario extends HttpServlet {

@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.despacho.vos.UsuarioVO" %>
+<%@ page import="tpo.ia.vos.UsuarioVO" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
