@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.SolicitudDeArticuloVO;
+import tpo.ia.vos.SolicitudDeArticuloVO;
 
 @Entity
 @Table(name="SolicitudesDeArticulo")

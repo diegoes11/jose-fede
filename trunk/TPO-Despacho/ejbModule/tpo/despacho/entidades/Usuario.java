@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import tpo.despacho.vos.UsuarioVO;
+import tpo.ia.vos.UsuarioVO;
 
 @Entity
 @Table(name="Usuarios")

@@ -24,9 +24,9 @@ import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.despacho.vos.DetalleOrdenDeDespachoVO;
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
-import tpo.despacho.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.DetalleOrdenDeDespachoVO;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.OrdenDeDespachoVO;
 
 @Stateless
 public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesDeDespacho {
@@ -54,7 +54,9 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 
 		final Properties env = new Properties();
 		  env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-		  env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://localhost:4447"));
+		  env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://172.16.164.38:4447"));
+		  env.put(Context.SECURITY_PRINCIPAL, "deposito1");
+		  env.put(Context.SECURITY_CREDENTIALS, "deposito1.");
 
 		  try {
 		
@@ -67,7 +69,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 		String destinationString = System.getProperty("destination", "jms/queue/SolicitudArticulos");
 		Destination  destination = (Destination) context.lookup(destinationString);
 		// crear la connection y la session a partir de la connection
-		Connection connection = connectionFactory.createConnection(System.getProperty("username", "colasolicitud."), System.getProperty("password", "colasolicitud1."));
+		Connection connection = connectionFactory.createConnection(System.getProperty("username", "deposito1"), System.getProperty("password", "deposito1."));
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		connection.start();
 		// crear un producer para enviar mensajes usando la session
@@ -174,10 +176,10 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
     	    		}
 
-    	    		manager.persist(ordenDeDespacho);
+    	    		//manager.persist(ordenDeDespacho);
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		return true;
         		}
         	}

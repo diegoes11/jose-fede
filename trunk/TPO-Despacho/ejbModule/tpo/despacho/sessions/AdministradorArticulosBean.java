@@ -11,7 +11,7 @@ import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.despacho.vos.ArticuloVO;
+import tpo.ia.vos.ArticuloVO;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {

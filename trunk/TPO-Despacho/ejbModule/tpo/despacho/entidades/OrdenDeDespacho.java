@@ -7,8 +7,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.DetalleOrdenDeDespachoCompletaVO;
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
 
 @Entity
 @Table(name="OrdenesDeDespacho")

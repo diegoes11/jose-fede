@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import tpo.despacho.vos.ArticuloVO;
+import tpo.ia.vos.ArticuloVO;
 
 @Local
 public interface AdministradorArticulos {
