@@ -1,4 +1,4 @@
-package tpo.despacho.vos;
+package tpo.ia.vos;
 
 import java.io.Serializable;
 
