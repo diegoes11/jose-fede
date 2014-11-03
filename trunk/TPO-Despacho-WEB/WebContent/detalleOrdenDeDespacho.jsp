@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/jquery.dataTables_themeroller.css">
 <link rel="stylesheet" href="css/despacho.css">
 </head>
+
 <body>
 <%
 	OrdenDeDespachoCompletaVO ordenDeDespacho = (OrdenDeDespachoCompletaVO)request.getAttribute("ordenDeDespacho");
