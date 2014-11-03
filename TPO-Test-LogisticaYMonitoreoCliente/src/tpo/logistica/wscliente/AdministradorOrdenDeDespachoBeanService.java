@@ -15,8 +15,8 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "AdministradorOrdenDeDespachoBeanService", 
-                  //wsdlLocation = "http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl",
-					wsdlLocation = "http://172.16.164.34:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl",
+                  wsdlLocation = "http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl",
+                		  //wsdlLocation = "http://172.16.164.34:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl",
                   targetNamespace = "http://ws.despacho.tpo/") 
 public class AdministradorOrdenDeDespachoBeanService extends Service {
 
@@ -27,8 +27,8 @@ public class AdministradorOrdenDeDespachoBeanService extends Service {
     static {
         URL url = null;
         try {
-            //url = new URL("http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl");
-            url = new URL("http://172.16.164.34:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl");
+            url = new URL("http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl");
+            //url = new URL("http://172.16.164.34:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(AdministradorOrdenDeDespachoBeanService.class.getName())
                 .log(java.util.logging.Level.INFO, 
