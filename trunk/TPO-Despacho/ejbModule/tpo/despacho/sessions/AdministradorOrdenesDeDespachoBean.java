@@ -176,10 +176,10 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
     	    		}
 
-    	    		//manager.persist(ordenDeDespacho);
+    	    		manager.persist(ordenDeDespacho);
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-    	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		return true;
         		}
         	}
