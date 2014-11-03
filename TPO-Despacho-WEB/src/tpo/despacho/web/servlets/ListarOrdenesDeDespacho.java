@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
 import tpo.despacho.web.business.DespachoBusinessDelegate;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
 
 @WebServlet("/ListarOrdenesDeDespacho")
 public class ListarOrdenesDeDespacho extends HttpServlet {

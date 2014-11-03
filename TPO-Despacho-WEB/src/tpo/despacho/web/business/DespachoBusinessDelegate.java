@@ -6,9 +6,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.despacho.vos.ArticuloVO;
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
-import tpo.despacho.vos.UsuarioVO;
+import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.UsuarioVO;
 
 public class DespachoBusinessDelegate {
 	// Atributos

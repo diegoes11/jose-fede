@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.despacho.vos.OrdenDeDespachoCompletaVO" %>
-<%@ page import="tpo.despacho.vos.DetalleOrdenDeDespachoCompletaVO" %>
+<%@ page import="tpo.ia.vos.OrdenDeDespachoCompletaVO" %>
+<%@ page import="tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

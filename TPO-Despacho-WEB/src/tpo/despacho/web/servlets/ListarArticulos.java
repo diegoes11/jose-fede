@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tpo.despacho.vos.ArticuloVO;
 import tpo.despacho.web.business.DespachoBusinessDelegate;
+import tpo.ia.vos.ArticuloVO;
 
 @WebServlet("/ListarArticulos")
 public class ListarArticulos extends HttpServlet {
