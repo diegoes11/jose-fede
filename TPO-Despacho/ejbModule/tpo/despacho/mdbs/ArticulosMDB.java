@@ -8,7 +8,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.despacho.vos.ArticuloVO;
+import tpo.ia.vos.ArticuloVO;
 
 @MessageDriven(
 		activationConfig = { @ActivationConfigProperty(

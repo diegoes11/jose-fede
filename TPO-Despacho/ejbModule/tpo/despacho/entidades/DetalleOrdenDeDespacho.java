@@ -2,7 +2,7 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.DetalleOrdenDeDespachoCompletaVO;
+import tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO;
 
 @Entity
 @Table(name="DetallesOrdenDeDespacho")

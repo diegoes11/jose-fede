@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.ArticuloVO;
-import tpo.despacho.vos.FichaTecnicaVO;
+import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.FichaTecnicaVO;
 
 @Entity
 @Table(name="Articulos")
@@ -126,7 +126,7 @@ public class Articulo {
 		this.precio = precio;
 	}
 
-	@Column(name="Foto")
+	@Column(name="Foto", columnDefinition="varbinary(MAX)")
 	public byte[] getFoto() {
 		return foto;
 	}

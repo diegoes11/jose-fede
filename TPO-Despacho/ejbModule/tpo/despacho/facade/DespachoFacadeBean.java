@@ -8,10 +8,10 @@ import javax.ejb.Stateless;
 import tpo.despacho.sessions.AdministradorArticulos;
 import tpo.despacho.sessions.AdministradorOrdenesDeDespacho;
 import tpo.despacho.sessions.AdministradorUsuarios;
-import tpo.despacho.vos.ArticuloVO;
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
-import tpo.despacho.vos.OrdenDeDespachoVO;
-import tpo.despacho.vos.UsuarioVO;
+import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.UsuarioVO;
 
 @Stateless
 public class DespachoFacadeBean implements DespachoFacade {

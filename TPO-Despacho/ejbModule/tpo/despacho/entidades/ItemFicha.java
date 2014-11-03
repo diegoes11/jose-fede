@@ -2,7 +2,7 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-import tpo.despacho.vos.FichaTecnicaVO;
+import tpo.ia.vos.FichaTecnicaVO;
 
 @Entity
 @Table(name="ItemsFicha")

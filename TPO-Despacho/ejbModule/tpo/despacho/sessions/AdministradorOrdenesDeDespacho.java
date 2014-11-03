@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import tpo.despacho.vos.OrdenDeDespachoCompletaVO;
-import tpo.despacho.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.OrdenDeDespachoVO;
 
 @Local
 public interface AdministradorOrdenesDeDespacho {

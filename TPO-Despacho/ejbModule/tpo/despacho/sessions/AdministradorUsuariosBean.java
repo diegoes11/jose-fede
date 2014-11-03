@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import tpo.despacho.entidades.Usuario;
-import tpo.despacho.vos.UsuarioVO;
+import tpo.ia.vos.UsuarioVO;
 
 @Stateless
 public class AdministradorUsuariosBean implements AdministradorUsuarios {
