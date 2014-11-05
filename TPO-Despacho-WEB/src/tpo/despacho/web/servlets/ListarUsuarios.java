@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @WebServlet("/ListarUsuarios")
 public class ListarUsuarios extends HttpServlet {
@@ -22,7 +22,7 @@ public class ListarUsuarios extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<UsuarioVO> usuarios = DespachoBusinessDelegate.getInstancia().obtenerUsuarios();
+		List<VOUsuario> usuarios = DespachoBusinessDelegate.getInstancia().obtenerUsuarios();
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarUsuarios.jsp");
 		request.setAttribute("usuarios", usuarios);
 	    dispatcher.forward(request, response);

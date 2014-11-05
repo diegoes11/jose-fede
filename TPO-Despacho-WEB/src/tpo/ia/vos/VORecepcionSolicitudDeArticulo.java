@@ -1,10 +1,10 @@
 package tpo.ia.vos;
 
-public class RecepcionSolicitudDeArticuloVO {
+public class VORecepcionSolicitudDeArticulo {
 	private int id;
 	private int cantidad;
 	
-	public RecepcionSolicitudDeArticuloVO() {
+	public VORecepcionSolicitudDeArticulo() {
 		super();
 	}
 	public int getId() {

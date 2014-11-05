@@ -6,9 +6,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.ia.vos.ArticuloVO;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
+import tpo.ia.vos.VOUsuario;
 
 public class DespachoBusinessDelegate {
 	// Atributos
@@ -44,19 +44,19 @@ public class DespachoBusinessDelegate {
 		}
 	}
 	
-	public int altaUsuario(UsuarioVO usuarioVO){
+	public int altaUsuario(VOUsuario usuarioVO){
 		return despachoFacade.altaUsuario(usuarioVO);
 	}
 	
-	public List<UsuarioVO> obtenerUsuarios(){
+	public List<VOUsuario> obtenerUsuarios(){
 		return despachoFacade.obtenerUsuarios();
 	}
 	
-	public boolean setEstadoActivoUsuario(UsuarioVO usuarioVO){
+	public boolean setEstadoActivoUsuario(VOUsuario usuarioVO){
 		return despachoFacade.setEstadoActivoUsuario(usuarioVO);
 	}
 	
-	public List<ArticuloVO> obtenerArticulos(){
+	public List<VOArticulo> obtenerArticulos(){
 		return despachoFacade.obtenerArticulos();
 	}
 	
@@ -64,11 +64,11 @@ public class DespachoBusinessDelegate {
 		return despachoFacade.recepcionDeArticulos(idSolicitudDeArticulo, cantidad);
 	}
 	
-	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
+	public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho(){
 		return despachoFacade.obtenerOrdenesDeDespacho();
 	}
 	
-	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+	public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
 		return despachoFacade.obtenerOrdenDeDespacho(id, nombrePortalWeb);
 	}
 }

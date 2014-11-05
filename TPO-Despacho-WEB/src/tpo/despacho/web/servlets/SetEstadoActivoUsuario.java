@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @WebServlet("/SetEstadoActivoUsuario")
 public class SetEstadoActivoUsuario extends HttpServlet {
@@ -32,7 +32,7 @@ public class SetEstadoActivoUsuario extends HttpServlet {
 			// Parseo el estado
 			if(estado.equals("true"))
 				activo = true;
-			UsuarioVO usuarioVO = new UsuarioVO();
+			VOUsuario usuarioVO = new VOUsuario();
 			usuarioVO.setDni(dni);
 			usuarioVO.setActivo(activo);
 			boolean estadoSeteado = DespachoBusinessDelegate.getInstancia().setEstadoActivoUsuario(usuarioVO);

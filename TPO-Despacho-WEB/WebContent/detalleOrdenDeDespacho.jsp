@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.ia.vos.OrdenDeDespachoCompletaVO" %>
-<%@ page import="tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO" %>
+<%@ page import="tpo.ia.vos.VOOrdenDeDespachoCompleta" %>
+<%@ page import="tpo.ia.vos.VODetalleOrdenDeDespachoCompleta" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -17,20 +17,20 @@
 
 <body>
 <%
-	OrdenDeDespachoCompletaVO ordenDeDespacho = (OrdenDeDespachoCompletaVO)request.getAttribute("ordenDeDespacho");
-	List<DetalleOrdenDeDespachoCompletaVO> detalles = ordenDeDespacho.getDetallesOrdenDeDespachoVO();
+	VOOrdenDeDespachoCompleta ordenDeDespacho = (VOOrdenDeDespachoCompleta)request.getAttribute("ordenDeDespacho");
+	List<VODetalleOrdenDeDespachoCompleta> detalles = ordenDeDespacho.getDetallesOrdenDeDespachoVO();
 %>
 <h1>Despacho - Detalle de Orden de Despacho</h1>
 
 <div id="ordenDeDespacho">
-	<h1>Orden de Despacho #<%= ordenDeDespacho.getIdOrdenDeDespacho() %></h1>
+	<h1>Orden de Despacho #<%=ordenDeDespacho.getIdOrdenDeDespacho()%></h1>
 	<br />
 	<div id="datosOrden">
-		<u>Estado</u>: <%= ordenDeDespacho.getEstado() %><br />
-		<u>Fecha de recepci&oacute;n</u>: <%= ordenDeDespacho.getFechaRecepcion() %><br />
-		<u>Fecha de entrega</u>: <%= ((ordenDeDespacho.getFechaEntrega() == null) ? "-" : ordenDeDespacho.getFechaEntrega()) %><br />
-		<u>Portal Web</u>: <%= ordenDeDespacho.getNombrePortalWeb() %><br />
-		<u>Log&iacute;stica y Monitoreo</u>: <%= ordenDeDespacho.getNombreLogisticaYMonitoreo() %>
+		<u>Estado</u>: <%=ordenDeDespacho.getEstado()%><br />
+		<u>Fecha de recepci&oacute;n</u>: <%=ordenDeDespacho.getFechaRecepcion()%><br />
+		<u>Fecha de entrega</u>: <%=((ordenDeDespacho.getFechaEntrega() == null) ? "-" : ordenDeDespacho.getFechaEntrega())%><br />
+		<u>Portal Web</u>: <%=ordenDeDespacho.getNombrePortalWeb()%><br />
+		<u>Log&iacute;stica y Monitoreo</u>: <%=ordenDeDespacho.getNombreLogisticaYMonitoreo()%>
 	</div>
 	<br />
 	<h2>Detalles</h2>
@@ -63,7 +63,7 @@
 	</tfoot>
 	<tbody>
 <%
-	for(DetalleOrdenDeDespachoCompletaVO dodd : detalles)
+	for(VODetalleOrdenDeDespachoCompleta dodd : detalles)
 	{
 %>
 		<tr>
