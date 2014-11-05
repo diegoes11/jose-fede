@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import tpo.ia.vos.ArticuloVO;
-import tpo.ia.vos.FichaTecnicaVO;
+import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOFichaTecnica;
 
 @Entity
 @Table(name="Articulos")
@@ -30,8 +30,8 @@ public class Articulo {
 	
 	// Metodos
 	@Transient
-	public ArticuloVO getArticuloVO(){
-		ArticuloVO articuloVO = new ArticuloVO();
+	public VOArticulo getArticuloVO(){
+		VOArticulo articuloVO = new VOArticulo();
 		articuloVO.setCodigo(id.getCodigo());
 		articuloVO.setNombre(nombre);
 		articuloVO.setTipo(tipo);
@@ -42,17 +42,17 @@ public class Articulo {
 		articuloVO.setNombreFoto(nombreFoto);
 		articuloVO.setOrigen(origen);
 		articuloVO.setDeposito(id.getDeposito().getNombre());
-		List<FichaTecnicaVO> fichasTecnicas = new ArrayList<FichaTecnicaVO>();
+		List<VOFichaTecnica> fichasTecnicas = new ArrayList<VOFichaTecnica>();
 		for(ItemFicha itemFicha : fichaTecnica)
 		{
-			FichaTecnicaVO ft = itemFicha.getFichaTecnicaVO();
+			VOFichaTecnica ft = itemFicha.getFichaTecnicaVO();
 			fichasTecnicas.add(ft);
 		}
 		articuloVO.setFichasTecnicas(fichasTecnicas);
 		return articuloVO;
 	}
 	
-	public void setArticuloVO(ArticuloVO articuloVO){
+	public void setArticuloVO(VOArticulo articuloVO){
 		nombre = articuloVO.getNombre();
 		tipo = articuloVO.getTipo();
 		descripcion = articuloVO.getDescripcion();
@@ -61,8 +61,8 @@ public class Articulo {
 		foto = articuloVO.getFoto();
 		nombreFoto = articuloVO.getNombreFoto();
 		origen = articuloVO.getOrigen();
-		List<FichaTecnicaVO> fichasTecnicasVO = articuloVO.getFichasTecnicas();
-		for(FichaTecnicaVO fichaTecnicaVO : fichasTecnicasVO)
+		List<VOFichaTecnica> fichasTecnicasVO = articuloVO.getFichasTecnicas();
+		for(VOFichaTecnica fichaTecnicaVO : fichasTecnicasVO)
 		{
 			ItemFicha itemFicha = new ItemFicha();
 			itemFicha.setFichaTecnicaVO(fichaTecnicaVO);

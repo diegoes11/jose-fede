@@ -7,8 +7,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.VODetalleOrdenDeDespachoCompleta;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 
 @Entity
 @Table(name="OrdenesDeDespacho")
@@ -40,15 +40,15 @@ public class OrdenDeDespacho {
 	}
 	
 	@Transient
-	public OrdenDeDespachoCompletaVO getOrdenDeDespachoVO(){
-		OrdenDeDespachoCompletaVO oddvo = new OrdenDeDespachoCompletaVO();
+	public VOOrdenDeDespachoCompleta getOrdenDeDespachoVO(){
+		VOOrdenDeDespachoCompleta oddvo = new VOOrdenDeDespachoCompleta();
 		oddvo.setIdOrdenDeDespacho(id.getIdOrdenDeDespacho());
 		oddvo.setNombreLogisticaYMonitoreo(logisticaYMonitoreo.getNombre());
 		oddvo.setNombrePortalWeb(id.getPortalWeb().getNombre());
 		oddvo.setEstado(estado);
 		oddvo.setFechaRecepcion(fechaRecepcion);
 		oddvo.setFechaEntrega(fechaEntrega);
-		List<DetalleOrdenDeDespachoCompletaVO> detallesOrdenDeDespachoVO = new ArrayList<DetalleOrdenDeDespachoCompletaVO>();
+		List<VODetalleOrdenDeDespachoCompleta> detallesOrdenDeDespachoVO = new ArrayList<VODetalleOrdenDeDespachoCompleta>();
 		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho){
 			detallesOrdenDeDespachoVO.add(dodd.getDetalleOrdenDeDespachoVO());
 		}

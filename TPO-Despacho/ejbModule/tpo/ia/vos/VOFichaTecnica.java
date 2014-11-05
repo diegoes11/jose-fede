@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 
-public class FichaTecnicaVO implements Serializable {
+public class VOFichaTecnica implements Serializable {
 	/**
 	 * 
 	 */
@@ -13,10 +13,10 @@ public class FichaTecnicaVO implements Serializable {
 	private String atributo;
 	private String detalle;
 	
-	public FichaTecnicaVO(){
+	public VOFichaTecnica(){
 		
 	}
-	public FichaTecnicaVO(int id,String atributo,String detalle){
+	public VOFichaTecnica(int id,String atributo,String detalle){
 		this.id=id;
 		this.atributo=atributo;
 		this.detalle=detalle;

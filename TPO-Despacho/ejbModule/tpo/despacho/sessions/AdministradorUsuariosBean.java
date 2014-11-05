@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import tpo.despacho.entidades.Usuario;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @Stateless
 public class AdministradorUsuariosBean implements AdministradorUsuarios {
@@ -26,7 +26,7 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
     	return usuario;
     }
     
-    public int altaUsuario(UsuarioVO usuarioVO){
+    public int altaUsuario(VOUsuario usuarioVO){
     	// Verifico que no exista un usuario con el DNI ingresado
     	Usuario usuario = buscarUsuario(usuarioVO.getDni());
     	
@@ -39,19 +39,19 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
     	return 1; // 1: Ya existe un usuario con el mismo nombre y password.
     }
     
-	public List<UsuarioVO> obtenerUsuarios(){
+	public List<VOUsuario> obtenerUsuarios(){
     	String query = "SELECT u FROM Usuario u";
     	List<Usuario> usuarios = (List<Usuario>)manager.createQuery(query, Usuario.class).getResultList();
-    	List<UsuarioVO> usuariosVO = new ArrayList<UsuarioVO>(usuarios.size());
+    	List<VOUsuario> usuariosVO = new ArrayList<VOUsuario>(usuarios.size());
     	// Convierto la lista de Usuario a UsuarioVO
     	for(Usuario u : usuarios){
-    		UsuarioVO usuarioVO = u.getUsuarioVO();
+    		VOUsuario usuarioVO = u.getUsuarioVO();
     		usuariosVO.add(usuarioVO);
     	}
     	return usuariosVO;
     }
 	
-	public boolean setEstadoActivoUsuario(UsuarioVO usuarioVO){
+	public boolean setEstadoActivoUsuario(VOUsuario usuarioVO){
 		try{
 			Usuario usuario = buscarUsuario(usuarioVO.getDni());
 			if(usuario == null) // Si no existe, retorno error.

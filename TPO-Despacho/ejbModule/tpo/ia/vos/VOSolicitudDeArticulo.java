@@ -2,14 +2,14 @@ package tpo.ia.vos;
 
 import java.io.Serializable;
 
-public class SolicitudDeArticuloVO implements Serializable {
+public class VOSolicitudDeArticulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String nombreDespacho;
 	private int idSolicitudDeArticulo;
 	private int codigoArticulo;
 	private int cantidad;
 	
-	public SolicitudDeArticuloVO(){
+	public VOSolicitudDeArticulo(){
 		
 	}
 	

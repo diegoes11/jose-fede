@@ -8,10 +8,10 @@ import javax.ejb.Stateless;
 import tpo.despacho.sessions.AdministradorArticulos;
 import tpo.despacho.sessions.AdministradorOrdenesDeDespacho;
 import tpo.despacho.sessions.AdministradorUsuarios;
-import tpo.ia.vos.ArticuloVO;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
-import tpo.ia.vos.OrdenDeDespachoVO;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
+import tpo.ia.vos.VOOrdenDeDespacho;
+import tpo.ia.vos.VOUsuario;
 
 @Stateless
 public class DespachoFacadeBean implements DespachoFacade {
@@ -28,19 +28,19 @@ public class DespachoFacadeBean implements DespachoFacade {
     }
     
     // Administración de usuarios
-    public int altaUsuario(UsuarioVO usuarioVO){
+    public int altaUsuario(VOUsuario usuarioVO){
     	return administradorUsuarios.altaUsuario(usuarioVO);
     }
     
-    public List<UsuarioVO> obtenerUsuarios(){
+    public List<VOUsuario> obtenerUsuarios(){
     	return administradorUsuarios.obtenerUsuarios();
     }
     
-    public boolean setEstadoActivoUsuario(UsuarioVO usuarioVO){
+    public boolean setEstadoActivoUsuario(VOUsuario usuarioVO){
     	return administradorUsuarios.setEstadoActivoUsuario(usuarioVO);
     }
 
-	public List<ArticuloVO> obtenerArticulos() {
+	public List<VOArticulo> obtenerArticulos() {
 		return administradorArticulos.obtenerArticulos();
 	}
 	
@@ -48,19 +48,19 @@ public class DespachoFacadeBean implements DespachoFacade {
 		return administradorArticulos.recepcionDeArticulos(idSolicitudDeArticulo, cantidad);
 	}
 	
-	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
+	public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho(){
 		return administradorOrdenesDeDespacho.obtenerOrdenesDeDespacho();
 	}
 	
-	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+	public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
 		return administradorOrdenesDeDespacho.obtenerOrdenDeDespacho(id, nombrePortalWeb);
 	}
 	
-	public boolean altaArticulo(ArticuloVO articuloVO){
+	public boolean altaArticulo(VOArticulo articuloVO){
 		return administradorArticulos.altaArticulo(articuloVO);
 	}
 	
-	public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO){
+	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO){
 		return administradorOrdenesDeDespacho.recepcionOrdenDeDespacho(ordenDeDespachoVO);
 	}
 }

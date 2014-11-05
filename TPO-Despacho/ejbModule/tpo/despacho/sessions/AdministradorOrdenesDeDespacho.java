@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
-import tpo.ia.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
+import tpo.ia.vos.VOOrdenDeDespacho;
 
 @Local
 public interface AdministradorOrdenesDeDespacho {
-	public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho();
-	public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb);
-	public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO);
+	public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho();
+	public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb);
+	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO);
 }

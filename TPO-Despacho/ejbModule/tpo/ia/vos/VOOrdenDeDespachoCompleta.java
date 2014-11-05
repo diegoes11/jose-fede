@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class OrdenDeDespachoCompletaVO implements Serializable {
+public class VOOrdenDeDespachoCompleta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int idOrdenDeDespacho;
@@ -13,9 +13,9 @@ public class OrdenDeDespachoCompletaVO implements Serializable {
 	private String estado;
 	private Date fechaRecepcion;
 	private Date fechaEntrega;
-	private List<DetalleOrdenDeDespachoCompletaVO> detallesOrdenDeDespachoVO;
+	private List<VODetalleOrdenDeDespachoCompleta> detallesOrdenDeDespachoVO;
 	
-	public OrdenDeDespachoCompletaVO() {
+	public VOOrdenDeDespachoCompleta() {
 		super();
 	}
 
@@ -67,12 +67,12 @@ public class OrdenDeDespachoCompletaVO implements Serializable {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-	public List<DetalleOrdenDeDespachoCompletaVO> getDetallesOrdenDeDespachoVO() {
+	public List<VODetalleOrdenDeDespachoCompleta> getDetallesOrdenDeDespachoVO() {
 		return detallesOrdenDeDespachoVO;
 	}
 
 	public void setDetallesOrdenDeDespachoVO(
-			List<DetalleOrdenDeDespachoCompletaVO> detallesOrdenDeDespachoVO) {
+			List<VODetalleOrdenDeDespachoCompleta> detallesOrdenDeDespachoVO) {
 		this.detallesOrdenDeDespachoVO = detallesOrdenDeDespachoVO;
 	}
 }

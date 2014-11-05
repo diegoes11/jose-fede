@@ -24,9 +24,9 @@ import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.ia.vos.DetalleOrdenDeDespachoVO;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
-import tpo.ia.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.VODetalleOrdenDeDespacho;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
+import tpo.ia.vos.VOOrdenDeDespacho;
 
 @Stateless
 public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesDeDespacho {
@@ -97,25 +97,25 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 	}
     
     // Métodos
-    public List<OrdenDeDespachoCompletaVO> obtenerOrdenesDeDespacho(){
+    public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho(){
 		try{
 			String query = "SELECT odd FROM OrdenDeDespacho odd";
 	    	List<OrdenDeDespacho> ordenesDeDespacho = (List<OrdenDeDespacho>)manager.createQuery(query, OrdenDeDespacho.class).getResultList();
-	    	List<OrdenDeDespachoCompletaVO> ordenesDeDespachoVO = new ArrayList<OrdenDeDespachoCompletaVO>(ordenesDeDespacho.size());
+	    	List<VOOrdenDeDespachoCompleta> ordenesDeDespachoVO = new ArrayList<VOOrdenDeDespachoCompleta>(ordenesDeDespacho.size());
 	    	// Convierto la lista de OrdenDeDespacho a OrdenDeDespachoCompletaVO
 	    	for(OrdenDeDespacho odd : ordenesDeDespacho){
-	    		OrdenDeDespachoCompletaVO ordenDeDespachoVO = odd.getOrdenDeDespachoVO();
+	    		VOOrdenDeDespachoCompleta ordenDeDespachoVO = odd.getOrdenDeDespachoVO();
 	    		ordenesDeDespachoVO.add(ordenDeDespachoVO);
 	    	}
 	    	return ordenesDeDespachoVO;
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return new ArrayList<OrdenDeDespachoCompletaVO>();
+			return new ArrayList<VOOrdenDeDespachoCompleta>();
 		}
 	}
 
-    public OrdenDeDespachoCompletaVO obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
+    public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
     	try{
     		PortalWeb portalWeb = manager.find(PortalWeb.class, nombrePortalWeb);
     		if (portalWeb != null){
@@ -133,7 +133,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	}
 	}
     
-    public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO){
+    public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO){
     	try{
     		PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
         	if(portalWeb != null)
@@ -147,10 +147,10 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
     	    		ordenDeDespacho.setEstado("pendiente de entrega");
     	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
-    	    		List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
+    	    		List<VODetalleOrdenDeDespacho> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
     	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
     	    		// Creo los detalles de la orden de despacho
-    	    		for(DetalleOrdenDeDespachoVO doddvo : detallesOrdenDeDespachoVO)
+    	    		for(VODetalleOrdenDeDespacho doddvo : detallesOrdenDeDespachoVO)
     	    		{
     	    			Articulo articulo = buscarArticulo(doddvo.getCodigoArticulo());
     	    			if(articulo != null)
