@@ -2,7 +2,7 @@ package tpo.ia.vos;
 
 import java.io.Serializable;
 
-public class UsuarioVO implements Serializable {
+public class VOUsuario implements Serializable {
 	// Atributos
 	private static final long serialVersionUID = 1L;
 	private long dni;
@@ -11,20 +11,20 @@ public class UsuarioVO implements Serializable {
 	private boolean activo;
 	
 	// Constructores
-	public UsuarioVO(long dni, String nombre, String apellido){
+	public VOUsuario(long dni, String nombre, String apellido){
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
 	
-	public UsuarioVO(long dni, String nombre, String apellido, boolean activo){
+	public VOUsuario(long dni, String nombre, String apellido, boolean activo){
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.activo = activo;
 	}
 	
-	public UsuarioVO() {
+	public VOUsuario() {
 	}
 	
 	// Getters y Setters

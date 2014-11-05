@@ -11,7 +11,7 @@ import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.VOArticulo;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {
@@ -58,19 +58,19 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		return false;
 	}
 
-	public List<ArticuloVO> obtenerArticulos() {
+	public List<VOArticulo> obtenerArticulos() {
     	String query = "SELECT a FROM Articulo a";
     	List<Articulo> articulos = (List<Articulo>)manager.createQuery(query, Articulo.class).getResultList();
-    	List<ArticuloVO> articulosVO = new ArrayList<ArticuloVO>(articulos.size());
+    	List<VOArticulo> articulosVO = new ArrayList<VOArticulo>(articulos.size());
     	// Convierto la lista de Articulo a ArticuloVO
     	for(Articulo a : articulos){
-    		ArticuloVO articuloVO = a.getArticuloVO();
+    		VOArticulo articuloVO = a.getArticuloVO();
     		articulosVO.add(articuloVO);
     	}
     	return articulosVO;
 	}
 	
-	public boolean altaArticulo(ArticuloVO articuloVO){
+	public boolean altaArticulo(VOArticulo articuloVO){
 		try{
 			Articulo articulo = buscarArticulo(articuloVO.getCodigo());
 			Deposito deposito = buscarDeposito(articuloVO.getDeposito());

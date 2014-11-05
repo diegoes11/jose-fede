@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @Entity
 @Table(name="Usuarios")
@@ -29,8 +29,8 @@ public class Usuario {
 	
 	// Getters y Setters
 	@Transient
-	public UsuarioVO getUsuarioVO(){
-		return new UsuarioVO(dni, nombre, apellido, activo);
+	public VOUsuario getUsuarioVO(){
+		return new VOUsuario(dni, nombre, apellido, activo);
 	}
 	
 	@Id	

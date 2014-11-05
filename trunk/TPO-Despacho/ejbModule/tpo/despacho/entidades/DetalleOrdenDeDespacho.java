@@ -2,7 +2,7 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-import tpo.ia.vos.DetalleOrdenDeDespachoCompletaVO;
+import tpo.ia.vos.VODetalleOrdenDeDespachoCompleta;
 
 @Entity
 @Table(name="DetallesOrdenDeDespacho")
@@ -26,8 +26,8 @@ public class DetalleOrdenDeDespacho {
 	}
 	
 	@Transient
-	public DetalleOrdenDeDespachoCompletaVO getDetalleOrdenDeDespachoVO(){
-		DetalleOrdenDeDespachoCompletaVO doddvo = new DetalleOrdenDeDespachoCompletaVO();
+	public VODetalleOrdenDeDespachoCompleta getDetalleOrdenDeDespachoVO(){
+		VODetalleOrdenDeDespachoCompleta doddvo = new VODetalleOrdenDeDespachoCompleta();
 		doddvo.setIdDetalleOrdenDeDespacho(idDetalle);
 		doddvo.setIdSolicitudDeArticulo(solicitudDeArticulo.getIdSolicitudDeArticulo());
 		doddvo.setNombreDeposito(solicitudDeArticulo.getDeposito().getNombre());

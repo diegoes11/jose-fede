@@ -8,7 +8,7 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.ia.vos.ArticuloVO;
+import tpo.ia.vos.VOArticulo;
 
 @MessageDriven(
 		activationConfig = { @ActivationConfigProperty(
@@ -27,7 +27,7 @@ public class ArticulosMDB implements MessageListener {
     	try 
     	{
     		ObjectMessage objectMessage = (ObjectMessage)message;
-    		ArticuloVO articuloVO = (ArticuloVO)objectMessage.getObject();
+    		VOArticulo articuloVO = (VOArticulo)objectMessage.getObject();
     		despachoFacade.altaArticulo(articuloVO);
     	}
     	catch (Exception e)

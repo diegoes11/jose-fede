@@ -2,7 +2,7 @@ package tpo.despacho.entidades;
 
 import javax.persistence.*;
 
-import tpo.ia.vos.FichaTecnicaVO;
+import tpo.ia.vos.VOFichaTecnica;
 
 @Entity
 @Table(name="ItemsFicha")
@@ -21,15 +21,15 @@ public class ItemFicha {
 	
 	// Metodos
 	@Transient
-	public FichaTecnicaVO getFichaTecnicaVO(){
-		FichaTecnicaVO fichaTecnicaVO = new FichaTecnicaVO();
+	public VOFichaTecnica getFichaTecnicaVO(){
+		VOFichaTecnica fichaTecnicaVO = new VOFichaTecnica();
 		fichaTecnicaVO.setId(idItemFicha);
 		fichaTecnicaVO.setAtributo(atributo);
 		fichaTecnicaVO.setDetalle(detalle);
 		return fichaTecnicaVO;
 	}
 	
-	public void setFichaTecnicaVO(FichaTecnicaVO fichaTecnicaVO){
+	public void setFichaTecnicaVO(VOFichaTecnica fichaTecnicaVO){
 		idItemFicha = fichaTecnicaVO.getId();
 		atributo = fichaTecnicaVO.getAtributo();
 		detalle = fichaTecnicaVO.getDetalle();

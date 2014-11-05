@@ -3,15 +3,15 @@ package tpo.ia.vos;
 import java.io.Serializable;
 import java.util.List;
 
-public class OrdenDeDespachoVO implements Serializable {
+public class VOOrdenDeDespacho implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private int idOrdenDeDespacho;
 	private String nombrePortalWeb;
 	private String nombreLogisticaYMonitoreo;
-	private List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO;
+	private List<VODetalleOrdenDeDespacho> detallesOrdenDeDespachoVO;
 		
-	public OrdenDeDespachoVO() {
+	public VOOrdenDeDespacho() {
 	}
 	
 	public int getIdOrdenDeDespacho() {
@@ -26,11 +26,11 @@ public class OrdenDeDespachoVO implements Serializable {
 	public void setNombrePortalWeb(String nombrePortalWeb) {
 		this.nombrePortalWeb = nombrePortalWeb;
 	}
-	public List<DetalleOrdenDeDespachoVO> getDetallesOrdenDeDespachoVO() {
+	public List<VODetalleOrdenDeDespacho> getDetallesOrdenDeDespachoVO() {
 		return detallesOrdenDeDespachoVO;
 	}
 	public void setDetallesOrdenDeDespachoVO(
-			List<DetalleOrdenDeDespachoVO> detallesOrdenDeDespachoVO) {
+			List<VODetalleOrdenDeDespacho> detallesOrdenDeDespachoVO) {
 		this.detallesOrdenDeDespachoVO = detallesOrdenDeDespachoVO;
 	}
 	public String getNombreLogisticaYMonitoreo() {

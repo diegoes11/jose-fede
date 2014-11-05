@@ -6,7 +6,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.ia.vos.OrdenDeDespachoVO;
+import tpo.ia.vos.VOOrdenDeDespacho;
 
 // URL WSDL: http://localhost:8080/TPO-Despacho/AdministradorOrdenDeDespachoBean?wsdl
 
@@ -21,7 +21,7 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     }
 
     @WebMethod
-	public boolean recepcionOrdenDeDespacho(OrdenDeDespachoVO ordenDeDespachoVO) {
+	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO) {
     	try{
     		return despachoFacade.recepcionOrdenDeDespacho(ordenDeDespachoVO);
     	}

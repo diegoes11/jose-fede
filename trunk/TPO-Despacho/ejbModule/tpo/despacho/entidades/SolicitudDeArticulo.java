@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import tpo.ia.vos.SolicitudDeArticuloVO;
+import tpo.ia.vos.VOSolicitudDeArticulo;
 
 @Entity
 @Table(name="SolicitudesDeArticulo")
@@ -22,8 +22,8 @@ public class SolicitudDeArticulo {
 	
 	// Metodos
 	@Transient
-	public SolicitudDeArticuloVO getSolicitudDeArticuloVO(){
-		SolicitudDeArticuloVO solicitudDeArticuloVO = new SolicitudDeArticuloVO();
+	public VOSolicitudDeArticulo getSolicitudDeArticuloVO(){
+		VOSolicitudDeArticulo solicitudDeArticuloVO = new VOSolicitudDeArticulo();
 		solicitudDeArticuloVO.setIdSolicitudDeArticulo(idSolicitudDeArticulo);
 		solicitudDeArticuloVO.setNombreDespacho("");
 		solicitudDeArticuloVO.setCodigoArticulo(detalleOrdenDeDespacho.getArticulo().getId().getCodigo());

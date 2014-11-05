@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @Local
 public interface AdministradorUsuarios {
-	public int altaUsuario(UsuarioVO usuarioVO);
-	public List<UsuarioVO> obtenerUsuarios();
-	public boolean setEstadoActivoUsuario(UsuarioVO usuarioVO);
+	public int altaUsuario(VOUsuario usuarioVO);
+	public List<VOUsuario> obtenerUsuarios();
+	public boolean setEstadoActivoUsuario(VOUsuario usuarioVO);
 }
