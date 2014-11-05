@@ -90,7 +90,7 @@ public class OrdenDeDespacho {
 		this.detallesOrdenDeDespacho = detallesOrdenDeDespacho;
 	}
 
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn (name = "NombreLogisticaYMonitoreo")
 	public LogisticaYMonitoreo getLogisticaYMonitoreo() {
 		return logisticaYMonitoreo;

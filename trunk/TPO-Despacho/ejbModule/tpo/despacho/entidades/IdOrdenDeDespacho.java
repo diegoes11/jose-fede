@@ -34,7 +34,7 @@ public class IdOrdenDeDespacho implements Serializable {
 		this.idOrdenDeDespacho = idOrdenDeDespacho;
 	}
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn (name = "NombrePortalWeb")
 	public PortalWeb getPortalWeb() {
 		return portalWeb;

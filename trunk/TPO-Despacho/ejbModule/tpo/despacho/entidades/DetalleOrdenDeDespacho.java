@@ -52,8 +52,10 @@ public class DetalleOrdenDeDespacho {
 	public void setIdDetalle(int idDetalle) {
 		this.idDetalle = idDetalle;
 	}
-
-	@ManyToOne (cascade = CascadeType.ALL)
+	
+	//Esto logicamente me da duda, no deberia ser un Detalle se relaciona con un Articulo?
+	//Lo cambio al ManyToOne por OneToOne
+	@OneToOne
 	@JoinColumns({
         @JoinColumn(name="CodigoArticulo", referencedColumnName="Codigo"),
         @JoinColumn(name="NombreDeposito", referencedColumnName="NombreDeposito")
@@ -65,8 +67,9 @@ public class DetalleOrdenDeDespacho {
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
 	}
-
-	@ManyToOne(cascade=CascadeType.ALL)
+	
+	//Logicamente creo que esto esta correcto, muchos detalles se relacionan con una unica OrdenDeDespacho.
+	@ManyToOne
 	@JoinColumns({
         @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="IdOrdenDeDespacho"),
         @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")

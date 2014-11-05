@@ -30,7 +30,7 @@ public class IdArticulo implements Serializable {
 		this.codigo = codigo;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="NombreDeposito")
 	public Deposito getDeposito() {
 		return deposito;
