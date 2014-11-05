@@ -8,7 +8,7 @@ import tpo.ia.vos.VORecepcionSolicitudDeArticulo;
 @Path("/RecepcionDeArticulos")
 public class RecepcionDeArticulosREST {
 
-	//URL REST: http://localhost:8080/TPO-Despacho-WEB/RecepcionDeArticulos
+	//URL DEL REST: http://localhost:8080/TPO-Despacho-WEB/RecepcionDeArticulos
 	@POST
 	@Path("/")
 	@Consumes({ "application/json" })
