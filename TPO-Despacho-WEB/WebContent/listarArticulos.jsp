@@ -71,7 +71,7 @@
 					<tbody>
 						<%
 							for(VOFichaTecnica ft : a.getFichasTecnicas())
-											{
+							{
 						%>
 							<tr>
 								<td><i><%= ft.getAtributo() %>:</i></td>
