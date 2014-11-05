@@ -3,7 +3,7 @@ package tpo.ia.vos;
 import java.io.Serializable;
 import java.util.Date;
 
-public class DetalleOrdenDeDespachoCompletaVO implements Serializable {
+public class VODetalleOrdenDeDespachoCompleta implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int idDetalleOrdenDeDespacho;
@@ -17,7 +17,7 @@ public class DetalleOrdenDeDespachoCompletaVO implements Serializable {
 	private int cantidadSolicitada;
 	private int cantidadRecibida;
 	
-	public DetalleOrdenDeDespachoCompletaVO() {
+	public VODetalleOrdenDeDespachoCompleta() {
 		super();
 	}
 

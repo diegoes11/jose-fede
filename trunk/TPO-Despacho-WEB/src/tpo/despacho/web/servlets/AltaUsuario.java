@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.UsuarioVO;
+import tpo.ia.vos.VOUsuario;
 
 @WebServlet("/AltaUsuario")
 public class AltaUsuario extends HttpServlet {
@@ -44,7 +44,7 @@ public class AltaUsuario extends HttpServlet {
 			else{
 				// Parseo el dni a long
 				long dni = Long.parseLong(dniString);
-				UsuarioVO usuarioVO = new UsuarioVO(dni, nombre, apellido);
+				VOUsuario usuarioVO = new VOUsuario(dni, nombre, apellido);
 				// Proceso el alta
 				int altaProcesada = DespachoBusinessDelegate.getInstancia().altaUsuario(usuarioVO);
 				if(altaProcesada == 0) // 0: Alta exitosa

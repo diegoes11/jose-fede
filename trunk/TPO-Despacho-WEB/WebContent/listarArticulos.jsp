@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.ia.vos.ArticuloVO" %>
-<%@ page import="tpo.ia.vos.FichaTecnicaVO" %>
+<%@ page import="tpo.ia.vos.VOArticulo" %>
+<%@ page import="tpo.ia.vos.VOFichaTecnica" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <%
-	List<ArticuloVO> articulos = (List<ArticuloVO>)request.getAttribute("articulos");
+	List<VOArticulo> articulos = (List<VOArticulo>)request.getAttribute("articulos");
 %>
 <h1>Despacho - Listado de Art&iacute;culos</h1>
 
@@ -54,24 +54,24 @@
 	</tfoot>
 	<tbody>
 <%
-	for(ArticuloVO a : articulos)
+	for(VOArticulo a : articulos)
 	{
 %>
 		<tr>
-			<td><%= a.getCodigo() %></td>
-			<td><%= a.getTipo() %></td>
-			<td><%= a.getNombre() %></td>
-			<td><%= a.getDescripcion() %></td>
-			<td><%= a.getMarca() %></td>
-			<td>$<%= a.getPrecio() %></td>
-			<td><img src="<%= a.getFoto() %>" alt="<%= a.getNombreFoto() %>" /></td>
-			<td><%= a.getOrigen() %></td>
+			<td><%=a.getCodigo()%></td>
+			<td><%=a.getTipo()%></td>
+			<td><%=a.getNombre()%></td>
+			<td><%=a.getDescripcion()%></td>
+			<td><%=a.getMarca()%></td>
+			<td>$<%=a.getPrecio()%></td>
+			<td><img src="<%=a.getFoto()%>" alt="<%=a.getNombreFoto()%>" /></td>
+			<td><%=a.getOrigen()%></td>
 			<td>
 				<table>
 					<tbody>
 						<%
-							for(FichaTecnicaVO ft : a.getFichasTecnicas())
-							{
+							for(VOFichaTecnica ft : a.getFichasTecnicas())
+											{
 						%>
 							<tr>
 								<td><i><%= ft.getAtributo() %>:</i></td>

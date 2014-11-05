@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.ia.vos.OrdenDeDespachoCompletaVO" %>
+<%@ page import="tpo.ia.vos.VOOrdenDeDespachoCompleta" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <%
-	List<OrdenDeDespachoCompletaVO> ordenesDeDespacho = (List<OrdenDeDespachoCompletaVO>)request.getAttribute("ordenesDeDespacho");
+	List<VOOrdenDeDespachoCompleta> ordenesDeDespacho = (List<VOOrdenDeDespachoCompleta>)request.getAttribute("ordenesDeDespacho");
 %>
 <h1>Despacho - Listado de &Oacute;rdenes de Despacho</h1>
 
@@ -47,7 +47,7 @@
 	</tfoot>
 	<tbody>
 <%
-	for(OrdenDeDespachoCompletaVO odd : ordenesDeDespacho)
+	for(VOOrdenDeDespachoCompleta odd : ordenesDeDespacho)
 	{
 %>
 		<tr>

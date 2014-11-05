@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.ia.vos.UsuarioVO" %>
+<%@ page import="tpo.ia.vos.VOUsuario" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -16,7 +16,7 @@
 <body>
 A HACER: UPDATE DEL ESTADO POR AJAX!
 <%
-	List<UsuarioVO> usuarios = (List<UsuarioVO>)request.getAttribute("usuarios");
+	List<VOUsuario> usuarios = (List<VOUsuario>)request.getAttribute("usuarios");
 %>
 <h1>Despacho - Listado de Usuarios</h1>
 
@@ -39,7 +39,7 @@ A HACER: UPDATE DEL ESTADO POR AJAX!
 </tfoot>
 <tbody>
 <%
-	for(UsuarioVO u : usuarios)
+	for(VOUsuario u : usuarios)
 	{
 %>
 	<tr>

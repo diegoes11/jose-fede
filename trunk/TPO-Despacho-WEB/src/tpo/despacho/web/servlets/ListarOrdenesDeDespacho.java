@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 
 @WebServlet("/ListarOrdenesDeDespacho")
 public class ListarOrdenesDeDespacho extends HttpServlet {
@@ -22,7 +22,7 @@ public class ListarOrdenesDeDespacho extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<OrdenDeDespachoCompletaVO> ordenesDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenesDeDespacho();
+		List<VOOrdenDeDespachoCompleta> ordenesDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenesDeDespacho();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarOrdenesDeDespacho.jsp");
 		request.setAttribute("ordenesDeDespacho", ordenesDeDespacho);

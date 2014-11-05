@@ -3,7 +3,7 @@ package tpo.despacho.rest;
 import javax.ws.rs.*;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.RecepcionSolicitudDeArticuloVO;
+import tpo.ia.vos.VORecepcionSolicitudDeArticulo;
 
 @Path("/RecepcionDeArticulos")
 public class RecepcionDeArticulosREST {
@@ -13,7 +13,7 @@ public class RecepcionDeArticulosREST {
 	@Path("/")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })
-	public boolean actualizarCantidadSolicitudDeArticulo(RecepcionSolicitudDeArticuloVO json) {
+	public boolean actualizarCantidadSolicitudDeArticulo(VORecepcionSolicitudDeArticulo json) {
 		return DespachoBusinessDelegate.getInstancia().recepcionDeArticulos(json.getId(), json.getCantidad());
 	}
 }

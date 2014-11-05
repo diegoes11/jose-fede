@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.OrdenDeDespachoCompletaVO;
+import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 
 @WebServlet("/DetalleOrdenDeDespacho")
 public class DetalleOrdenDeDespacho extends HttpServlet {
@@ -26,7 +26,7 @@ public class DetalleOrdenDeDespacho extends HttpServlet {
 		if ((idString != null && !idString.equals("")) && (portalWeb != null && !portalWeb.equals("")))
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
-			OrdenDeDespachoCompletaVO ordenDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenDeDespacho(id, portalWeb);
+			VOOrdenDeDespachoCompleta ordenDeDespacho = DespachoBusinessDelegate.getInstancia().obtenerOrdenDeDespacho(id, portalWeb);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/detalleOrdenDeDespacho.jsp");
 			request.setAttribute("ordenDeDespacho", ordenDeDespacho);
