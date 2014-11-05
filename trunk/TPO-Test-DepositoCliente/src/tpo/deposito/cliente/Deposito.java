@@ -13,8 +13,8 @@ import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import tpo.ia.vos.ArticuloVO;
-import tpo.ia.vos.FichaTecnicaVO;
+import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOFichaTecnica;
 
 public class Deposito {
 	public static void main(String[] args) {
@@ -46,23 +46,23 @@ public class Deposito {
 		MessageProducer producer = session.createProducer(destination);
 		 
 		 // CREO EL ARTICULO nº1 y lo envio
-		 FichaTecnicaVO ft1 = new FichaTecnicaVO();
+		 VOFichaTecnica ft1 = new VOFichaTecnica();
 		 ft1.setId(1);
 		 ft1.setAtributo("Tipo");
 		 ft1.setDetalle("Split");
-		 FichaTecnicaVO ft2 = new FichaTecnicaVO();
+		 VOFichaTecnica ft2 = new VOFichaTecnica();
 		 ft2.setId(2);
 		 ft2.setAtributo("Color");
 		 ft2.setDetalle("Blanco");
-		 FichaTecnicaVO ft3 = new FichaTecnicaVO();
+		 VOFichaTecnica ft3 = new VOFichaTecnica();
 		 ft3.setId(3);
 		 ft3.setAtributo("Modo");
 		 ft3.setDetalle("Frio/Calor");
-		 List<FichaTecnicaVO> fichas = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas = new ArrayList<VOFichaTecnica>();
 		 fichas.add(ft1);
 		 fichas.add(ft2);
 		 fichas.add(ft3);
-		 ArticuloVO art = new ArticuloVO();
+		 VOArticulo art = new VOArticulo();
 		 art.setCodigo(1351953);
 		 art.setDeposito("DEPOSITO1");
 		 art.setTipo("Electrodomesticos");
@@ -84,13 +84,13 @@ public class Deposito {
 		/***************/
 		
 		 // CREO EL ARTICULO nº2 y lo envio
-		 FichaTecnicaVO ft4 = new FichaTecnicaVO();
+		 VOFichaTecnica ft4 = new VOFichaTecnica();
 		 ft4.setId(4);
 		 ft4.setAtributo("Capacidad");
 		 ft4.setDetalle("202 Lt");
-		 List<FichaTecnicaVO> fichas2 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas2 = new ArrayList<VOFichaTecnica>();
 		 fichas2.add(ft4);
-		 ArticuloVO art2 = new ArticuloVO();
+		 VOArticulo art2 = new VOArticulo();
 		 art2.setCodigo(1739701);
 		 art2.setDeposito("DEPOSITO1");
 		 art2.setTipo("Electrodomesticos");
@@ -112,18 +112,18 @@ public class Deposito {
 		/***************/
 		
 		 // CREO EL ARTICULO nº3 y lo envio
-		 FichaTecnicaVO ft5 = new FichaTecnicaVO();
+		 VOFichaTecnica ft5 = new VOFichaTecnica();
 		 ft5.setId(5);
 		 ft5.setAtributo("Color");
 		 ft5.setDetalle("Celeste");
-		 FichaTecnicaVO ft6 = new FichaTecnicaVO();
+		 VOFichaTecnica ft6 = new VOFichaTecnica();
 		 ft6.setId(6);
 		 ft6.setAtributo("Talle");
 		 ft6.setDetalle("M");
-		 List<FichaTecnicaVO> fichas3 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas3 = new ArrayList<VOFichaTecnica>();
 		 fichas3.add(ft5);
 		 fichas3.add(ft6);
-		 ArticuloVO art3 = new ArticuloVO();
+		 VOArticulo art3 = new VOArticulo();
 		 art3.setCodigo(3122);
 		 art3.setDeposito("DEPOSITO1");
 		 art3.setTipo("Moda");
@@ -143,18 +143,18 @@ public class Deposito {
 		producer.send(message3);
 		
 		 // CREO EL ARTICULO nº4 y lo envio
-		 FichaTecnicaVO ft7 = new FichaTecnicaVO();
+		 VOFichaTecnica ft7 = new VOFichaTecnica();
 		 ft7.setId(7);
 		 ft7.setAtributo("Color");
 		 ft7.setDetalle("Negro");
-		 FichaTecnicaVO ft8 = new FichaTecnicaVO();
+		 VOFichaTecnica ft8 = new VOFichaTecnica();
 		 ft8.setId(8);
 		 ft8.setAtributo("Talle");
 		 ft8.setDetalle("Largo del reloj: 2");
-		 List<FichaTecnicaVO> fichas4 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas4 = new ArrayList<VOFichaTecnica>();
 		 fichas4.add(ft7);
 		 fichas4.add(ft8);
-		 ArticuloVO art4 = new ArticuloVO();
+		 VOArticulo art4 = new VOArticulo();
 		 art4.setCodigo(1741046);
 		 art4.setDeposito("DEPOSITO1");
 		 art4.setTipo("Moda");
@@ -176,13 +176,13 @@ public class Deposito {
 		/***************/
 		
 		 // CREO EL ARTICULO nº5 y lo envio
-		 FichaTecnicaVO ft9 = new FichaTecnicaVO();
+		 VOFichaTecnica ft9 = new VOFichaTecnica();
 		 ft9.setId(9);
 		 ft9.setAtributo("Material");
 		 ft9.setDetalle("MDF");
-		 List<FichaTecnicaVO> fichas5 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas5 = new ArrayList<VOFichaTecnica>();
 		 fichas5.add(ft9);
-		 ArticuloVO art5 = new ArticuloVO();
+		 VOArticulo art5 = new VOArticulo();
 		 art5.setCodigo(1857363);
 		 art5.setDeposito("DEPOSITO1");
 		 art5.setTipo("Muebles");
@@ -202,13 +202,13 @@ public class Deposito {
 		producer.send(message5);
 		
 		 // CREO EL ARTICULO nº6 y lo envio
-		 FichaTecnicaVO ft10 = new FichaTecnicaVO();
+		 VOFichaTecnica ft10 = new VOFichaTecnica();
 		 ft10.setId(10);
 		 ft10.setAtributo("Material");
 		 ft10.setDetalle("Rattan de Pvc");
-		 List<FichaTecnicaVO> fichas6 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas6 = new ArrayList<VOFichaTecnica>();
 		 fichas6.add(ft10);
-		 ArticuloVO art6 = new ArticuloVO();
+		 VOArticulo art6 = new VOArticulo();
 		 art6.setCodigo(1607594);
 		 art6.setDeposito("DEPOSITO1");
 		 art6.setTipo("Muebles");
@@ -230,13 +230,13 @@ public class Deposito {
 		/***************/
 		
 		 // CREO EL ARTICULO nº7 y lo envio
-		 FichaTecnicaVO ft11 = new FichaTecnicaVO();
+		 VOFichaTecnica ft11 = new VOFichaTecnica();
 		 ft11.setId(11);
 		 ft11.setAtributo("Edad recomendada");
 		 ft11.setDetalle("8 a 14 años");
-		 List<FichaTecnicaVO> fichas7 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas7 = new ArrayList<VOFichaTecnica>();
 		 fichas7.add(ft11);
-		 ArticuloVO art7 = new ArticuloVO();
+		 VOArticulo art7 = new VOArticulo();
 		 art7.setCodigo(1750150);
 		 art7.setDeposito("DEPOSITO1");
 		 art7.setTipo("Niños");
@@ -256,13 +256,13 @@ public class Deposito {
 		producer.send(message7);
 		
 		 // CREO EL ARTICULO nº8 y lo envio
-		 FichaTecnicaVO ft12 = new FichaTecnicaVO();
+		 VOFichaTecnica ft12 = new VOFichaTecnica();
 		 ft12.setId(12);
 		 ft12.setAtributo("Edad recomendada");
 		 ft12.setDetalle("9 meses a 3 años");
-		 List<FichaTecnicaVO> fichas8 = new ArrayList<FichaTecnicaVO>();
+		 List<VOFichaTecnica> fichas8 = new ArrayList<VOFichaTecnica>();
 		 fichas8.add(ft12);
-		 ArticuloVO art8 = new ArticuloVO();
+		 VOArticulo art8 = new VOArticulo();
 		 art8.setCodigo(1858018);
 		 art8.setDeposito("DEPOSITO1");
 		 art8.setTipo("Niños");

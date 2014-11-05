@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticuloVO implements Serializable{
+public class VOArticulo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int codigo;
 	private String nombre;
@@ -17,17 +17,17 @@ public class ArticuloVO implements Serializable{
 	private byte[] foto;
 	private String nombreFoto;
 	private String estado;
-	private List<FichaTecnicaVO> fichasTecnicas;
+	private List<VOFichaTecnica> fichasTecnicas;
 	private String deposito;
 	
-	public ArticuloVO (){
+	public VOArticulo (){
 		
 	}
 
 
 		
-	public ArticuloVO(int codigo, String nombre, String descripcion,
-			String marca, String pais_origen, int stock, float precio,String tipo,List<FichaTecnicaVO> fichas, String estado, String nombreFoto, byte[] foto) {
+	public VOArticulo(int codigo, String nombre, String descripcion,
+			String marca, String pais_origen, int stock, float precio,String tipo,List<VOFichaTecnica> fichas, String estado, String nombreFoto, byte[] foto) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -42,7 +42,7 @@ public class ArticuloVO implements Serializable{
 		this.foto=foto;
 	}
 	
-	public ArticuloVO(int codigo, String nombre, String descripcion,
+	public VOArticulo(int codigo, String nombre, String descripcion,
 			String marca, String pais_origen, int stock, float precio,String tipo) {
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -52,7 +52,7 @@ public class ArticuloVO implements Serializable{
 		this.stock = stock;
 		this.precio = precio;
 		this.tipo=tipo;
-		this.fichasTecnicas=new ArrayList<FichaTecnicaVO>();
+		this.fichasTecnicas=new ArrayList<VOFichaTecnica>();
 	}
 
 
@@ -111,11 +111,11 @@ public class ArticuloVO implements Serializable{
 		this.origen = origen;
 	}
 
-	public List<FichaTecnicaVO> getFichasTecnicas() {
+	public List<VOFichaTecnica> getFichasTecnicas() {
 		return fichasTecnicas;
 	}
 
-	public void setFichasTecnicas(List<FichaTecnicaVO> fichasTecnicas) {
+	public void setFichasTecnicas(List<VOFichaTecnica> fichasTecnicas) {
 		this.fichasTecnicas = fichasTecnicas;
 	}
 
