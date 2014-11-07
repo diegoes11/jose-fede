@@ -1,11 +1,5 @@
 package tpo.despacho.sessions;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -23,10 +17,8 @@ import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-
 import tpo.despacho.entidades.Articulo;
+import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
 import tpo.despacho.entidades.IdOrdenDeDespacho;
 import tpo.despacho.entidades.LogisticaYMonitoreo;
@@ -34,7 +26,6 @@ import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
 import tpo.ia.vos.VODetalleOrdenDeDespacho;
-import tpo.ia.vos.VOEnvioOrdenDeDespachoLista;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 
@@ -61,49 +52,53 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     
     @SuppressWarnings("unused")
 	private void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
-
-		final Properties env = new Properties();
-		  env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-		  env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://172.16.164.38:4447"));
-		  env.put(Context.SECURITY_PRINCIPAL, "deposito1");
-		  env.put(Context.SECURITY_CREDENTIALS, "deposito1.");
-
-		  try {
-		
-		Context context = new InitialContext(env);
-			  
-		// buscar la Connection Factory en JNDI
-		String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
-		ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
-		// buscar la Cola en JNDI
-		String destinationString = System.getProperty("destination", "jms/queue/SolicitudArticulos");
-		Destination  destination = (Destination) context.lookup(destinationString);
-		// crear la connection y la session a partir de la connection
-		Connection connection = connectionFactory.createConnection(System.getProperty("username", "deposito1"), System.getProperty("password", "deposito1."));
-		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		connection.start();
-		// crear un producer para enviar mensajes usando la session
-		 MessageProducer producer = session.createProducer(destination);
-		 
-		 // POR CADA DETALLE DE LA ORDEN DE DESPACHO
-		 for(DetalleOrdenDeDespacho dodd : ordenDeDespacho.getDetallesOrdenDeDespacho())
-		 {
-			// Crear un mensaje de tipo Object Message y setearle el contenido
-			ObjectMessage message = session.createObjectMessage();
-			message.setObject(dodd.getSolicitudDeArticulo().getSolicitudDeArticuloVO());
-			
-			// Enviar el mensaje
-			producer.send(message);
-		 }		
-		
-		// TODO: recordar cerrar la session y la connection en un bloque “finally”
-		System.out.print("Envió el mensaje...");
-		connection.close();
-
-		} catch (Exception e) {
-			System.out.println("Error al efectuar pedido: " + e);
-			e.printStackTrace();
-		}
+    	try {
+    		// Obtengo los depositos
+        	List<Deposito> depositos = ordenDeDespacho.obtenerDepositosOrden();
+        	// Por cada deposito
+        	for(Deposito d : depositos)
+        	{
+        		final Properties env = new Properties();
+				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://" + d.getIp() +":4447"));
+				env.put(Context.SECURITY_PRINCIPAL, d.getRecepcionDeSolicitudes().getUsuario());
+				env.put(Context.SECURITY_CREDENTIALS, d.getRecepcionDeSolicitudes().getPassword());
+				
+				Context context = new InitialContext(env);
+					  
+				// buscar la Connection Factory en JNDI
+				String connectionFactoryString = System.getProperty("connection.factory", "jms/RemoteConnectionFactory");
+				ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(connectionFactoryString);
+				// buscar la Cola en JNDI
+				String destinationString = System.getProperty("destination", "jms/queue/" + d.getRecepcionDeSolicitudes().getNombre());
+				Destination  destination = (Destination) context.lookup(destinationString);
+				// crear la connection y la session a partir de la connection
+				Connection connection = connectionFactory.createConnection(System.getProperty("username", d.getRecepcionDeSolicitudes().getUsuario()), System.getProperty("password", d.getRecepcionDeSolicitudes().getPassword()));
+				Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				connection.start();
+				// crear un producer para enviar mensajes usando la session
+				 MessageProducer producer = session.createProducer(destination);
+				 
+				 // POR CADA DETALLE DE LA ORDEN DE DESPACHO
+				 for(DetalleOrdenDeDespacho dodd : ordenDeDespacho.getDetallesOrdenDeDespacho())
+				 {
+					// Crear un mensaje de tipo Object Message y setearle el contenido
+					ObjectMessage message = session.createObjectMessage();
+					message.setObject(dodd.getSolicitudDeArticulo().getSolicitudDeArticuloVO());
+					
+					// Enviar el mensaje
+					producer.send(message);
+				 }		
+				
+				// TODO: recordar cerrar la session y la connection en un bloque “finally”
+				System.out.print("Envió el mensaje...");
+				connection.close();
+				}
+        	
+			} catch (Exception e) {
+				System.out.println("Error al efectuar pedido: " + e);
+				e.printStackTrace();
+			}
 	}
     
     // Métodos

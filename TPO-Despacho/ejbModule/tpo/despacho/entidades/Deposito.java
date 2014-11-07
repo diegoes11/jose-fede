@@ -7,7 +7,9 @@ import javax.persistence.*;
 public class Deposito {
 	
 	private String nombre;
+	private String ip;
 	private Coordenadas coordenadas;
+	private Cola recepcionDeSolicitudes;
 	
 	public Deposito(){
 		
@@ -23,6 +25,15 @@ public class Deposito {
 		this.nombre = nombre;
 	}
 
+	@Column(name="IP")
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	@Embedded
 	public Coordenadas getCoordenadas() {
 		return coordenadas;
@@ -30,6 +41,15 @@ public class Deposito {
 
 	public void setCoordenadas(Coordenadas coordenadas) {
 		this.coordenadas = coordenadas;
+	}
+
+	@Embedded
+	public Cola getRecepcionDeSolicitudes() {
+		return recepcionDeSolicitudes;
+	}
+
+	public void setRecepcionDeSolicitudes(Cola recepcionDeSolicitudes) {
+		this.recepcionDeSolicitudes = recepcionDeSolicitudes;
 	}
 
 }

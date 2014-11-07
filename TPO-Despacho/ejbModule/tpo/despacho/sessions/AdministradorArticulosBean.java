@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.logging.Logger;
+
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
@@ -18,6 +20,8 @@ import tpo.ia.vos.VOArticuloCompleto;
 public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	// Atributos
+	private static final Logger LOGGER = Logger.getLogger(AdministradorArticulosBean.class);
+	
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
 	
@@ -51,12 +55,23 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 
     // Métodos
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad) {
-		SolicitudDeArticulo solicitudDeArticulo = buscarSolicitudDeArticulo(idSolicitudDeArticulo);
-		if(solicitudDeArticulo != null){
-			solicitudDeArticulo.actualizarCantidad(cantidad);
-			return true;
+		try{
+			LOGGER.info("Recepción de articulos...");
+			SolicitudDeArticulo solicitudDeArticulo = buscarSolicitudDeArticulo(idSolicitudDeArticulo);
+			if(solicitudDeArticulo != null){
+				solicitudDeArticulo.actualizarCantidad(cantidad);
+				LOGGER.info("Recepción de articulos: OK");
+				return true;
+			}
+			LOGGER.error("Recepción de articulos: No existe una solicitud con el id recibido.");
+			return false;
 		}
-		return false;
+		catch(Exception e){
+			e.printStackTrace();
+			LOGGER.error("Recepción de articulos: Error desconocido - " + e.getStackTrace());
+			return false;
+		}
+		
 	}
 
 	public List<VOArticuloCompleto> obtenerArticulos() {
@@ -73,6 +88,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	public boolean altaArticulo(VOArticulo articuloVO){
 		try{
+			LOGGER.info("Alta de articulo...");
 			Articulo articulo = buscarArticulo(articuloVO.getCodigo());
 			Deposito deposito = buscarDeposito(articuloVO.getDeposito());
 			if(articulo == null && deposito != null){
@@ -80,14 +96,16 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				articulo.setArticuloVO(articuloVO);
 				articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
 				manager.persist(articulo);
+				LOGGER.info("Alta de articulo: OK");
 				return true;
 			}
+			LOGGER.error("Alta de articulo: No existe el depósito o el artículo ingresado.");
 			return false;
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			LOGGER.error("Alta de articulo: Error desconocido - " + e.getStackTrace());
 			return false;
 		}
-		
 	}
 }
