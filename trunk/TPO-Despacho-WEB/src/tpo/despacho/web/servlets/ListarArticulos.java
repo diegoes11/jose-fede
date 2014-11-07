@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tpo.despacho.web.business.DespachoBusinessDelegate;
-import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 
 @WebServlet("/ListarArticulos")
 public class ListarArticulos extends HttpServlet {
@@ -22,7 +22,7 @@ public class ListarArticulos extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<VOArticulo> articulos = DespachoBusinessDelegate.getInstancia().obtenerArticulos();
+		List<VOArticuloCompleto> articulos = DespachoBusinessDelegate.getInstancia().obtenerArticulos();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarArticulos.jsp");
 		request.setAttribute("articulos", articulos);
