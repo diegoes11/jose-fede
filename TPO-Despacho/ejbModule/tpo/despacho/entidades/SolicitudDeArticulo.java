@@ -45,6 +45,7 @@ public class SolicitudDeArticulo {
 	
 	// Getters y Setters
 	@Id
+	@GeneratedValue
 	@Column(name="IdSolicitudDeArticulo")
 	public int getIdSolicitudDeArticulo() {
 		return idSolicitudDeArticulo;
@@ -54,7 +55,7 @@ public class SolicitudDeArticulo {
 		this.idSolicitudDeArticulo = idSolicitudDeArticulo;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="NombreDeposito")
 	public Deposito getDeposito() {
 		return deposito;

@@ -148,7 +148,6 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		ordenDeDespacho.setEstado("pendiente de entrega");
     	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
     	    		List<VODetalleOrdenDeDespacho> detallesOrdenDeDespachoVO = ordenDeDespachoVO.getDetallesOrdenDeDespachoVO();
-    	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
     	    		// Creo los detalles de la orden de despacho
     	    		for(VODetalleOrdenDeDespacho doddvo : detallesOrdenDeDespachoVO)
     	    		{
@@ -156,24 +155,23 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    			if(articulo != null)
     	    			{
     	        			DetalleOrdenDeDespacho dodd = new DetalleOrdenDeDespacho();
+    	    				ordenDeDespacho.agregarDetalle(dodd);
     	    				dodd.setArticulo(articulo);
     	    				dodd.setCantidad(doddvo.getCantidad());
     	    				dodd.setEstado("incompleto");
     	    				dodd.setOrdenDeDespacho(ordenDeDespacho);
-    	    				detallesOrdenDeDespacho.add(dodd);
     	    			}
     	    		}
-    	    		ordenDeDespacho.setDetallesOrdenDeDespacho(detallesOrdenDeDespacho);
+    	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = ordenDeDespacho.getDetallesOrdenDeDespacho();
     	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
     	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
     	    		{
     	    			SolicitudDeArticulo solicitudDeArticulo = new SolicitudDeArticulo();
-    	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
+    	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
     	    			solicitudDeArticulo.setDetalleOrdenDeDespacho(dodd);
+    	    			solicitudDeArticulo.setDeposito(dodd.getArticulo().getId().getDeposito());
     	    			solicitudDeArticulo.setCantidadRestante(dodd.getCantidad());
     	    			solicitudDeArticulo.setFechaPedido(Calendar.getInstance().getTime());
-    	    			
-    	    			dodd.setSolicitudDeArticulo(solicitudDeArticulo);
     	    		}
 
     	    		manager.persist(ordenDeDespacho);

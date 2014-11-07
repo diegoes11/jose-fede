@@ -22,7 +22,7 @@ public class OrdenDeDespacho {
 	private Date fechaEntrega;
 	
 	public OrdenDeDespacho(){
-	
+		detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
 	}
 	
 	// Métodos	
@@ -55,6 +55,13 @@ public class OrdenDeDespacho {
 		oddvo.setDetallesOrdenDeDespachoVO(detallesOrdenDeDespachoVO);
 		return oddvo;
 	}
+	
+	public void agregarDetalle(DetalleOrdenDeDespacho dodd){
+		if(detallesOrdenDeDespacho == null){
+			detallesOrdenDeDespacho = new ArrayList<DetalleOrdenDeDespacho>();
+		}
+		detallesOrdenDeDespacho.add(dodd);
+	}
 
 	// Getters y Setters
 	
@@ -76,11 +83,7 @@ public class OrdenDeDespacho {
 		this.id = id;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumns({
-        @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="IdOrdenDeDespacho"),
-        @JoinColumn(name="NombrePortalWeb", referencedColumnName="NombrePortalWeb")
-    })
+	@OneToMany(mappedBy = "ordenDeDespacho", cascade=CascadeType.ALL)
 	public List<DetalleOrdenDeDespacho> getDetallesOrdenDeDespacho() {
 		return detallesOrdenDeDespacho;
 	}

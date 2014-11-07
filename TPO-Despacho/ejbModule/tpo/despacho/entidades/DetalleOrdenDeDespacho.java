@@ -55,7 +55,11 @@ public class DetalleOrdenDeDespacho {
 	
 	//Esto logicamente me da duda, no deberia ser un Detalle se relaciona con un Articulo?
 	//Lo cambio al ManyToOne por OneToOne
-	@OneToOne
+	// Me parece que es ManyToOne Jo.. Osea, Si miras una sola orden de despacho, si un
+	// detalle de ESA orden se relacioan con un articulo...
+	// Pero si miras la relación en general, osea todas los detalles, varios detalles pueden tener el mismo
+	// articulo...
+	@ManyToOne
 	@JoinColumns({
         @JoinColumn(name="CodigoArticulo", referencedColumnName="Codigo"),
         @JoinColumn(name="NombreDeposito", referencedColumnName="NombreDeposito")
