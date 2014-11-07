@@ -72,7 +72,6 @@ public class DetalleOrdenDeDespacho {
 		this.articulo = articulo;
 	}
 	
-	//Logicamente creo que esto esta correcto, muchos detalles se relacionan con una unica OrdenDeDespacho.
 	@ManyToOne
 	@JoinColumns({
         @JoinColumn(name="IdOrdenDeDespacho", referencedColumnName="IdOrdenDeDespacho"),

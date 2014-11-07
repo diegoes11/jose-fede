@@ -1,5 +1,24 @@
 /* DATA TABLES */
 $(document).ready(function() {
+	$(".estado").on("click", function (o){
+		var dni = o.currentTarget.attributes[2].value;
+		var estadoActual = o.currentTarget.childNodes[0].data.trim();
+		var estadoNuevo;
+		if(estadoActual === "inactivo"){
+			estadoNuevo = true;
+		}
+		else{
+			estadoNuevo = false;
+		}
+		//$.ajax({
+		//	  url: "SetEstadoActivoUsuario",
+		//	  context: document.body
+		//	}).done(function() {
+		//	  $( this ).addClass( "done" );
+		//	});
+		alert("EA");
+	});
+	
 	$('.img-zoom').hover(function() {
         $(this).addClass('transition');
  
