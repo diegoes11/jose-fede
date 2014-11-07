@@ -1,5 +1,12 @@
 /* DATA TABLES */
 $(document).ready(function() {
+	$('.img-zoom').hover(function() {
+        $(this).addClass('transition');
+ 
+    }, function() {
+        $(this).removeClass('transition');
+    });
+	
     $('#tabla').DataTable({
         language: {
         	"emptyTable":     "No hay información disponible en la tabla",

@@ -6,7 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import tpo.despacho.facade.DespachoFacade;
-import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOUsuario;
 
@@ -56,7 +56,7 @@ public class DespachoBusinessDelegate {
 		return despachoFacade.setEstadoActivoUsuario(usuarioVO);
 	}
 	
-	public List<VOArticulo> obtenerArticulos(){
+	public List<VOArticuloCompleto> obtenerArticulos(){
 		return despachoFacade.obtenerArticulos();
 	}
 	

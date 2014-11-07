@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="tpo.ia.vos.VOArticulo" %>
+<%@ page import="tpo.ia.vos.VOArticuloCompleto" %>
 <%@ page import="tpo.ia.vos.VOFichaTecnica" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,7 +16,7 @@
 </head>
 <body>
 <%
-	List<VOArticulo> articulos = (List<VOArticulo>)request.getAttribute("articulos");
+	List<VOArticuloCompleto> articulos = (List<VOArticuloCompleto>)request.getAttribute("articulos");
 %>
 <h1>Despacho - Listado de Art&iacute;culos</h1>
 
@@ -54,7 +54,7 @@
 	</tfoot>
 	<tbody>
 <%
-	for(VOArticulo a : articulos)
+	for(VOArticuloCompleto a : articulos)
 	{
 %>
 		<tr>
@@ -64,7 +64,22 @@
 			<td><%=a.getDescripcion()%></td>
 			<td><%=a.getMarca()%></td>
 			<td>$<%=a.getPrecio()%></td>
-			<td><img src="<%=a.getFoto()%>" alt="<%=a.getNombreFoto()%>" /></td>
+			<td>
+				<%
+					if(a.getFoto() != null)
+					{
+				%>
+						<img class="img-zoom" src="data:image/jpg;base64,<%=a.obtenerFotoEnString()%>" alt="<%=a.getNombreFoto()%>" />
+				<%
+					}
+					else
+					{
+				%>
+						-
+				<%
+					}
+				%>
+			</td>
 			<td><%=a.getOrigen()%></td>
 			<td>
 				<table>

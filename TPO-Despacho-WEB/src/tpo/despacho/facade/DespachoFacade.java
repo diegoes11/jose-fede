@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 import tpo.ia.vos.VOUsuario;
@@ -14,7 +15,7 @@ public interface DespachoFacade {
 	public int altaUsuario(VOUsuario usuarioVO);
 	public List<VOUsuario> obtenerUsuarios();
 	public boolean setEstadoActivoUsuario(VOUsuario usuarioVO);
-	public List<VOArticulo> obtenerArticulos();
+	public List<VOArticuloCompleto> obtenerArticulos();
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad);
 	public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho();
 	public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb);
