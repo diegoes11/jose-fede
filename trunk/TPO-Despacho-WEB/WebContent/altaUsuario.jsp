@@ -12,32 +12,52 @@
 </head>
 <body>
 <h1>Despacho - Alta de Usuarios</h1>
-<% String error = (String)request.getAttribute("error");
-if(error != null) { %>
-<div class="ui-widget">
-	<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
-		<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
-		<strong>Error:</strong> <%= error %></p>
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-0">Alta de Usuarios</a></li>
+		<li><a href="#tabs-1">Administraci&oacute;n de Usuarios</a></li>
+		<li><a href="#tabs-2">Administraci&oacute;n de Art&iacute;culos</a></li>
+		<li><a href="#tabs-3">Administraci&oacute;n de &Oacute;rdenes de despacho</a></li>
+	</ul>
+	<div id="tabs-0">
+		<% String error = (String)request.getAttribute("error");
+		if(error != null) { %>
+		<div class="ui-widget">
+			<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+				<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+				<strong>Error:</strong> <%= error %></p>
+			</div>
+		</div>
+		<% } %>
+		<form action="AltaUsuario" method="POST">
+		<p>
+		<label for="apellido">DNI</label>
+		<input type="number" name="dni" id="dni" min="1" required />
+		</p>
+		<p>
+		<label for="nombre">Nombre</label>
+		<input type="text" name="nombre" id="nombre" required />
+		</p>
+		<p>
+		<label for="apellido">Apellido</label>
+		<input type="text" name="apellido" id="apellido" required />
+		</p>
+		<p>
+		<input class="ui-button-text" type="submit" name="enviar" id="enviar" value="Enviar" />
+		</p>
+		</form>
+	</div>
+	<div id="tabs-1">
+		<a href="AltaUsuario">Alta de Usuarios</a><br />
+		<a href="ListarUsuarios">Listado de Usuarios</a>
+	</div>
+	<div id="tabs-2">
+		<a href="ListarArticulos">Listado de Art&iacute;culos</a>
+	</div>
+	<div id="tabs-3">
+		<a href="ListarOrdenesDeDespacho">Listado de &Oacute;rdenes de Despacho</a>
 	</div>
 </div>
-<% } %>
-<form action="AltaUsuario" method="POST">
-<p>
-<label for="apellido">DNI</label>
-<input type="number" name="dni" id="dni" min="1" required />
-</p>
-<p>
-<label for="nombre">Nombre</label>
-<input type="text" name="nombre" id="nombre" required />
-</p>
-<p>
-<label for="apellido">Apellido</label>
-<input type="text" name="apellido" id="apellido" required />
-</p>
-<p>
-<input class="ui-button-text" type="submit" name="enviar" id="enviar" value="Enviar" />
-</p>
-</form>
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
