@@ -12,6 +12,7 @@ import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.entidades.SolicitudDeArticulo;
 import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {
@@ -58,13 +59,13 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		return false;
 	}
 
-	public List<VOArticulo> obtenerArticulos() {
+	public List<VOArticuloCompleto> obtenerArticulos() {
     	String query = "SELECT a FROM Articulo a";
     	List<Articulo> articulos = (List<Articulo>)manager.createQuery(query, Articulo.class).getResultList();
-    	List<VOArticulo> articulosVO = new ArrayList<VOArticulo>(articulos.size());
+    	List<VOArticuloCompleto> articulosVO = new ArrayList<VOArticuloCompleto>(articulos.size());
     	// Convierto la lista de Articulo a ArticuloVO
     	for(Articulo a : articulos){
-    		VOArticulo articuloVO = a.getArticuloVO();
+    		VOArticuloCompleto articuloVO = a.getArticuloVOCompleto();
     		articulosVO.add(articuloVO);
     	}
     	return articulosVO;

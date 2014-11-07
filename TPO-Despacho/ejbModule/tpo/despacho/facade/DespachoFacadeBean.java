@@ -9,6 +9,7 @@ import tpo.despacho.sessions.AdministradorArticulos;
 import tpo.despacho.sessions.AdministradorOrdenesDeDespacho;
 import tpo.despacho.sessions.AdministradorUsuarios;
 import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 import tpo.ia.vos.VOUsuario;
@@ -40,7 +41,7 @@ public class DespachoFacadeBean implements DespachoFacade {
     	return administradorUsuarios.setEstadoActivoUsuario(usuarioVO);
     }
 
-	public List<VOArticulo> obtenerArticulos() {
+	public List<VOArticuloCompleto> obtenerArticulos() {
 		return administradorArticulos.obtenerArticulos();
 	}
 	
