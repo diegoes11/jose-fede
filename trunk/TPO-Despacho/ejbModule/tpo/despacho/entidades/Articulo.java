@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import tpo.ia.vos.VOArticulo;
+import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOFichaTecnica;
 
 @Entity
@@ -32,6 +33,29 @@ public class Articulo {
 	@Transient
 	public VOArticulo getArticuloVO(){
 		VOArticulo articuloVO = new VOArticulo();
+		articuloVO.setCodigo(id.getCodigo());
+		articuloVO.setNombre(nombre);
+		articuloVO.setTipo(tipo);
+		articuloVO.setDescripcion(descripcion);
+		articuloVO.setMarca(marca);
+		articuloVO.setPrecio(precio);
+		articuloVO.setFoto(foto);
+		articuloVO.setNombreFoto(nombreFoto);
+		articuloVO.setOrigen(origen);
+		articuloVO.setDeposito(id.getDeposito().getNombre());
+		List<VOFichaTecnica> fichasTecnicas = new ArrayList<VOFichaTecnica>();
+		for(ItemFicha itemFicha : fichaTecnica)
+		{
+			VOFichaTecnica ft = itemFicha.getFichaTecnicaVO();
+			fichasTecnicas.add(ft);
+		}
+		articuloVO.setFichasTecnicas(fichasTecnicas);
+		return articuloVO;
+	}
+	
+	@Transient
+	public VOArticuloCompleto getArticuloVOCompleto(){
+		VOArticuloCompleto articuloVO = new VOArticuloCompleto();
 		articuloVO.setCodigo(id.getCodigo());
 		articuloVO.setNombre(nombre);
 		articuloVO.setTipo(tipo);
