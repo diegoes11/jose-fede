@@ -45,8 +45,10 @@ public class OrdenDeDespacho {
 		if(ordenCompleta == true){
 			this.setFechaEntrega(Calendar.getInstance().getTime());
 			setEstado("despachada");
-			//FALTA PASAR URL
-			informarOrdenDeDespachoListaSync("", new VOEnvioOrdenDeDespachoLista(id.getIdOrdenDeDespacho()));
+			// ENVIO DE INFORME DE CAMBIO DE ESTADO A LOGISTICA Y MONITOREO POR REST
+			//informarOrdenDeDespachoListaSync(logisticaYMonitoreo.getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(id.getIdOrdenDeDespacho()));
+			//ENVIO DE INFORME DE CAMBIO DE ESTADO A PORTAL WEB POR WEB SERVICE
+			// --
 		}
 	}
 	
@@ -116,6 +118,24 @@ public class OrdenDeDespacho {
 			return false;
 		}
     }
+	
+	public List<Deposito> obtenerDepositosOrden(){
+		List<Deposito> depositos = new ArrayList<Deposito>();
+		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho){
+			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
+			Deposito deposito = sda.getDeposito();
+			boolean noExiste = true;
+			// Verifico que no exista
+			for(Deposito d : depositos){
+				if(d.getNombre().equals(deposito.getNombre()))
+					noExiste = false;
+			}
+			if(noExiste == true){
+				depositos.add(deposito);
+			}
+		}
+		return depositos;
+	}
 
 	// Getters y Setters
 	
