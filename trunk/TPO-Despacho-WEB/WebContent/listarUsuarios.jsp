@@ -11,10 +11,10 @@
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/jquery.dataTables.css">
 <link rel="stylesheet" href="css/jquery.dataTables_themeroller.css">
+<link rel="stylesheet" href="css/toastr.css">
 <link rel="stylesheet" href="css/despacho.css">
 </head>
 <body>
-A HACER: UPDATE DEL ESTADO POR AJAX!
 <%
 	List<VOUsuario> usuarios = (List<VOUsuario>)request.getAttribute("usuarios");
 %>
@@ -80,6 +80,7 @@ A HACER: UPDATE DEL ESTADO POR AJAX!
 <script src="js/jquery.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/jquery.dataTables.js"></script>
+<script src="js/toastr.js"></script>
 <script src="js/despacho.js"></script>
 </body>
 </html>

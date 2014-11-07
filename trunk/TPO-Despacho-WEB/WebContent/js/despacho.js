@@ -1,22 +1,30 @@
-/* DATA TABLES */
 $(document).ready(function() {
+	/* CAMBIAR ESTADO EN LISTAR USUARIOS */
 	$(".estado").on("click", function (o){
 		var dni = o.currentTarget.attributes[2].value;
 		var estadoActual = o.currentTarget.childNodes[0].data.trim();
+		var activo;
 		var estadoNuevo;
 		if(estadoActual === "inactivo"){
-			estadoNuevo = true;
+			activo = "true";
+			estadoNuevo = "activo";
 		}
 		else{
-			estadoNuevo = false;
+			activo = "false";
+			estadoNuevo = "inactivo";
 		}
-		//$.ajax({
-		//	  url: "SetEstadoActivoUsuario",
-		//	  context: document.body
-		//	}).done(function() {
-		//	  $( this ).addClass( "done" );
-		//	});
-		alert("EA");
+		$.post( "SetEstadoActivoUsuario", { dni: dni, activo: activo })
+		  .done(function( data ) {
+			  if(data === "true"){
+				  $(o.currentTarget).text(estadoNuevo);
+			  }
+			  else{
+				  toastr.error('Error al cambiar el estado del usuario.', 'DNI: ' + dni);
+			  }
+		  })
+		  .fail(function() {
+			  toastr.error('Error al cambiar el estado del usuario con DNI: ' + dni);
+		  });
 	});
 	
 	$('.img-zoom').hover(function() {
@@ -25,7 +33,8 @@ $(document).ready(function() {
     }, function() {
         $(this).removeClass('transition');
     });
-	
+
+	/* DATA TABLES */
     $('#tabla').DataTable({
         language: {
         	"emptyTable":     "No hay información disponible en la tabla",
