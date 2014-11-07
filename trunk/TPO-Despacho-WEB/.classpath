@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/IA/jbdevstudio/runtimes/jboss-eap/bin/client/jboss-cli-client.jar"/>
 	<classpathentry kind="lib" path="C:/IA/jbdevstudio/runtimes/jboss-eap/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="E:/Fede/UADE/5to año/1er cuatrimestre/Ingeniería Sistemas II - Integración de Aplicaciones/TPO/commons-codec-1.9.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
