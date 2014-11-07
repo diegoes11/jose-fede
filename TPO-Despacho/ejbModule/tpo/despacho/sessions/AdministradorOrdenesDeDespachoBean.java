@@ -1,5 +1,11 @@
 package tpo.despacho.sessions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,6 +23,9 @@ import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
+
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
 import tpo.despacho.entidades.IdOrdenDeDespacho;
@@ -25,6 +34,7 @@ import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
 import tpo.ia.vos.VODetalleOrdenDeDespacho;
+import tpo.ia.vos.VOEnvioOrdenDeDespachoLista;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 
@@ -50,7 +60,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     }
     
     @SuppressWarnings("unused")
-	private static void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
+	private void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
 
 		final Properties env = new Properties();
 		  env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
