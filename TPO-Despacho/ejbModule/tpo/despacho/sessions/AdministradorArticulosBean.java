@@ -76,7 +76,6 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			SolicitudDeArticulo solicitudDeArticulo = buscarSolicitudDeArticulo(idSolicitudDeArticulo);
 			if(solicitudDeArticulo != null){
 				solicitudDeArticulo.actualizarCantidad(cantidad);
-				LOGGER.info("Recepción de artículos: OK");
 				// Si el detalle de la orden de despacho está completo, informe a auditoría
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
 				{
@@ -97,6 +96,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
 					// IMPLEMENTAR WS
 				}
+				LOGGER.info("Recepción de artículos: OK");
 				return true;
 			}
 			LOGGER.error("Recepción de artículos: No existe una solicitud con el id recibido.");
@@ -149,6 +149,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	private boolean informarOrdenDeDespachoListaSync (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
     	try {
+    		LOGGER.info("Informar orden de despacho lista...");
     		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
     		String json = ow.writeValueAsString(voEnvioOrdenDeDespachoLista);
 			URL url = new URL(urlString);
@@ -177,14 +178,17 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			con.disconnect();
 			String respuesta = sb.toString();
 			if (respuesta.equals("OK")) {
+				LOGGER.info("Informar orden de despacho lista: OK");
 				return true;
 			}
 			else {
+				LOGGER.error("Informar orden de despacho lista: La respuesta no fue OK.");
 				return false;
 			}
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			LOGGER.error("Informar orden de despacho lista: Error desconocido - " + e.getStackTrace());
 			return false;
 		}
     }
