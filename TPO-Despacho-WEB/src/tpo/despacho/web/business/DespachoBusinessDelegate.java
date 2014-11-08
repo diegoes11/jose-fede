@@ -5,6 +5,8 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import org.jboss.logging.Logger;
+
 import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
@@ -14,6 +16,7 @@ public class DespachoBusinessDelegate {
 	// Atributos
 	private static DespachoBusinessDelegate instancia;
 	private DespachoFacade despachoFacade;
+	private static final Logger LOGGER = Logger.getLogger(DespachoBusinessDelegate.class);
 	
 	// Constructor
 	private DespachoBusinessDelegate(){
@@ -29,6 +32,7 @@ public class DespachoBusinessDelegate {
 	
 	private void obtenerConexion(){
 		try {
+			LOGGER.info("Obtener conexión...");
 			/*Properties jndiProps = new Properties();
    		 	jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
    		 	jndiProps.put(Context.PROVIDER_URL,"remote://127.0.0.1:4447");
@@ -38,9 +42,11 @@ public class DespachoBusinessDelegate {
 			despachoFacade =(DespachoFacade)context.lookup("TPO-DespachoEAR/TPO-Despacho/DespachoFacadeBean!tpo.despacho.facade.DespachoFacade");*/
 			Context context = new InitialContext();
 			despachoFacade =(DespachoFacade)context.lookup("java:global/TPO-DespachoEAR/TPO-Despacho/DespachoFacadeBean!tpo.despacho.facade.DespachoFacade");
+			LOGGER.info("Obtener conexión: OK");
 	   		
 		} catch (Exception e) {
 			e.printStackTrace();
+			LOGGER.error("Obtener conexión: Error desconocido - " + e.getStackTrace());
 		}
 	}
 	

@@ -9,12 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.resteasy.logging.Logger;
+
 import tpo.despacho.web.business.DespachoBusinessDelegate;
 import tpo.ia.vos.VOUsuario;
 
 @WebServlet("/AltaUsuario")
 public class AltaUsuario extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger LOGGER = Logger.getLogger(AltaUsuario.class);
        
     public AltaUsuario() {
         super();
@@ -29,6 +34,7 @@ public class AltaUsuario extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		try{
+			LOGGER.info("Alta usuario...");
 			String dniString = request.getParameter("dni");
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
@@ -40,6 +46,7 @@ public class AltaUsuario extends HttpServlet {
 				request.setAttribute("error", "Se deben ingresar todos los datos solicitados.");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/altaUsuario.jsp");
 			    dispatcher.forward(request, response);
+			    LOGGER.error("Alta usuario: No se ingresaron todos los datos solicitados.");
 			}
 			else{
 				// Parseo el dni a long
@@ -51,12 +58,14 @@ public class AltaUsuario extends HttpServlet {
 				{
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 				    dispatcher.forward(request, response);
+				    LOGGER.info("Alta usuario: OK");
 				}
 				else{ // Procesar errores
 					request.setAttribute("nombre", nombre);
 					request.setAttribute("error", "Ya existe un usuario con el DNI ingresado.");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/altaUsuario.jsp");
 				    dispatcher.forward(request, response);
+				    LOGGER.error("Alta usuario: Existe un usuario con el DNI ingresado.");
 				}
 			}
 		}
@@ -71,9 +80,11 @@ public class AltaUsuario extends HttpServlet {
 			request.setAttribute("error", "El DNI ingresado es incorrecto. Debe contener solamente números.");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/altaUsuario.jsp");
 		    dispatcher.forward(request, response);
+		    LOGGER.error("Alta usuario: El DNI ingresado es incorrecto - " + e.getStackTrace());
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			LOGGER.error("Alta usuario: Error desconocido - " + e.getStackTrace());
 		}
 	}
 

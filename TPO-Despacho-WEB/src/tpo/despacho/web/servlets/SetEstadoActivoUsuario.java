@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.logging.Logger;
+
 import tpo.despacho.web.business.DespachoBusinessDelegate;
 import tpo.ia.vos.VOUsuario;
 
 @WebServlet("/SetEstadoActivoUsuario")
 public class SetEstadoActivoUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger LOGGER = Logger.getLogger(SetEstadoActivoUsuario.class);
        
     public SetEstadoActivoUsuario() {
         super();
@@ -23,6 +27,7 @@ public class SetEstadoActivoUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+			LOGGER.info("Establecer estado activo a un usuario...");
 			// Obtengo los datos
 			String dniString = request.getParameter("dni");
 			String estado = request.getParameter("activo");
@@ -53,9 +58,11 @@ public class SetEstadoActivoUsuario extends HttpServlet {
 				PrintWriter pw=response.getWriter();
 				if(estadoSeteado){
 					pw.write("true");
+					LOGGER.info("Establecer estado activo a un usuario: OK");
 				}
 				else{
 					pw.write("false");
+					LOGGER.error("Establecer estado activo a un usuario: No se ingresaron correctamente los datos.");
 				}
 			}
 			else{ // Vuelvo al listado de usuarios
@@ -64,12 +71,14 @@ public class SetEstadoActivoUsuario extends HttpServlet {
 				response.setContentType("text/plain");
 				PrintWriter pw=response.getWriter();
 				pw.write("false");
+				LOGGER.error("Establecer estado activo a un usuario: No se ingresaron correctamente los datos.");
 			}
 		}
 		catch(Exception e){
 			response.setContentType("text/plain");
 			PrintWriter pw=response.getWriter();
 			pw.write("false");
+			LOGGER.error("Establecer estado activo a un usuario: Error desconocido - " + e.getStackTrace());
 		}
 	}
 
