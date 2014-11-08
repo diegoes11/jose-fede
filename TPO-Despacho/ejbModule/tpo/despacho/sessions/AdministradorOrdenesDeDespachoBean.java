@@ -17,6 +17,8 @@ import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.logging.Logger;
+
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.DetalleOrdenDeDespacho;
@@ -33,6 +35,8 @@ import tpo.ia.vos.VOOrdenDeDespacho;
 public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesDeDespacho {
 
 	// Atributos
+	private static final Logger LOGGER = Logger.getLogger(AdministradorOrdenesDeDespachoBean.class);
+	
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
 	
@@ -53,6 +57,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     @SuppressWarnings("unused")
 	private void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
     	try {
+    		LOGGER.info("Envio de solicitudes de articulos...");
     		// Obtengo los depositos
         	List<Deposito> depositos = ordenDeDespacho.obtenerDepositosOrden();
         	// Por cada deposito
@@ -91,19 +96,20 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 				 }		
 				
 				// TODO: recordar cerrar la session y la connection en un bloque “finally”
-				System.out.print("Envió el mensaje...");
+				LOGGER.info("Envio de solicitudes de articulos: OK");
 				connection.close();
 				}
         	
 			} catch (Exception e) {
-				System.out.println("Error al efectuar pedido: " + e);
 				e.printStackTrace();
+				LOGGER.error("Envio de solicitudes de articulos: Error desconocido - " + e.getStackTrace());
 			}
 	}
     
     // Métodos
     public List<VOOrdenDeDespachoCompleta> obtenerOrdenesDeDespacho(){
 		try{
+			LOGGER.info("Búsqueda de órdenes de despacho...");
 			String query = "SELECT odd FROM OrdenDeDespacho odd";
 	    	List<OrdenDeDespacho> ordenesDeDespacho = (List<OrdenDeDespacho>)manager.createQuery(query, OrdenDeDespacho.class).getResultList();
 	    	List<VOOrdenDeDespachoCompleta> ordenesDeDespachoVO = new ArrayList<VOOrdenDeDespachoCompleta>(ordenesDeDespacho.size());
@@ -112,34 +118,42 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 	    		VOOrdenDeDespachoCompleta ordenDeDespachoVO = odd.getOrdenDeDespachoVO();
 	    		ordenesDeDespachoVO.add(ordenDeDespachoVO);
 	    	}
+	    	LOGGER.info("Búsqueda de órdenes de despacho: OK");
 	    	return ordenesDeDespachoVO;
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			LOGGER.error("Búsqueda de órdenes de despacho: Error desconocido - " + e.getStackTrace());
 			return new ArrayList<VOOrdenDeDespachoCompleta>();
 		}
 	}
 
     public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb){
     	try{
+    		LOGGER.info("Búsqueda de una orden de despacho...");
     		PortalWeb portalWeb = manager.find(PortalWeb.class, nombrePortalWeb);
     		if (portalWeb != null){
             	IdOrdenDeDespacho idOrden = new IdOrdenDeDespacho(id, portalWeb);
         		OrdenDeDespacho ordenDeDespacho = manager.find(OrdenDeDespacho.class, idOrden);
         		if(ordenDeDespacho != null){
+        			LOGGER.info("Búsqueda de una orden de despacho: OK");
         			return ordenDeDespacho.getOrdenDeDespachoVO();
         		}
+        		LOGGER.error("Búsqueda de una orden de despacho: No existe una orden con el id recibido.");
     		}
+    		LOGGER.error("Búsqueda de una orden de despacho: No existe un portal web con el nombre recibido.");
     		return null;
     	}
     	catch(Exception e){
     		e.printStackTrace();
+    		LOGGER.error("Búsqueda de una orden de despacho: Error desconocido - " + e.getStackTrace());
     		return null;
     	}
 	}
     
     public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO){
     	try{
+    		LOGGER.info("Recepcion de orden de despacho...");
     		PortalWeb portalWeb = manager.find(PortalWeb.class, ordenDeDespachoVO.getNombrePortalWeb());
         	if(portalWeb != null)
         	{
@@ -166,6 +180,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    				dodd.setEstado("incompleto");
     	    				dodd.setOrdenDeDespacho(ordenDeDespacho);
     	    			}
+    	    			LOGGER.error("Recepcion de orden de despacho: No existe articulo con el codigo recibido.");
     	    		}
     	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = ordenDeDespacho.getDetallesOrdenDeDespacho();
     	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
@@ -183,13 +198,17 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
     	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		LOGGER.info("Recepcion de orden de despacho: OK");
     	    		return true;
         		}
+        		LOGGER.error("Recepcion de orden de despacho: No existe modulo de logistica y monitoreo con el nombre recibido.");
         	}
+        	LOGGER.error("Recepcion de orden de despacho: No existe portal web con el nombre recibido.");
         	return false;
     	}
     	catch(Exception e){
     		e.printStackTrace();
+    		LOGGER.error("Recepcion de orden de despacho: Error desconocido - " + e.getStackTrace());
     		return false;
     	}
     }
