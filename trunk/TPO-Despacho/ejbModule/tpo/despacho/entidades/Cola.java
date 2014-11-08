@@ -1,5 +1,6 @@
 package tpo.despacho.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -12,6 +13,7 @@ public class Cola {
 		
 	}
 
+	@Column(name="NombreCola")
 	public String getNombre() {
 		return nombre;
 	}
@@ -20,6 +22,7 @@ public class Cola {
 		this.nombre = nombre;
 	}
 
+	@Column(name="UsuarioCola")
 	public String getUsuario() {
 		return usuario;
 	}
@@ -28,6 +31,7 @@ public class Cola {
 		this.usuario = usuario;
 	}
 
+	@Column(name="PasswordCola")
 	public String getPassword() {
 		return password;
 	}

@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class PortalWeb {
 	private String nombre;
 	private Coordenadas coordenadas;
+	private String urlRecepcionEstadoOrdenDeDespacho;
 	
 	public PortalWeb(){
 		
@@ -29,5 +30,15 @@ public class PortalWeb {
 
 	public void setCoordenadas(Coordenadas coordenadas) {
 		this.coordenadas = coordenadas;
+	}
+
+	@Column(name="URLRecepcionEstadoOrdenDeDespacho")
+	public String getUrlRecepcionEstadoOrdenDeDespacho() {
+		return urlRecepcionEstadoOrdenDeDespacho;
+	}
+
+	public void setUrlRecepcionEstadoOrdenDeDespacho(
+			String urlRecepcionEstadoOrdenDeDespacho) {
+		this.urlRecepcionEstadoOrdenDeDespacho = urlRecepcionEstadoOrdenDeDespacho;
 	}
 }
