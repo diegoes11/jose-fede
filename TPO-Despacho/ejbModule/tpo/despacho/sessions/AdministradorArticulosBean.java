@@ -1,5 +1,11 @@
 package tpo.despacho.sessions;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,15 +14,19 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.jboss.logging.Logger;
 
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
+import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.SolicitudDeArticulo;
 import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VOArticulo;
 import tpo.ia.vos.VOArticuloCompleto;
+import tpo.ia.vos.VOEnvioOrdenDeDespachoLista;
 import tpo.ia.vos.VOInformeAuditoria;
 
 @Stateless
@@ -75,9 +85,14 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				// Si la orden de despacho está completa, informo a los modulos correspondientes
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
 				{
-					despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().obtenerInformeCompletitud()));
-					// ENVIO JMS A LOGISTICA
+					OrdenDeDespacho o = solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho();
+					// Envio informe a Logistica y Monitoreo (SYNC/ASYNC)
+					despachoFacade.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
 					// ENVIO WEBSERVICE A PORTAL
+					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
+					informarOrdenDeDespachoListaSync(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
+					// IMPLEMENTAR WS
 				}
 				return true;
 			}
@@ -127,4 +142,46 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			return false;
 		}
 	}
+	
+	private boolean informarOrdenDeDespachoListaSync (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
+    	try {
+    		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+    		String json = ow.writeValueAsString(voEnvioOrdenDeDespachoLista);
+			URL url = new URL(urlString);
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			con.setRequestMethod("POST");
+			con.setDoOutput(true);
+			con.setDoInput(true);
+			con.setUseCaches(false);
+			con.setAllowUserInteraction(false);
+			con.setRequestProperty("Content-Type", "application/json; charset=utf8");
+			OutputStream os = con.getOutputStream();
+			os.write(json.getBytes("UTF-8"));
+			os.close();
+			
+			if (con.getResponseCode() != 200){
+				throw new IOException(con.getResponseMessage());
+			}
+			BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while((line = rd.readLine()) != null){
+				sb.append(line);
+			}
+			rd.close();
+			
+			con.disconnect();
+			String respuesta = sb.toString();
+			if (respuesta.equals("OK")) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+    }
 }
