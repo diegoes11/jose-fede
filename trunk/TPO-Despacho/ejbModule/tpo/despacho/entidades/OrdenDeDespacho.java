@@ -52,6 +52,18 @@ public class OrdenDeDespacho {
 		}
 	}
 	
+	public boolean estaCompleta(){
+		if(estado.equals("despachada"))
+			return true;
+		else
+			return false;
+	}
+	
+	public String obtenerInformeCompletitud(){
+		return "Se ha completado la orden de despacho " + id.getIdOrdenDeDespacho() +
+				" perteneciente al Portal Web " + id.getPortalWeb();
+	}
+	
 	@Transient
 	public VOOrdenDeDespachoCompleta getOrdenDeDespachoVO(){
 		VOOrdenDeDespachoCompleta oddvo = new VOOrdenDeDespachoCompleta();

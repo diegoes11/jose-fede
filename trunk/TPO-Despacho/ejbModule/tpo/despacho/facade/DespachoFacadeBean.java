@@ -8,8 +8,10 @@ import javax.ejb.Stateless;
 import tpo.despacho.sessions.AdministradorArticulos;
 import tpo.despacho.sessions.AdministradorOrdenesDeDespacho;
 import tpo.despacho.sessions.AdministradorUsuarios;
+import tpo.despacho.sessions.EnvioInformesAuditoria;
 import tpo.ia.vos.VOArticulo;
 import tpo.ia.vos.VOArticuloCompleto;
+import tpo.ia.vos.VOInformeAuditoria;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 import tpo.ia.vos.VOUsuario;
@@ -24,6 +26,8 @@ public class DespachoFacadeBean implements DespachoFacade {
 	private AdministradorArticulos administradorArticulos;
 	@EJB
 	private AdministradorOrdenesDeDespacho administradorOrdenesDeDespacho;
+	@EJB
+	private EnvioInformesAuditoria envioInformesAuditoria;
 
     public DespachoFacadeBean() {
     }
@@ -63,5 +67,9 @@ public class DespachoFacadeBean implements DespachoFacade {
 	
 	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO){
 		return administradorOrdenesDeDespacho.recepcionOrdenDeDespacho(ordenDeDespachoVO);
+	}
+	
+	public boolean EnviarInforme(VOInformeAuditoria informe) {
+		return envioInformesAuditoria.EnviarInforme(informe);
 	}
 }

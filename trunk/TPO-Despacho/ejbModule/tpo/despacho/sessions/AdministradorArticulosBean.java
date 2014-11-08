@@ -3,6 +3,7 @@ package tpo.despacho.sessions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,8 +14,10 @@ import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.entidades.SolicitudDeArticulo;
+import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VOArticulo;
 import tpo.ia.vos.VOArticuloCompleto;
+import tpo.ia.vos.VOInformeAuditoria;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {
@@ -24,6 +27,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
+	
+	@EJB
+	private DespachoFacade despachoFacade;
 	
 	// Constructor
     public AdministradorArticulosBean() {
@@ -61,6 +67,18 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			if(solicitudDeArticulo != null){
 				solicitudDeArticulo.actualizarCantidad(cantidad);
 				LOGGER.info("Recepción de artículos: OK");
+				// Si el detalle de la orden de despacho está completo, informe a auditoría
+				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
+				{
+					despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
+				}
+				// Si la orden de despacho está completa, informo a los modulos correspondientes
+				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
+				{
+					despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().obtenerInformeCompletitud()));
+					// ENVIO JMS A LOGISTICA
+					// ENVIO WEBSERVICE A PORTAL
+				}
 				return true;
 			}
 			LOGGER.error("Recepción de artículos: No existe una solicitud con el id recibido.");
@@ -97,6 +115,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
 				manager.persist(articulo);
 				LOGGER.info("Alta de artículo: OK");
+				despachoFacade.EnviarInforme(new VOInformeAuditoria(articulo.obtenerInformeAlta()));
 				return true;
 			}
 			LOGGER.error("Alta de artículo: No existe el depósito o el artículo ingresado.");

@@ -42,6 +42,12 @@ public class SolicitudDeArticulo {
 		}
 	}
 
+	public String obtenerInformeSolicitud(){
+		return "Se ha enviado una solicitud de artículos al Deposito " + deposito.getNombre() +
+				" por " + detalleOrdenDeDespacho.getCantidad() + " del artículo con código " + detalleOrdenDeDespacho.getArticulo().getId().getCodigo() + 
+				" para la orden de despacho " + detalleOrdenDeDespacho.getOrdenDeDespacho().getId().getIdOrdenDeDespacho() + 
+				" perteneciente al Portal Web " + detalleOrdenDeDespacho.getOrdenDeDespacho().getId().getPortalWeb().getNombre();
+	}
 	
 	// Getters y Setters
 	@Id

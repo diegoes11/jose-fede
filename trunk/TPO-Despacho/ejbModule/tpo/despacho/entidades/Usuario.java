@@ -27,6 +27,21 @@ public class Usuario {
 		this.activo = true;
 	}
 	
+	public String obtenerInformeAlta(){
+		return "Se ha dado de alta el usuario " + nombre + ", DNI " + dni;
+	}
+	
+	public String obtenerInformeCambioEstado(){
+		String respuesta = "Se ha cambiado el estado del usuario " + nombre + ", DNI " + dni + "a ";
+		if(activo == true){
+			respuesta += "ACTIVO";
+		}
+		else{
+			respuesta += "INACTIVO";
+		}
+		return respuesta;
+	}
+	
 	// Getters y Setters
 	@Transient
 	public VOUsuario getUsuarioVO(){
