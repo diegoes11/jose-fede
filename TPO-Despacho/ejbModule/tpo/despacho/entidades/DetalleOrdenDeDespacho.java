@@ -25,6 +25,20 @@ public class DetalleOrdenDeDespacho {
 		ordenDeDespacho.verificarOrdenCompleta();
 	}
 	
+	public boolean estaCompleto(){
+		if(estado.equals("completo"))
+			return true;
+		else
+			return false;
+	}
+	
+	public String obtenerInformeCompletitud(){
+		return "Se han recibido todos los items (" + cantidad + ") del artículo  " + articulo.getId().getCodigo() + 
+				" proveniente del Depósito " + articulo.getId().getDeposito().getNombre() +
+				" para la orden de despacho " + ordenDeDespacho.getId().getIdOrdenDeDespacho() +
+				" perteneciente al Portal Web " + ordenDeDespacho.getId().getPortalWeb();
+	}
+	
 	@Transient
 	public VODetalleOrdenDeDespachoCompleta getDetalleOrdenDeDespachoVO(){
 		VODetalleOrdenDeDespachoCompleta doddvo = new VODetalleOrdenDeDespachoCompleta();
@@ -53,12 +67,6 @@ public class DetalleOrdenDeDespacho {
 		this.idDetalle = idDetalle;
 	}
 	
-	//Esto logicamente me da duda, no deberia ser un Detalle se relaciona con un Articulo?
-	//Lo cambio al ManyToOne por OneToOne
-	// Me parece que es ManyToOne Jo.. Osea, Si miras una sola orden de despacho, si un
-	// detalle de ESA orden se relacioan con un articulo...
-	// Pero si miras la relación en general, osea todas los detalles, varios detalles pueden tener el mismo
-	// articulo...
 	@ManyToOne
 	@JoinColumns({
         @JoinColumn(name="CodigoArticulo", referencedColumnName="Codigo"),

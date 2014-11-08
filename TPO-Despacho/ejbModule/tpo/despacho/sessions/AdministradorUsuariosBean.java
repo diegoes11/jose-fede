@@ -3,6 +3,7 @@ package tpo.despacho.sessions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +11,8 @@ import javax.persistence.PersistenceContext;
 import org.jboss.logging.Logger;
 
 import tpo.despacho.entidades.Usuario;
+import tpo.despacho.facade.DespachoFacade;
+import tpo.ia.vos.VOInformeAuditoria;
 import tpo.ia.vos.VOUsuario;
 
 @Stateless
@@ -19,6 +22,9 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
 	
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
+	
+	@EJB
+	private DespachoFacade despachoFacade;
 	
 	// Constructor
     public AdministradorUsuariosBean() {
@@ -41,6 +47,7 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
         		usuario = new Usuario(usuarioVO.getDni(), usuarioVO.getNombre(), usuarioVO.getApellido());
         		manager.persist(usuario);
         		LOGGER.info("Alta usuario: OK");
+        		despachoFacade.EnviarInforme(new VOInformeAuditoria(usuario.obtenerInformeAlta()));
         		return 0; // 0: Usuario creado con éxito
         	}
         	LOGGER.error("Alta usuario: Existe un usuario con el DNI recibido.");
@@ -84,6 +91,7 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
 			usuario.setActivo(usuarioVO.isActivo());
 			manager.merge(usuario);
 			LOGGER.info("Establecer estado activo a un usuario: OK");
+			despachoFacade.EnviarInforme(new VOInformeAuditoria(usuario.obtenerInformeCambioEstado()));
 			return true;
 		}
 		catch(Exception e){

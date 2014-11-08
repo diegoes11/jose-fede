@@ -6,6 +6,7 @@ import javax.ejb.Remote;
 
 import tpo.ia.vos.VOArticulo;
 import tpo.ia.vos.VOArticuloCompleto;
+import tpo.ia.vos.VOInformeAuditoria;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 import tpo.ia.vos.VOUsuario;
@@ -21,4 +22,5 @@ public interface DespachoFacade {
 	public VOOrdenDeDespachoCompleta obtenerOrdenDeDespacho(int id, String nombrePortalWeb);
 	public boolean altaArticulo(VOArticulo articuloVO);
 	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO);
+	public boolean EnviarInforme(VOInformeAuditoria informe);
 }

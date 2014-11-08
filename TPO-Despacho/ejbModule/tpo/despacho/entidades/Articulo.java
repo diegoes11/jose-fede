@@ -93,6 +93,11 @@ public class Articulo {
 			fichaTecnica.add(itemFicha);
 		}
 	}
+	
+	public String obtenerInformeAlta(){
+		return "Se ha dado de alta el artículo con código " + id.getCodigo() + 
+				" proveniente del Depósito " + id.getDeposito().getNombre();
+	}
 
 	// Getters y setters
 	

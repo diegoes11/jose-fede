@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -27,7 +28,9 @@ import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
+import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VODetalleOrdenDeDespacho;
+import tpo.ia.vos.VOInformeAuditoria;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 
@@ -39,6 +42,9 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 	
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
+	
+	@EJB
+	private DespachoFacade despachoFacade;
 	
     public AdministradorOrdenesDeDespachoBean() {
     	
@@ -198,7 +204,17 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
     	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		
+
     	    		LOGGER.info("Recepcion de orden de despacho: OK");
+    	    		
+    	    		// Por cada detalle/item de la orden de despacho, înformo de la solicitud de articulo a LyM
+    	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
+    	    		{
+    	    			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
+    	    			despachoFacade.EnviarInforme(new VOInformeAuditoria(sda.obtenerInformeSolicitud()));
+    	    		}
+
     	    		return true;
         		}
         		LOGGER.error("Recepcion de orden de despacho: No existe modulo de logistica y monitoreo con el nombre recibido.");
