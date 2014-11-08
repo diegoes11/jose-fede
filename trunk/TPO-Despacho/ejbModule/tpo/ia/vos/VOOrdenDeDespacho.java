@@ -7,6 +7,7 @@ public class VOOrdenDeDespacho implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private int idOrdenDeDespacho;
+	private int idVenta;
 	private String nombrePortalWeb;
 	private String nombreLogisticaYMonitoreo;
 	private List<VODetalleOrdenDeDespacho> detallesOrdenDeDespachoVO;
@@ -20,6 +21,14 @@ public class VOOrdenDeDespacho implements Serializable {
 	public void setIdOrdenDeDespacho(int idOrdenDeDespacho) {
 		this.idOrdenDeDespacho = idOrdenDeDespacho;
 	}
+	public int getIdVenta() {
+		return idVenta;
+	}
+
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
+	}
+
 	public String getNombrePortalWeb() {
 		return nombrePortalWeb;
 	}
