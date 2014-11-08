@@ -27,7 +27,6 @@ public class AdministradorOrdenDeDespachoBean implements AdministradorOrdenDeDes
     @WebMethod
 	public boolean recepcionOrdenDeDespacho(VOOrdenDeDespacho ordenDeDespachoVO) {
     	try{
-    		LOGGER.info("Recepción de orden de despacho...");
     		LOGGER.info("Recepción de orden de despacho: OK");
     		return despachoFacade.recepcionOrdenDeDespacho(ordenDeDespachoVO);
     	}
