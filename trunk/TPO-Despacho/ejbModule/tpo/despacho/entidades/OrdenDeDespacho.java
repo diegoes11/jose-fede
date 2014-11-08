@@ -1,11 +1,5 @@
 package tpo.despacho.entidades;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,11 +7,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-
 import tpo.ia.vos.VODetalleOrdenDeDespachoCompleta;
-import tpo.ia.vos.VOEnvioOrdenDeDespachoLista;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 
 @Entity
@@ -45,10 +35,6 @@ public class OrdenDeDespacho {
 		if(ordenCompleta == true){
 			this.setFechaEntrega(Calendar.getInstance().getTime());
 			setEstado("despachada");
-			// ENVIO DE INFORME DE CAMBIO DE ESTADO A LOGISTICA Y MONITOREO POR REST
-			//informarOrdenDeDespachoListaSync(logisticaYMonitoreo.getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(id.getIdOrdenDeDespacho()));
-			//ENVIO DE INFORME DE CAMBIO DE ESTADO A PORTAL WEB POR WEB SERVICE
-			// --
 		}
 	}
 	
@@ -87,49 +73,6 @@ public class OrdenDeDespacho {
 		}
 		detallesOrdenDeDespacho.add(dodd);
 	}
-	
-	@SuppressWarnings("unused")
-	private boolean informarOrdenDeDespachoListaSync (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
-    	try {
-    		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-    		String json = ow.writeValueAsString(voEnvioOrdenDeDespachoLista);
-			URL url = new URL(urlString);
-			HttpURLConnection con = (HttpURLConnection)url.openConnection();
-			con.setRequestMethod("POST");
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			con.setUseCaches(false);
-			con.setAllowUserInteraction(false);
-			con.setRequestProperty("Content-Type", "application/json; charset=utf8");
-			OutputStream os = con.getOutputStream();
-			os.write(json.getBytes("UTF-8"));
-			os.close();
-			
-			if (con.getResponseCode() != 200){
-				throw new IOException(con.getResponseMessage());
-			}
-			BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			StringBuilder sb = new StringBuilder();
-			String line;
-			while((line = rd.readLine()) != null){
-				sb.append(line);
-			}
-			rd.close();
-			
-			con.disconnect();
-			String respuesta = sb.toString();
-			if (respuesta.equals("OK")) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-    }
 	
 	public List<Deposito> obtenerDepositosOrden(){
 		List<Deposito> depositos = new ArrayList<Deposito>();

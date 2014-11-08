@@ -60,7 +60,6 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	return articulos.get(0);
     }
     
-    @SuppressWarnings("unused")
 	private void enviarSolcitudesDeArticuloAsync(OrdenDeDespacho ordenDeDespacho) {
     	try {
     		LOGGER.info("Envio de solicitudes de articulos...");
@@ -203,7 +202,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		manager.persist(ordenDeDespacho);
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		
 
     	    		LOGGER.info("Recepcion de orden de despacho: OK");
