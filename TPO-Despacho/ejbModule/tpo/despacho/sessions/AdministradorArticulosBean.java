@@ -56,19 +56,19 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
     // Métodos
 	public boolean recepcionDeArticulos(int idSolicitudDeArticulo, int cantidad) {
 		try{
-			LOGGER.info("Recepción de articulos...");
+			LOGGER.info("Recepción de artículos...");
 			SolicitudDeArticulo solicitudDeArticulo = buscarSolicitudDeArticulo(idSolicitudDeArticulo);
 			if(solicitudDeArticulo != null){
 				solicitudDeArticulo.actualizarCantidad(cantidad);
-				LOGGER.info("Recepción de articulos: OK");
+				LOGGER.info("Recepción de artículos: OK");
 				return true;
 			}
-			LOGGER.error("Recepción de articulos: No existe una solicitud con el id recibido.");
+			LOGGER.error("Recepción de artículos: No existe una solicitud con el id recibido.");
 			return false;
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			LOGGER.error("Recepción de articulos: Error desconocido - " + e.getStackTrace());
+			LOGGER.error("Recepción de artículos: Error desconocido - " + e.getStackTrace());
 			return false;
 		}
 		
@@ -88,7 +88,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	
 	public boolean altaArticulo(VOArticulo articuloVO){
 		try{
-			LOGGER.info("Alta de articulo...");
+			LOGGER.info("Alta de artículo...");
 			Articulo articulo = buscarArticulo(articuloVO.getCodigo());
 			Deposito deposito = buscarDeposito(articuloVO.getDeposito());
 			if(articulo == null && deposito != null){
@@ -96,15 +96,15 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				articulo.setArticuloVO(articuloVO);
 				articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
 				manager.persist(articulo);
-				LOGGER.info("Alta de articulo: OK");
+				LOGGER.info("Alta de artículo: OK");
 				return true;
 			}
-			LOGGER.error("Alta de articulo: No existe el depósito o el artículo ingresado.");
+			LOGGER.error("Alta de artículo: No existe el depósito o el artículo ingresado.");
 			return false;
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			LOGGER.error("Alta de articulo: Error desconocido - " + e.getStackTrace());
+			LOGGER.error("Alta de artículo: Error desconocido - " + e.getStackTrace());
 			return false;
 		}
 	}
