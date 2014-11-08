@@ -8,7 +8,7 @@ public class LogisticaYMonitoreo {
 	private String nombre;
 	private String ip;
 	private Coordenadas coordenadas;
-	private String urlRecepcionEstadoOrdenDeDesapcho;
+	private String urlRecepcionEstadoOrdenDeDespacho;
 	private Cola colaInformes;
 	private boolean informeAsincronico;
 	
@@ -44,14 +44,14 @@ public class LogisticaYMonitoreo {
 		this.coordenadas = coordenadas;
 	}
 
-	@Column(name="RecepcionEstadoOrdenDeDesapcho")
-	public String getUrlRecepcionEstadoOrdenDeDesapcho() {
-		return urlRecepcionEstadoOrdenDeDesapcho;
+	@Column(name="URLRecepcionEstadoOrdenDeDespacho")
+	public String getUrlRecepcionEstadoOrdenDeDespacho() {
+		return urlRecepcionEstadoOrdenDeDespacho;
 	}
 
-	public void setUrlRecepcionEstadoOrdenDeDesapcho(
-			String urlRecepcionEstadoOrdenDeDesapcho) {
-		this.urlRecepcionEstadoOrdenDeDesapcho = urlRecepcionEstadoOrdenDeDesapcho;
+	public void setUrlRecepcionEstadoOrdenDeDespacho(
+			String urlRecepcionEstadoOrdenDeDespacho) {
+		this.urlRecepcionEstadoOrdenDeDespacho = urlRecepcionEstadoOrdenDeDespacho;
 	}
 
 	@Embedded
