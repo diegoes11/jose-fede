@@ -80,17 +80,20 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				// Si el detalle de la orden de despacho está completo, informe a auditoría
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
 				{
-					despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
+					// INTEGRACIÓN
+					// despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
 				}
 				// Si la orden de despacho está completa, informo a los modulos correspondientes
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
 				{
 					OrdenDeDespacho o = solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho();
 					// Envio informe a Logistica y Monitoreo (SYNC/ASYNC)
-					despachoFacade.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
+					// INTEGRACIÓN
+					// despachoFacade.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
 					// ENVIO WEBSERVICE A PORTAL
 					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
-					informarOrdenDeDespachoListaSync(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					// INTEGRACIÓN
+					// informarOrdenDeDespachoListaSync(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
 					// IMPLEMENTAR WS
 				}
@@ -130,7 +133,8 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
 				manager.persist(articulo);
 				LOGGER.info("Alta de artículo: OK");
-				despachoFacade.EnviarInforme(new VOInformeAuditoria(articulo.obtenerInformeAlta()));
+				// INTEGRACIÓN
+				// despachoFacade.EnviarInforme(new VOInformeAuditoria(articulo.obtenerInformeAlta()));
 				return true;
 			}
 			LOGGER.error("Alta de artículo: No existe el depósito o el artículo ingresado.");
