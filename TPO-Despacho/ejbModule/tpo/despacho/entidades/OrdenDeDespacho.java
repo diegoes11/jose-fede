@@ -15,6 +15,7 @@ import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 public class OrdenDeDespacho {
 	
 	private IdOrdenDeDespacho id;
+	private int idVenta;
 	private LogisticaYMonitoreo logisticaYMonitoreo;
 	private String estado;
 	private List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho;
@@ -110,6 +111,15 @@ public class OrdenDeDespacho {
 
 	public void setId(IdOrdenDeDespacho id) {
 		this.id = id;
+	}
+
+	@Column(name="IdVenta")
+	public int getIdVenta() {
+		return idVenta;
+	}
+
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
 	}
 
 	@OneToMany(mappedBy = "ordenDeDespacho", cascade=CascadeType.ALL)

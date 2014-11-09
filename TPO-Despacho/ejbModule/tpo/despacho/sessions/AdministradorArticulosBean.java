@@ -18,6 +18,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.jboss.logging.Logger;
 
+import tpo.clientes.portalweb.WSTTestImp;
+import tpo.clientes.portalweb.WSTTestImpService;
 import tpo.despacho.entidades.Articulo;
 import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
@@ -92,9 +94,9 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 					// ENVIO WEBSERVICE A PORTAL
 					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
 					// INTEGRACIÓN
-					// informarOrdenDeDespachoListaSync(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					// informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
-					// IMPLEMENTAR WS
+					// informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().getUrlRecepcionEstadoOrdenDeDespacho(), o.getIdVenta());
 				}
 				LOGGER.info("Recepción de artículos: OK");
 				return true;
@@ -147,7 +149,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	private boolean informarOrdenDeDespachoListaSync (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
+	private boolean informarOrdenDeDespachoListaSyncRest (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
     	try {
     		LOGGER.info("Informar orden de despacho lista...");
     		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -178,6 +180,31 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 			con.disconnect();
 			String respuesta = sb.toString();
 			if (respuesta.equals("OK")) {
+				LOGGER.info("Informar orden de despacho lista: OK");
+				return true;
+			}
+			else {
+				LOGGER.error("Informar orden de despacho lista: La respuesta no fue OK.");
+				return false;
+			}
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("Informar orden de despacho lista: Error desconocido - " + e.getStackTrace());
+			return false;
+		}
+    }
+	
+	private boolean informarOrdenDeDespachoListaSync (String urlString, int idVenta) {
+    	try {
+    		LOGGER.info("Informar orden de despacho lista...");
+    		LOGGER.info("Creando cliente Web Service...");
+	        WSTTestImpService service1 = new WSTTestImpService();
+	        LOGGER.info("Creando Web Service...");
+	        WSTTestImp port1 = service1.getWSTTestImpPort();
+	        LOGGER.info("Llamado al método Web Service...");
+	        boolean respuesta =  port1.procesarVenta(1);
+			if (respuesta) {
 				LOGGER.info("Informar orden de despacho lista: OK");
 				return true;
 			}
