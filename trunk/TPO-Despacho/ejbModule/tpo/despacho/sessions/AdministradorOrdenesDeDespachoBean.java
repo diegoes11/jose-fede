@@ -168,6 +168,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		// Creo la orden de despacho
     	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
     	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
+    	    		ordenDeDespacho.setIdVenta(ordenDeDespacho.getIdVenta());
     	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
     	    		ordenDeDespacho.setEstado("pendiente de entrega");
     	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
