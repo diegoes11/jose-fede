@@ -25,11 +25,9 @@ import tpo.despacho.entidades.Deposito;
 import tpo.despacho.entidades.IdArticulo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VOArticulo;
 import tpo.ia.vos.VOArticuloCompleto;
 import tpo.ia.vos.VOEnvioOrdenDeDespachoLista;
-import tpo.ia.vos.VOInformeAuditoria;
 
 @Stateless
 public class AdministradorArticulosBean implements AdministradorArticulos {
@@ -41,7 +39,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	private EntityManager manager;
 	
 	@EJB
-	private DespachoFacade despachoFacade;
+	private EnvioInformesAuditoria envioInformes;
 	
 	// Constructor
     public AdministradorArticulosBean() {
@@ -82,7 +80,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
 				{
 					// INTEGRACIÓN
-					// despachoFacade.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
+					// envioInformes.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
 				}
 				// Si la orden de despacho está completa, informo a los modulos correspondientes
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
@@ -90,13 +88,13 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 					OrdenDeDespacho o = solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho();
 					// Envio informe a Logistica y Monitoreo (SYNC/ASYNC)
 					// INTEGRACIÓN
-					// despachoFacade.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
+					// envioInformes.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
 					// ENVIO WEBSERVICE A PORTAL
 					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
 					// INTEGRACIÓN
-					// informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().getUrlRecepcionEstadoOrdenDeDesapcho(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					//informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().generarUrlRESTEnvioCambioDeEstadoODD(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
-					// informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().getUrlRecepcionEstadoOrdenDeDespacho(), o.getIdVenta());
+					//informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().generarUrlSyncEnvioCambioDeEstadoODD(), o.getIdVenta());
 				}
 				LOGGER.info("Recepción de artículos: OK");
 				return true;
@@ -136,7 +134,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				manager.persist(articulo);
 				LOGGER.info("Alta de artículo: OK");
 				// INTEGRACIÓN
-				// despachoFacade.EnviarInforme(new VOInformeAuditoria(articulo.obtenerInformeAlta()));
+				// envioInformes.EnviarInforme(new VOInformeAuditoria(articulo.obtenerInformeAlta()));
 				return true;
 			}
 			LOGGER.error("Alta de artículo: No existe el depósito o el artículo ingresado.");
@@ -149,7 +147,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
 	}
 	
-	private boolean informarOrdenDeDespachoListaSyncRest (String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
+	private boolean informarOrdenDeDespachoListaSyncRest(String urlString, VOEnvioOrdenDeDespachoLista voEnvioOrdenDeDespachoLista) {
     	try {
     		LOGGER.info("Informar orden de despacho lista...");
     		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -195,11 +193,12 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 		}
     }
 	
-	private boolean informarOrdenDeDespachoListaSync (String urlString, int idVenta) {
+	private boolean informarOrdenDeDespachoListaSync(String urlString, int idVenta) {
     	try {
     		LOGGER.info("Informar orden de despacho lista...");
+    		URL url = new URL(urlString);
     		LOGGER.info("Creando cliente Web Service...");
-	        WSTTestImpService service1 = new WSTTestImpService();
+	        WSTTestImpService service1 = new WSTTestImpService(url);
 	        LOGGER.info("Creando Web Service...");
 	        WSTTestImp port1 = service1.getWSTTestImpPort();
 	        LOGGER.info("Llamado al método Web Service...");

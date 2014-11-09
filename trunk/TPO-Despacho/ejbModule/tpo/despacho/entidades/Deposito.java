@@ -15,6 +15,10 @@ public class Deposito {
 		
 	}
 	
+	public String generarUrlRecepcionSolicitudDeArticulos(){
+		return "remote://" + ip + ":4447";
+	}
+	
 	@Id
 	@Column(name="Nombre")
 	public String getNombre() {

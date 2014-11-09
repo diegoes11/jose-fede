@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "WSTTestImpService", 
-                  wsdlLocation = 123 + "http://172.16.164.43:8080/IDA_TPO_PW_SRV/WSTTestImp?wsdl",
+                  wsdlLocation = "http://172.16.164.43:8080/IDA_TPO_PW_SRV/WSTTestImp?wsdl",
                   targetNamespace = "http://soap/") 
 public class WSTTestImpService extends Service {
 
