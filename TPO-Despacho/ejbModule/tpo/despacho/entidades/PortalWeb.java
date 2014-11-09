@@ -6,11 +6,16 @@ import javax.persistence.*;
 @Table(name="PortalesWeb")
 public class PortalWeb {
 	private String nombre;
+	private String ip;
 	private Coordenadas coordenadas;
 	private String urlRecepcionEstadoOrdenDeDespacho;
 	
 	public PortalWeb(){
 		
+	}
+	
+	public String generarUrlSyncEnvioCambioDeEstadoODD(){
+		return "http://" + ip + ":8080/" + urlRecepcionEstadoOrdenDeDespacho;
 	}
 
 	@Id
@@ -21,6 +26,15 @@ public class PortalWeb {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Column(name="IP")
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	@Embedded

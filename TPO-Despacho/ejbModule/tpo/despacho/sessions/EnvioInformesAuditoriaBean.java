@@ -1,5 +1,7 @@
 package tpo.despacho.sessions;
 
+import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,11 +17,19 @@ import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.jboss.logging.Logger;
+
+import tpo.clientes.auditoria.ws.VoInformeAuditoria;
+import tpo.clientes.auditoria.ws.WSAgregarInformeAuditoriaBean;
+import tpo.clientes.auditoria.ws.WSAgregarInformeAuditoriaBeanService;
 import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.ia.vos.VOInformeAuditoria;
 
 @Stateless
 public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
+	
+	// Atributos
+	private static final Logger LOGGER = Logger.getLogger(AdministradorArticulosBean.class);
 
 	@PersistenceContext(unitName="DespachoBD")
 	private EntityManager manager;
@@ -27,7 +37,7 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
     public EnvioInformesAuditoriaBean() {
     }
 
-	public boolean EnviarInforme(VOInformeAuditoria informe) {
+	public boolean EnviarInforme(String informe) {
 		try{
 			// Obtengo los módulos de Logistica y Monitoreo
 			String query = "SELECT lym FROM LogisticaYMonitoreo lym";
@@ -52,11 +62,11 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 		}
 	}
 	
-	private boolean enviarInformeAsync(LogisticaYMonitoreo logisticaYMonitoreo, VOInformeAuditoria informe) {
+	public static boolean enviarInformeAsync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
     	try {
         		final Properties env = new Properties();
 				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://" + logisticaYMonitoreo.getIp() +":4447"));
+				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, logisticaYMonitoreo.generarURLCola()));
 				env.put(Context.SECURITY_PRINCIPAL, logisticaYMonitoreo.getColaInformes().getUsuario());
 				env.put(Context.SECURITY_CREDENTIALS, logisticaYMonitoreo.getColaInformes().getPassword());
 				
@@ -77,7 +87,7 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 				 
 				// Crear un mensaje de tipo Object Message y setearle el contenido
 				ObjectMessage message = session.createObjectMessage();
-				message.setObject(informe);
+				message.setObject(new VOInformeAuditoria(informe));
 				
 				// Enviar el mensaje
 				producer.send(message);	
@@ -92,15 +102,33 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 			}
 	}
 	
-	private boolean enviarInformeSync(LogisticaYMonitoreo logisticaYMonitoreo, VOInformeAuditoria informe) {
+	private boolean enviarInformeSync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
     	try {
-        		// ACA LLAMAR AL WEB SERVICE
+    		LOGGER.info("Enviar informe de auditoría listo...");
+    		URL url = new URL(logisticaYMonitoreo.generarUrlSyncInformes());
+    		LOGGER.info("Creando cliente Web Service...");
+	        WSAgregarInformeAuditoriaBeanService service1 = new WSAgregarInformeAuditoriaBeanService(url);
+	        LOGGER.info("Creando Web Service...");
+	        WSAgregarInformeAuditoriaBean port1 = service1.getWSAgregarInformeAuditoriaBeanPort();
+	        
+	        VoInformeAuditoria inf = new VoInformeAuditoria();
+	        inf.setDescripcion(informe);
+	        inf.setFechaYHora((int)(new Date().getTime()/1000));
+	        
+	        LOGGER.info("Llamado al método Web Service...");
+	        boolean respuesta = port1.agregarInformeAuditoria(inf);
+	        if (respuesta) {
+				LOGGER.info("Enviar informe de auditoría listo: OK");
 				return true;
-        	
-			} catch (Exception e) {
-				e.printStackTrace();
+			}
+			else {
+				LOGGER.error("Enviar informe de auditoría listo: La respuesta no fue OK.");
 				return false;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("Enviar informe de auditoría listo: La respuesta no fue OK.");
+			return false;
+		}
 	}
-
 }

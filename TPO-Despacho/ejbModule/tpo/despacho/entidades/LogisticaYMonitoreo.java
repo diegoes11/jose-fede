@@ -9,11 +9,23 @@ public class LogisticaYMonitoreo {
 	private String ip;
 	private Coordenadas coordenadas;
 	private String urlRecepcionEstadoOrdenDeDespacho;
+	private String urlInformes;
 	private Cola colaInformes;
 	private boolean informeAsincronico;
 	
 	public LogisticaYMonitoreo(){
-		
+	}
+	
+	public String generarURLCola(){
+		return "remote://" + ip + ":4447";
+	}
+	
+	public String generarUrlRESTEnvioCambioDeEstadoODD(){
+		return "http://" + ip + ":8080/" + urlRecepcionEstadoOrdenDeDespacho;
+	}
+	
+	public String generarUrlSyncInformes(){
+		return "http://" + ip + ":8080/" + urlInformes;
 	}
 	
 	@Id
@@ -52,6 +64,15 @@ public class LogisticaYMonitoreo {
 	public void setUrlRecepcionEstadoOrdenDeDespacho(
 			String urlRecepcionEstadoOrdenDeDespacho) {
 		this.urlRecepcionEstadoOrdenDeDespacho = urlRecepcionEstadoOrdenDeDespacho;
+	}
+
+	@Column(name="URLInformes")
+	public String getUrlInformes() {
+		return urlInformes;
+	}
+
+	public void setUrlInformes(String urlInformes) {
+		this.urlInformes = urlInformes;
 	}
 
 	@Embedded

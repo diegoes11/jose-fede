@@ -28,9 +28,7 @@ import tpo.despacho.entidades.LogisticaYMonitoreo;
 import tpo.despacho.entidades.OrdenDeDespacho;
 import tpo.despacho.entidades.PortalWeb;
 import tpo.despacho.entidades.SolicitudDeArticulo;
-import tpo.despacho.facade.DespachoFacade;
 import tpo.ia.vos.VODetalleOrdenDeDespacho;
-import tpo.ia.vos.VOInformeAuditoria;
 import tpo.ia.vos.VOOrdenDeDespachoCompleta;
 import tpo.ia.vos.VOOrdenDeDespacho;
 
@@ -44,7 +42,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 	private EntityManager manager;
 	
 	@EJB
-	private DespachoFacade despachoFacade;
+	private EnvioInformesAuditoria envioInformes;
 	
     public AdministradorOrdenesDeDespachoBean() {
     	
@@ -70,7 +68,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
         	{
         		final Properties env = new Properties();
 				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, "remote://" + d.getIp() +":4447"));
+				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, d.generarUrlRecepcionSolicitudDeArticulos()));
 				env.put(Context.SECURITY_PRINCIPAL, d.getRecepcionDeSolicitudes().getUsuario());
 				env.put(Context.SECURITY_CREDENTIALS, d.getRecepcionDeSolicitudes().getPassword());
 				
@@ -214,7 +212,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		{
     	    			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
     	    			// INTEGRACIÓN
-    	    			//despachoFacade.EnviarInforme(new VOInformeAuditoria(sda.obtenerInformeSolicitud()));
+    	    			//envioInformes.EnviarInforme(new VOInformeAuditoria(sda.obtenerInformeSolicitud()));
     	    		}
 
     	    		return true;
