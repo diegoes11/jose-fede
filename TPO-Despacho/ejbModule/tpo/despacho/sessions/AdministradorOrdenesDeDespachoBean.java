@@ -220,10 +220,16 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 
     	    		return true;
         		}
-        		LOGGER.error("Recepcion de orden de despacho: No existe modulo de logistica y monitoreo con el nombre recibido.");
+        		else{
+        			LOGGER.error("Recepcion de orden de despacho: No existe modulo de logistica y monitoreo con el nombre recibido.");
+        			return false;
+        		}
         	}
-        	LOGGER.error("Recepcion de orden de despacho: No existe portal web con el nombre recibido.");
-        	return false;
+        	else
+        	{
+            	LOGGER.error("Recepcion de orden de despacho: No existe portal web con el nombre recibido.");
+            	return false;
+        	}
     	}
     	catch(Exception e){
     		e.printStackTrace();
