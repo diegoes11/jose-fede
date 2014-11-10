@@ -14,9 +14,9 @@ import tpo.ia.vos.VORecepcionSolicitudDeArticulo;
 
 public class ClienteREST {
 	public static void main(String[] args) {
-        String urlString = "http://25.106.95.243:8080/TPO-Despacho-WEB/RecepcionDeArticulos";
+        String urlString = "http://localhost:8080/TPO-Despacho-WEB/RecepcionDeArticulos";
         VORecepcionSolicitudDeArticulo vo = new VORecepcionSolicitudDeArticulo();
-        vo.setId(4);
+        vo.setId(6);
         vo.setCantidad(29);
         enviarREST(urlString, vo);
 }
