@@ -4,5 +4,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="C:/IA/jbdevstudio/runtimes/jboss-eap/bin/client/jboss-cli-client.jar"/>
 	<classpathentry kind="lib" path="C:/IA/jbdevstudio/runtimes/jboss-eap/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-annotations-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-core-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-core-asl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-databind-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-jaxrs-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-jaxrs-base-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-jaxrs-json-provider-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-mapper-asl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-module-jaxb-annotations-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-xc-1.9.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
