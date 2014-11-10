@@ -79,22 +79,23 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				// Si el detalle de la orden de despacho está completo, informe a auditoría
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
 				{
-					// INTEGRACIÓN
-					// envioInformes.EnviarInforme(new VOInformeAuditoria(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud()));
+					// INTEGRACIÓN LOGISTICA
+					envioInformes.EnviarInforme(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud());
 				}
 				// Si la orden de despacho está completa, informo a los modulos correspondientes
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
 				{
 					OrdenDeDespacho o = solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho();
 					// Envio informe a Logistica y Monitoreo (SYNC/ASYNC)
-					// INTEGRACIÓN
-					// envioInformes.EnviarInforme(new VOInformeAuditoria(o.obtenerInformeCompletitud()));
+					// INTEGRACIÓN LOGISTICA
+					envioInformes.EnviarInforme(o.obtenerInformeCompletitud());
 					// ENVIO WEBSERVICE A PORTAL
 					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
-					// INTEGRACIÓN
-					//informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().generarUrlRESTEnvioCambioDeEstadoODD(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					// INTEGRACIÓN LOGISTICA
+					informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().generarUrlRESTEnvioCambioDeEstadoODD(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
-					//informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().generarUrlSyncEnvioCambioDeEstadoODD(), o.getIdVenta());
+					// INTEGRACIÓN PORTAL WEB
+					informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().generarUrlSyncEnvioCambioDeEstadoODD(), o.getIdVenta());
 				}
 				LOGGER.info("Recepción de artículos: OK");
 				return true;
@@ -202,7 +203,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 	        LOGGER.info("Creando Web Service...");
 	        WSTTestImp port1 = service1.getWSTTestImpPort();
 	        LOGGER.info("Llamado al método Web Service...");
-	        boolean respuesta =  port1.procesarVenta(1);
+	        boolean respuesta =  port1.procesarVenta(idVenta);
 			if (respuesta) {
 				LOGGER.info("Informar orden de despacho lista: OK");
 				return true;

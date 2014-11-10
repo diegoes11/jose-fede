@@ -166,7 +166,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		// Creo la orden de despacho
     	    		OrdenDeDespacho ordenDeDespacho = new OrdenDeDespacho();
     	    		ordenDeDespacho.setId(new IdOrdenDeDespacho(ordenDeDespachoVO.getIdOrdenDeDespacho(), portalWeb));
-    	    		ordenDeDespacho.setIdVenta(ordenDeDespacho.getIdVenta());
+    	    		ordenDeDespacho.setIdVenta(ordenDeDespachoVO.getIdVenta());
     	    		ordenDeDespacho.setLogisticaYMonitoreo(logisticaYMonitoreo);
     	    		ordenDeDespacho.setEstado("pendiente de entrega");
     	    		ordenDeDespacho.setFechaRecepcion(Calendar.getInstance().getTime());
@@ -201,7 +201,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		manager.persist(ordenDeDespacho);
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
-    	    		// INTEGRACIÓN
+    	    		// INTEGRACIÓN DEPOSITO
     	    		// enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		
 
@@ -211,8 +211,8 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		for(DetalleOrdenDeDespacho dodd : detallesOrdenDeDespacho)
     	    		{
     	    			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
-    	    			// INTEGRACIÓN
-    	    			//envioInformes.EnviarInforme(new VOInformeAuditoria(sda.obtenerInformeSolicitud()));
+    	    			// INTEGRACIÓN LOGISTICA
+    	    			envioInformes.EnviarInforme(sda.obtenerInformeSolicitud());
     	    		}
 
     	    		return true;

@@ -28,11 +28,11 @@ public class Usuario {
 	}
 	
 	public String obtenerInformeAlta(){
-		return "Se ha dado de alta el usuario " + nombre + ", DNI " + dni;
+		return "Se ha dado de alta el usuario " + nombre + " " + apellido + ", DNI " + dni;
 	}
 	
 	public String obtenerInformeCambioEstado(){
-		String respuesta = "Se ha cambiado el estado del usuario " + nombre + ", DNI " + dni + "a ";
+		String respuesta = "Se ha cambiado el estado del usuario " + nombre + " " + apellido + ", DNI " + dni + "a ";
 		if(activo == true){
 			respuesta += "ACTIVO";
 		}

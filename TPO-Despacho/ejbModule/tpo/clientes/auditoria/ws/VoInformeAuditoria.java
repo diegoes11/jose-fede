@@ -1,6 +1,8 @@
 
 package tpo.clientes.auditoria.ws;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -31,9 +33,10 @@ import javax.xml.bind.annotation.XmlType;
     "descripcion",
     "fechaYHora"
 })
-public class VoInformeAuditoria {
-
-    protected String descripcion;
+public class VoInformeAuditoria implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	protected String descripcion;
     protected int fechaYHora;
 
     /**
