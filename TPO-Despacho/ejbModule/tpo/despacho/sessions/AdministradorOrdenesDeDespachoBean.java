@@ -200,9 +200,12 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
 
     	    		manager.persist(ordenDeDespacho);
     	    		
+    	    		// INTEGRACIÓN LOGISTICA
+    	    		//envioInformes.EnviarInforme(ordenDeDespacho.obtenerInformeOrdenRecibida());
+    	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
     	    		// INTEGRACIÓN DEPOSITO
-    	    		// enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		
 
     	    		LOGGER.info("Recepcion de orden de despacho: OK");
@@ -212,7 +215,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		{
     	    			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
     	    			// INTEGRACIÓN LOGISTICA
-    	    			envioInformes.EnviarInforme(sda.obtenerInformeSolicitud());
+    	    			//envioInformes.EnviarInforme(sda.obtenerInformeSolicitud());
     	    		}
 
     	    		return true;

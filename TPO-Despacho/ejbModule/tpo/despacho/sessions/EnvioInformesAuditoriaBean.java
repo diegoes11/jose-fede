@@ -64,6 +64,7 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 	
 	public static boolean enviarInformeAsync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
     	try {
+    			LOGGER.info("Enviar informe de auditoría JMS listo...");
         		final Properties env = new Properties();
 				env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
 				env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, logisticaYMonitoreo.generarURLCola()));
@@ -93,18 +94,20 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 				producer.send(message);	
 				
 				// TODO: recordar cerrar la session y la connection en un bloque “finally”
+				LOGGER.info("Envio de informe de auditoría JMS: OK");
 				connection.close();
 				return true;
         	
 			} catch (Exception e) {
 				e.printStackTrace();
+				LOGGER.error("Envio de informe de auditoría JMS: Error desconocido - " + e.getStackTrace());
 				return false;
 			}
 	}
 	
 	private boolean enviarInformeSync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
     	try {
-    		LOGGER.info("Enviar informe de auditoría listo...");
+    		LOGGER.info("Enviar informe de auditoría WS listo...");
     		URL url = new URL(logisticaYMonitoreo.generarUrlSyncInformes());
     		LOGGER.info("Creando cliente Web Service...");
 	        WSAgregarInformeAuditoriaBeanService service1 = new WSAgregarInformeAuditoriaBeanService(url);
