@@ -25,7 +25,7 @@ public class SolicitudDeArticulo {
 	public VOSolicitudDeArticulo getSolicitudDeArticuloVO(){
 		VOSolicitudDeArticulo solicitudDeArticuloVO = new VOSolicitudDeArticulo();
 		solicitudDeArticuloVO.setIdSolicitudDeArticulo(idSolicitudDeArticulo);
-		solicitudDeArticuloVO.setNombreDespacho("");
+		solicitudDeArticuloVO.setNombreDespacho("DESPACHO1");
 		solicitudDeArticuloVO.setCodigoArticulo(detalleOrdenDeDespacho.getArticulo().getId().getCodigo());
 		solicitudDeArticuloVO.setCantidad(detalleOrdenDeDespacho.getCantidad());
 		return solicitudDeArticuloVO;

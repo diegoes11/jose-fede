@@ -51,6 +51,11 @@ public class OrdenDeDespacho {
 				" perteneciente al Portal Web " + id.getPortalWeb();
 	}
 	
+	public String obtenerInformeOrdenRecibida(){
+		return "Se ha recibido la orden de despacho " + id.getIdOrdenDeDespacho() +
+				" perteneciente al Portal Web " + id.getPortalWeb();
+	}
+	
 	@Transient
 	public VOOrdenDeDespachoCompleta getOrdenDeDespachoVO(){
 		VOOrdenDeDespachoCompleta oddvo = new VOOrdenDeDespachoCompleta();
