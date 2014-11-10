@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-mapper-asl-1.9.12.jar"/>
 	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-module-jaxb-annotations-2.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/lib/jackson-xc-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/IA/resteasy-jaxrs-3.0.9.Final/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
