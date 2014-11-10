@@ -16,19 +16,20 @@ public class LogisticaYMonitoreo {
 
 	        // CREO UNA ORDEN DE DESPACHO
 	        VoOrdenDeDespacho odd = new VoOrdenDeDespacho();
-	        odd.setIdOrdenDeDespacho(4);
-	        odd.setNombrePortalWeb("PORTALWEB1");
-	        odd.setNombreLogisticaYMonitoreo("LOGISTICA1");
+	        odd.setIdOrdenDeDespacho(18);
+	        odd.setIdVenta(9);
+	        odd.setNombrePortalWeb("PORTALWEB2");
+	        odd.setNombreLogisticaYMonitoreo("LOGISTICA2");
 	        
 	        List<VoDetalleOrdenDeDespacho> detalles = odd.getDetallesOrdenDeDespachoVO();
 	        VoDetalleOrdenDeDespacho dodd1 = new VoDetalleOrdenDeDespacho();
-	        dodd1.setCodigoArticulo(1351953);
+	        dodd1.setCodigoArticulo(13);
 	        dodd1.setCantidad(48);
 	        detalles.add(dodd1);
-	        VoDetalleOrdenDeDespacho dodd2 = new VoDetalleOrdenDeDespacho();
+	        /*VoDetalleOrdenDeDespacho dodd2 = new VoDetalleOrdenDeDespacho();
 	        dodd2.setCodigoArticulo(1607594);
 	        dodd2.setCantidad(29);
-	        detalles.add(dodd2);
+	        detalles.add(dodd2);*/
 	        
 	        System.out.println("Server said: " + port1.recepcionOrdenDeDespacho(odd));
 	        //Please input the parameters instead of 'null' for the upper method!
