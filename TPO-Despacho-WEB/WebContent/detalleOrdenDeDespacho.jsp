@@ -45,7 +45,6 @@
 			<table id="tabla" class="display cell-border compact" cellspacing="0" width="100%">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>C&oacute;digo Art&iacute;culo</th>
 					<th>Nombre Art&iacute;culo</th>
 					<th>Cantidad Recibida</th>
@@ -58,7 +57,6 @@
 			</thead>
 			<tfoot>
 				<tr>
-					<th>ID</th>
 					<th>C&oacute;digo Art&iacute;culo</th>
 					<th>Nombre Art&iacute;culo</th>
 					<th>Cantidad Recibida</th>
@@ -75,7 +73,6 @@
 			{
 		%>
 				<tr>
-					<td><%= dodd.getIdDetalleOrdenDeDespacho() %></td>
 					<td><%= dodd.getCodigoArticulo() %></td>
 					<td><%= dodd.getNombreArticulo() %></td>
 					<td><%= dodd.getCantidadRecibida() %></td>
