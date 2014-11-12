@@ -62,7 +62,7 @@ public class EnvioInformesAuditoriaBean implements EnvioInformesAuditoria {
 		}
 	}
 	
-	public static boolean enviarInformeAsync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
+	private boolean enviarInformeAsync(LogisticaYMonitoreo logisticaYMonitoreo, String informe) {
     	try {
     			LOGGER.info("Enviar informe de auditoría JMS listo...");
         		final Properties env = new Properties();
