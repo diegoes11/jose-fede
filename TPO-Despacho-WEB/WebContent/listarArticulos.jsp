@@ -74,7 +74,7 @@
 					<td>$<%=a.getPrecio()%></td>
 					<td>
 						<%
-							if(a.getFoto() != null)
+							if(a.getFoto() != null && a.getFoto().length > 0)
 							{
 						%>
 								<img class="img-zoom" src="data:image/jpg;base64,<%=a.obtenerFotoEnString()%>" alt="<%=a.getNombreFoto()%>" />
