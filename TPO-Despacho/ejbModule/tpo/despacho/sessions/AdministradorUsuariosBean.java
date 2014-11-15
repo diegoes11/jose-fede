@@ -45,8 +45,8 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
         		usuario = new Usuario(usuarioVO.getDni(), usuarioVO.getNombre(), usuarioVO.getApellido());
         		manager.persist(usuario);
         		LOGGER.info("Alta usuario: OK");
-        		// INTEGRACIÓN
-        		//envioInformes.EnviarInforme(usuario.obtenerInformeAlta());
+        		// INTEGRACIÓN LOGISTICA
+        		envioInformes.EnviarInforme(usuario.obtenerInformeAlta());
         		return 0; // 0: Usuario creado con éxito
         	}
         	LOGGER.error("Alta usuario: Existe un usuario con el DNI recibido.");
@@ -90,8 +90,8 @@ public class AdministradorUsuariosBean implements AdministradorUsuarios {
 			usuario.setActivo(usuarioVO.isActivo());
 			manager.merge(usuario);
 			LOGGER.info("Establecer estado activo a un usuario: OK");
-			// INTEGRACIÓN
-			//envioInformes.EnviarInforme(usuario.obtenerInformeCambioEstado());
+			// INTEGRACIÓN LOGISTICA
+			envioInformes.EnviarInforme(usuario.obtenerInformeCambioEstado());
 			return true;
 		}
 		catch(Exception e){
