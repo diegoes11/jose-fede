@@ -184,7 +184,10 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    				dodd.setEstado("incompleto");
     	    				dodd.setOrdenDeDespacho(ordenDeDespacho);
     	    			}
-    	    			LOGGER.error("Recepcion de orden de despacho: No existe articulo con el codigo recibido.");
+    	    			else
+    	    			{
+    	    				LOGGER.error("Recepcion de orden de despacho: No existe articulo con el codigo recibido.");
+    	    			}
     	    		}
     	    		List<DetalleOrdenDeDespacho> detallesOrdenDeDespacho = ordenDeDespacho.getDetallesOrdenDeDespacho();
     	    		// Por cada detalle/item de la orden de despacho, creo la solicitud de articulo
@@ -201,11 +204,11 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		manager.persist(ordenDeDespacho);
     	    		
     	    		// INTEGRACIÓN LOGISTICA
-    	    		//envioInformes.EnviarInforme(ordenDeDespacho.obtenerInformeOrdenRecibida());
+    	    		envioInformes.EnviarInforme(ordenDeDespacho.obtenerInformeOrdenRecibida());
     	    		
     				// ENVIAR ASINCRONICAMENTE LAS SOLICITUDES DE ARTICULO AL DEPOSITO CORRESPONDIENTE.
     	    		// INTEGRACIÓN DEPOSITO
-    	    		//enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
+    	    		enviarSolcitudesDeArticuloAsync(ordenDeDespacho);
     	    		
 
     	    		LOGGER.info("Recepcion de orden de despacho: OK");
@@ -215,7 +218,7 @@ public class AdministradorOrdenesDeDespachoBean implements AdministradorOrdenesD
     	    		{
     	    			SolicitudDeArticulo sda = dodd.getSolicitudDeArticulo();
     	    			// INTEGRACIÓN LOGISTICA
-    	    			//envioInformes.EnviarInforme(sda.obtenerInformeSolicitud());
+    	    			envioInformes.EnviarInforme(sda.obtenerInformeSolicitud());
     	    		}
 
     	    		return true;

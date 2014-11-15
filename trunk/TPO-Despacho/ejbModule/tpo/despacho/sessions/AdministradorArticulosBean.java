@@ -80,7 +80,7 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().estaCompleto())
 				{
 					// INTEGRACIÓN LOGISTICA
-					//envioInformes.EnviarInforme(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud());
+					envioInformes.EnviarInforme(solicitudDeArticulo.getDetalleOrdenDeDespacho().obtenerInformeCompletitud());
 				}
 				// Si la orden de despacho está completa, informo a los modulos correspondientes
 				if(solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho().estaCompleta())
@@ -88,14 +88,14 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 					OrdenDeDespacho o = solicitudDeArticulo.getDetalleOrdenDeDespacho().getOrdenDeDespacho();
 					// Envio informe a Logistica y Monitoreo (SYNC/ASYNC)
 					// INTEGRACIÓN LOGISTICA
-					//envioInformes.EnviarInforme(o.obtenerInformeCompletitud());
+					envioInformes.EnviarInforme(o.obtenerInformeCompletitud());
 					// ENVIO WEBSERVICE A PORTAL
 					// Envio informe de cambio de destado a Logistica y Monitoreo (REST)
 					// INTEGRACIÓN LOGISTICA
-					//informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().generarUrlRESTEnvioCambioDeEstadoODD(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
+					informarOrdenDeDespachoListaSyncRest(o.getLogisticaYMonitoreo().generarUrlRESTEnvioCambioDeEstadoODD(), new VOEnvioOrdenDeDespachoLista(o.getId().getIdOrdenDeDespacho()));
 					// Envio informe de cambio de estado a Portal Web (WEB SERVICE)
 					// INTEGRACIÓN PORTAL WEB
-					//informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().generarUrlSyncEnvioCambioDeEstadoODD(), o.getIdVenta());
+					informarOrdenDeDespachoListaSync(o.getId().getPortalWeb().generarUrlSyncEnvioCambioDeEstadoODD(), o.getIdVenta());
 				}
 				LOGGER.info("Recepción de artículos: OK");
 				return true;
@@ -134,8 +134,8 @@ public class AdministradorArticulosBean implements AdministradorArticulos {
 				articulo.setId(new IdArticulo(articuloVO.getCodigo(), deposito));
 				manager.persist(articulo);
 				LOGGER.info("Alta de artículo: OK");
-				// INTEGRACIÓN
-				//envioInformes.EnviarInforme(articulo.obtenerInformeAlta());
+				// INTEGRACIÓN LOGISTICA
+				envioInformes.EnviarInforme(articulo.obtenerInformeAlta());
 				return true;
 			}
 			LOGGER.error("Alta de artículo: No existe el depósito o el artículo ingresado.");
