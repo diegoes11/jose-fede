@@ -32,7 +32,7 @@ public class Usuario {
 	}
 	
 	public String obtenerInformeCambioEstado(){
-		String respuesta = "Se ha cambiado el estado del usuario " + nombre + " " + apellido + ", DNI " + dni + "a ";
+		String respuesta = "Se ha cambiado el estado del usuario " + nombre + " " + apellido + ", DNI " + dni + " a ";
 		if(activo == true){
 			respuesta += "ACTIVO";
 		}
